@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>It's Not Dark Magic - Pulling Back the Curtains From Your Stylesheets</title>
+
+		<meta name="description" content="It's Not Dark Magic - Pulling Back the Curtains From Your Stylesheets">
+		<meta name="author" content="Aimee Knight">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/custom.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>It's Not Dark Magic</h1>
+          <h3>Pulling Back the Curtains From Your Stylesheets</h3>
+					<p>
+						<small>Created by
+						  <a href="http://aimeemarieknight.com">Aimee Knight</a> /
+						  <a href="http://twitter.com/Aimee_Knight">@Aimee_Knight</a>
+						</small>
+					</p>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<ul>
+						<li>Software developers spend more time reading than writing source code</li>
+						<li>Knowledge of internals can be useful for advanced debugging and performance tuning</li>
+					</ul>
+					<aside class="notes">
+						why it’s important
+					</aside>
+				</section>
+
+				<section>
+					<h1>Vocabulary</h1>
+					<ul>
+						<li>Chromium</li>
+						<li>Chrome</li>
+						<li>V8</li>
+						<li>Trident</li>
+						<li>Blink</li>
+						<li>Webkit</li>
+					</ul>
+					<aside class="notes">
+						Webkit forked into blink
+						<br>
+						2m loc
+						<br>
+						each tab has own rendering engine in chrome
+					</aside>
+				</section>
+
+				<section>
+					<h1>Parsing - High Level</h1>
+					<ul>
+						<li>Conversion</li>
+						<li>Tokenization</li>
+						<li>Nodes (block node & text node???)</li>
+					</ul>
+					<aside class="notes">
+						The HTML5 specification explains that these bytes undergo a process called 'tokenization', however before these bytes can be tokenized, they must first be converted into characters. 						
+						<br>
+						browser reads raw bytes of the HTML off the disk or network and translates them to individual based on specified encoding of the file
+						<br>
+						These tokens are then turned into nodes
+					</aside>
+				</section>
+
+				<section>
+					<h1>DOM (Elements)</h1>
+					<ul>
+						<li>Not context free</li>
+						<li>Never get a syntax error</li>
+					</ul>
+					<aside class="notes">
+						When constructing DOM tree, the browser firstly needs some important information. This information comes from the network in the form of bytes
+						<br>
+						not defined - fudge factor
+						<br>
+						missing info, need more than the spec
+						<br>
+						edge cases
+					</aside>
+				</section>
+
+				<section>
+					<h1>Lexer (AKA tokenizer)</h1>
+					<ul>
+						<li>Breaks input into chunks (valid tokens)</li>
+						<li>HTML tokens are start tags, end tags, attribute names and attribute values</li>
+						<li>Knows how to strip irrelevant characters like white spaces and line breaks</li>
+						<li>Outputs token stream</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>Parser</h1>
+					<ul>
+						<li>Reads off stream</li>
+						<li>Responsible for constructing the parse tree by analyzing the document structure according to the language syntax rules</li>
+						<li>Constructs AST from stream</li>
+						<li>The compiler that compiles source code into machine code first parses it into a parse tree and then translates the tree into a machine code document</li>
+					</ul>
+					<aside class="notes">
+						AST = JS EX
+					</aside>
+				</section>
+
+				<section>
+					<h1>DOM</h1>
+					<ul>
+						<li>source code =></li>
+						<li>parsing => </li>
+						<li>parse tree (similar to AST) =></li>
+						<li>translation (compilation) =></li>
+						<li>machine code</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>Recap:</h1>
+					<ul>
+						<li>browser sends HTTP request for page</li>
+						<li>browser receives response from web server</li>
+						<li>browser converts response data (bytes) into tokens, via tokenization</li>
+						<li>browser turns tokens into nodes</li>
+						<li>browser turns nodes into the DOM tree</li>
+						<li>DOM tree construction finished, awaiting CSSOM tree construction</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+				
+				<section>
+					<h1>CCOM</h1>
+					<ul>
+						<li>By default CSS is treated as render blocking resource</li>
+						<li>Synchronous</li>
+						<li>Browser will hold rendering of any process until the CSSOM is constructed</li>
+						<li>DOM can be built while loading scripts</li>
+					</ul>
+					<aside class="notes">
+						Stylesheets are synchronous and block
+					</aside>
+				</section>
+
+				<section>
+					<h1>CCOM</h1>
+					<ul>
+						<li>Not 1 to 1 with DOM</li>
+						<li>display none, script tags, meta tags head element and so on are omitted since they are not reflected in the render output</li>
+					</ul>
+					<aside class="notes">
+						Whereas elements with "hidden" visibility will appear in the tree
+					</aside>
+				</section>
+
+				<section>
+					<h1>CCOM</h1>
+					<ul>
+						<li>CSS file is parsed into a StyleSheet object</li>
+						<li>Each object contains CSS rules object</li>
+						<li>The rule objects contain selector and declaration objects and other objects corresponding to CSS grammar</li>
+					</ul>
+					<aside class="notes">
+						Again, think AST/tree structure
+					</aside>
+				</section>
+
+				<section>
+					<h1>Render Tree</h1>
+					<h4>DOM + CCOM</h4>
+					<ul>
+						<li>Visual representation of the document</li>
+						<li>Enable painting the contents in their correct order</li>
+						<li>CSSOM Can have drastic effects on the render tree but none on the DOM tree</li>
+					</ul>
+					<aside class="notes">
+						This tree is of visual elements in the order in which they will be displayed
+					</aside>
+				</section>
+
+				<section>
+					<h1>Purpose</h1>
+					<ul>
+						<li>Stores RenderObject's or “renderer” (frames in firefox)</li>
+						<li>A renderer knows how to lay out and paint itself and its children</li>
+						<li>Includes geometric information like width, height and position</li>
+						<li>Each node in the DOM tree that produces visual output has a corresponding RenderObject</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>Render Tree Construction</h1>
+					<ul>
+						<li>Starting at the root of the DOM tree, traverse each visible node</li>
+						<li>Omit not visible nodes</li>
+						<li>For each visible node finds the appropriate matching CSSOM rules and apply them</li>
+						<li>Emit visible nodes with content and their computed styles</li>
+						<li>The final output is a render that contains both the content and style information of all visible content on the screen. We can now proceed to the “layout” stage.</li>
+					</ul>
+					<aside class="notes">
+						To construct a render tree, the browser does the following:
+					</aside>
+				</section>
+
+				<section>
+					<h1>Rendering Phases</h1>
+					<ul>
+						<li>layout =></li>
+						<li>paint =></li>
+						<li>composite =></li>						
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>Layout AKA Relow</h1>
+					<ul>
+						<li>When the renderer is created and added to the tree, it does not have a position and size. Calculating these values is called layout or reflow</li>
+						<li>The output of the layout process is a “box-model” which precisely captures the position and size of every element within the viewport</li>
+					</ul>
+					<aside class="notes">
+						Up to this point we’ve calculated which nodes should be visible and their computed styles
+						<br>
+						but we haven't calculated their exact position & size within the viewport of the device
+						<br>
+						that’s the layout stage, also known as reflow
+					</aside>
+				</section>
+
+				<section>
+					<h1>DOM</h1>
+					<ul>
+						<li></li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>DOM</h1>
+					<ul>
+						<li></li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>Thank you!</h1>
+					<ul>
+						<li><a href="https://twitter.com/Aimee_Knight">@Aimee_Knight</a></li>
+						<li><a href="https://github.com/AimeeKnight">GitHub: AimeeKnight</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<ul>
+						<li><cite></cite></li>
+					</ul>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

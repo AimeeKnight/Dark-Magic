@@ -1,0 +1,23 @@
+.emphasis {
+    color: #00BFFF;
+    font-weight: bolder !important;
+}
+
+blockquote {
+    color: #00BFFF;
+    background: none !important;
+}
+
+.sp {
+    border-radius: 100%;
+    width: 5%;
+    border: none !important;
+    vertical-align: middle !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    box-shadow: none !important;
+}
+
+p {
+    font-size: larger !important;
+}
