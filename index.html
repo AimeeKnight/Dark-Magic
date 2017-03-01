@@ -271,16 +271,41 @@
 				</section>
 
 				<section>
-					<h1>DOM</h1>
+					<h1>Paint AKA Rasterizing</h1>
 					<ul>
-						<li></li>
+						<li>When we have the visible nodes (DOM), their computed styles (CSSOM) and geometry (Layout), we can pass this information to our second stage</li>
+						<li>Converts each node in the render tree to actual pixels on the screen</li>
 					</ul>
 					<aside class="notes">
+						Once the render tree is constructed, the browser can paint (draw) the render tree nodes on the screen
 					</aside>
 				</section>
 
 				<section>
-					<h1>DOM</h1>
+					<h1>Painting Cont.</h1>
+					<ul>
+						<li>Multiple rounds of painting can be caused by JS being loaded that changes the DOM</li>
+						<li>Includes: text, colors, shadows, background images, etc.</li>
+					</ul>
+					<aside class="notes">
+						show paint rectangles mode website???
+					</aside>
+				</section>
+
+				<section>
+					<h1>Painting Time</h1>
+					<ul>
+						<li>Painting time may vary based on render tree construction</li>
+						<li>The bigger the width and height of the element, the longer the painting</li>
+						<li>Adding different effects will also increase the painting time???</li>
+					</ul>
+					<aside class="notes">
+						The first thing to look for is the area of the element
+					</aside>
+				</section>
+
+				<section>
+					<h1></h1>
 					<ul>
 						<li></li>
 					</ul>
