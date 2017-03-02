@@ -303,6 +303,48 @@
 						The first thing to look for is the area of the element
 					</aside>
 				</section>
+	
+				<section>
+					<h1>Painting Process Order</h1>
+					<ul>
+						<li>Painted from back to front</li>
+						<li>Actual order in which elements are stacked in the stacking contexts</li>
+						<li>Example: background color => background image => border, children</li>
+					</ul>
+					<aside class="notes">
+						Like layout, painting can also be global (entire tree is painted or incremental)
+						<br>
+						Incremental: some renderers change in way that doesn't affect entire tree
+						<br>
+						The changed renderer invalidates its rectangle on the screen causing the OS to see it as a "dirty region" and generate a "paint” event
+					</aside>
+				</section>
+	
+				<section>
+					<h1>Composite</h1>
+					<ul>
+						<li>We render different elements of a web page in different layers (think of layers as photoshop layers)</li>
+						<li>Compositing is the action of flattening all these layers into the final image that gets to the screen</li>
+					</ul>
+					<aside class="notes">
+						When people around the internet speak of hardware acceleration in web browsers, they almost always refer to accelerated compositing
+						<br>
+						Composite is where painted parts are put together
+					</aside>
+				</section>
+
+				<section>
+					<h1>Summary</h1>
+					<ul>
+						<li>The browsers try to do the minimal possible actions in response to a change</li>
+						<li>Changes to an elements color will cause only repaint of the element</li>
+						<li>Changes to the element position will cause layout and repaint of the element, its children and possibly siblings</li>
+						<li>Adding a DOM node will cause layout and repaint of the node</li>
+						<li>Major changes, like increasing font size of the "html" element, will cause invalidation of caches, relayout and repaint of the entire tree</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
 
 				<section>
 					<h1></h1>
