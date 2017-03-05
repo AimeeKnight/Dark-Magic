@@ -347,6 +347,219 @@
 				</section>
 
 				<section>
+					<h1>Cascade and Specificity</h1>
+					<ul>
+						<li>Applying rules in correct cascade order</li>
+						<li>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will “win”</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>Specificity Cont.</h1>
+					<ul>
+						<li>There are many ways to target a specific tag using CSS selectors</li>
+						<li>The browser needs a way to negotiate which color it should give to a specific tag</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>Specificity Cont.</h1>
+					<ul>
+						<li>The way the browser makes the decision is by first calculating each selectors' specificity value</li>
+						<li>Then it checks which selector has the highest value to determine the winner</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>Positioning</h1>
+					<ul>
+						<li>Before starting positioning layout, a tree of render objects is created</li>
+						<li>When renderers are first created and added to the tree, they have no position or size yet</li>
+					</ul>
+					<aside class="notes">
+						Can only happen once we have the render tree
+						<br>
+						All renderers have a layout method
+						<br>
+						The process by which all of the boxes have their positions and sizes determined is called layout
+					</aside>
+				</section>
+
+				<section>
+					<h1>Positioning Cont.</h1>
+					<h3>Normal & Relative</h3>
+					<ul>
+						<li>Normal: The object is positioned according to its place in the document</li>
+						<li>Relative: Positioned like usual and then moved by the required delta</li>
+					</ul>
+					<aside class="notes">
+						Its place in the render tree is like its place in the DOM tree and laid out according to its box type and dimensions
+					</aside>
+				</section>
+
+				<section>
+					<h1>Positioning Cont.</h1>
+					<h3>Float</h3>
+					<ul>
+						<li>The object is first laid out like normal flow, then moved as far left or right as possible</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>				
+
+				<section>
+					<h1>Positioning Cont.</h1>
+					<h3>Absolute</h3>
+					<ul>
+						<li>The object is put in the render tree in a different place than in the DOM tree</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>		
+
+				<section>
+					<h1>Positioning Phases</h1>
+					<ul>
+						<li>Layout is a recursive process</li>
+						<li>The current renderer computes its width</li>
+						<li>For each child, the current renderer: determines the position of the child, asks the child to compute its dimensions, finally, the current renderer computes its height</li>
+					</ul>
+					<aside class="notes">
+						Parent tells child to fit into it’s width - also responsible for dimensions
+						<br>
+						This happens whenever a position changes - repaint and then composite back together still needs to happen
+					</aside>
+				</section>
+
+				<section>
+					<h1>Global and incremental layout</h1>
+					<ul>
+						<li>Layout can be triggered on the entire render tree as a result of a global style change that affects all renderers</li>
+						<li>Global layout will usually be triggered synchronously</li>
+						<li>Example: font size change, screen being resized</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>Global and incremental layout</h1>
+					<ul>
+						<li>Layout can be incremental, where only the dirty renderers will be laid out</li>
+						<li>Incremental layout is triggered asynchronously when renderers are dirty</li>
+						<li>Example: when new renderers are appended to the render tree after extra content came from the network and was added to the DOM tree</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>Z -Index</h1>
+					<ul>
+						<li>Every element in an HTML document can be either in front of or behind every other element in the document</li>
+					</ul>
+					<aside class="notes">
+						So simple!
+						<br>
+						Elements with a higher z-index are stacked in front of elements with a lower z-index
+					</aside>
+				</section>
+
+				<section>
+					<h1>GIF</h1>
+					<aside class="notes">
+						It appears so simple, so most developers don’t take the time to read the rules.
+					</aside>
+				</section>
+
+				<section>
+					<h1>AKA Stacking Order</h1>
+					<ul>
+						<li>Groups of elements with a common parent that move forward or backward together in the stacking order make up what is known as a stacking context</li>
+						<li>Every stacking context has a single HTML element as its root elemen</li>
+						<li>When the z-index and position properties aren’t involved, the rules are simple: the stacking order is the same as the order of appearance in the HTML</li>
+					</ul>
+					<aside class="notes">
+						Layered representation
+						<br>
+						When you introduce the position property into the mix, any positioned elements (and their children) are displayed in front of any non-positioned elements
+						<br>
+						To say an element is “positioned” means that it has a position value other than static, e.g., relative, absolute, etc
+					</aside>
+				</section>
+
+				<section>
+					<h1>What is a stacking context?</h1>
+					<ul>
+						<li>Stacking context is the three-dimensional conceptualization of HTML elements along an imaginary z-axis relative to the user who is assumed to be facing the viewport or the webpage</li>
+						<li>A stacking context is an element that contains a set of layers</li>
+						<li>This can be a root stacking context, as created by the html element</li>
+						<li>Can be a local stacking context, as created by specific properties and values</li>
+						<li>Within a local stacking context, the z-index values of its children are set relative to that element rather than to the document root</li>
+						<li>Layers outside of that context — i.e. sibling elements of a local stacking context — can't sit between layers within it</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>Stacking Order</h1>
+					<ul>
+						<li>z-index only works on positioned elements (if you try to set a z-index on an element with no position specified, it will do nothing)</li>
+						<li>z-index values can create stacking contexts (this is where things get complicated)</li>
+					</ul>
+					<aside class="notes">
+						At first it’s natural to assume elements with higher z-index values are in front of elements with lower z-index values, and any element with a z-index is in front of any element without a z-index, but it’s not that simple. 
+					</aside>
+				</section>
+
+				<section>
+					<h1>Stacking Context</h1>
+					<ul>
+						<li>When a new stacking context is formed on an element, that stacking context confines all of its child elements to a particular place in the stacking order</li>
+						<li>If an element is contained in a stacking context at the bottom of the stacking order, there is no way to get it to appear in front of another element in a different stacking context that is higher in the stacking order</li>
+					</ul>
+					<aside class="notes">
+						Can't even change if in diff contexts even with a z-index of a billion!
+						A full understanding of stacking contexts is key to really grasping how z-index and the stacking order work.
+					</aside>
+				</section>
+
+				<section>
+					<h1>Stacking Context Rules</h1>
+					<ul>
+						<li>The stacking context’s root element</li>
+						<li>Positioned elements (and their children) with negative z-index values higher values: stacked in front of lower values; elements with the same value are stacked according to appearance in the HTML</li>
+						<li>Non-positioned elements: ordered by appearance in the HTML</li>
+						<li>Positioned elements (and their children) with a z-index value of auto: ordered by appearance in the HTML</li>
+						<li>Positioned elements (and their children) with positive z-index values: higher values are stacked in front of lower values; elements with the same value are stacked according to appearance in the HTML</li>
+						<li>Positioned elements with negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li>
+					</ul>
+					<aside class="notes">
+						Here are the basic rules to determine stacking order within a single stacking context (from back to front)
+						<br>
+						Because of this, it becomes possible for an element to appear behind its own parent, which is normally not possible
+						<br>
+						This will only work if the element’s parent is in the same stacking context and is not the root element of that stacking context.
+					</aside>
+				</section>
+
+				<section>
+					<h1></h1>
+					<ul>
+						<li></li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
 					<h1></h1>
 					<ul>
 						<li></li>
