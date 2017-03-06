@@ -551,6 +551,74 @@
 				</section>
 
 				<section>
+					<h1>Painting order</h1>
+					<ul>
+						<li>Elements with a negative stack level, typically elements with z-index: -1</li>
+						<li>Elements with a position value of static</li>
+						<li>Elements with a stack level of 0, typically positioned elements with a z-index value of auto</li>
+						<li>Elements with positive stack levels, e.g. a positioned element with a z-index value of 1 or higher</li>
+						<li>Two elements with the same stack level are layered based on their source order (successive elements stack on top of their predecessors)</li>
+						<li>A handful of CSS properties and values trigger a new stacking context: opacity when its value is less than 1 (e.g.: .99), filter when its value is something other than none, and mix-blend-mode when its value is something other than normal</li>
+						<li>The transform property can trigger a stacking context — but only when its value isn't none. This includes identity transforms1, such as scale(1) and translate3d(0,0,0)</li>
+					</ul>
+					<aside class="notes">
+						Children of a stacking context are painted from bottom to top in the following order
+					</aside>
+				</section>
+
+				<section>
+					<h1>Debugging z-index</h1>
+					<ul>
+						<li>The key to avoid getting tripped up is being able to spot when new stacking contexts are formed</li>
+						<li>If you’re setting a z-index of a billion on an element and it’s not moving forward in the stacking order, take a look up its ancestor tree and see if any of its parents form stacking contexts</li>
+					</ul>
+					<aside class="notes">
+						If new stack context, your z-index of a billion isn’t going to do you any good.
+					</aside>
+				</section>
+
+				<section>
+					<h1>Conclusion</h1>
+					<ul>
+						<li>Begin constructing the DOM by parsing the HTML - DOM construction may be incremental, so response may not arrive all at once, so we may not finish constructing it all at once</li>
+						<li>Request CSS and JavaScript resources - the browser send request for all CSS or JavaScript files. If the script is synchronous it will not be executed until the CSS is received (CSS is render-blocking)</li>
+						<li>Execute JavaScript - completing the CSSOM will un-block the JavaScript engine and the scripts will be executed</li>
+						<li>Merge the DOM and CSSOM into Render Tree - we have the DOM and CSSOM trees, so the browser will now build the Render Tree</li>
+						<li>Run layout and paint - in this final step, the browser run the layout process and paint the page</li>
+					</ul>
+					<aside class="notes">
+						So, here are the steps the browser goes through when loading a page:
+					</aside>
+				</section>
+
+				<section>
+					<h1></h1>
+					<ul>
+						<li></li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1></h1>
+					<ul>
+						<li></li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1></h1>
+					<ul>
+						<li></li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+	
+				<section>
 					<h1></h1>
 					<ul>
 						<li></li>
