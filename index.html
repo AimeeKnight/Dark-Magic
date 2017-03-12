@@ -75,15 +75,17 @@
 				<section>
 					<h1>Vocabulary</h1>
 					<ul>
-						<li>Chromium</li>
+						<li>Chromium (Open source browser)</li>
 						<li>Chrome</li>
 						<li>V8</li>
-						<li>Trident</li>
-						<li>Blink</li>
+						<li>Chakra</li>
 						<li>Webkit</li>
+						<li>Blink</li>
+						<li>Gecko</li>
+						<li>Trident/EdgeHTML</li>
 					</ul>
 					<aside class="notes">
-						Webkit forked into blink
+						Webkit (apple) forked into blink
 						<br>
 						2m loc
 						<br>
@@ -96,7 +98,7 @@
 					<ul>
 						<li>Conversion</li>
 						<li>Tokenization</li>
-						<li>Nodes (block node & text node???)</li>
+						<li>Nodes (block nodes & text nodes)</li>
 					</ul>
 					<aside class="notes">
 						The HTML5 specification explains that these bytes undergo a process called 'tokenization', however before these bytes can be tokenized, they must first be converted into characters. 						
@@ -114,7 +116,9 @@
 						<li>Never get a syntax error</li>
 					</ul>
 					<aside class="notes">
-						When constructing DOM tree, the browser firstly needs some important information. This information comes from the network in the form of bytes
+						When constructing DOM tree, the browser first needs bytes from network
+						<br>
+						when parsing, you have to take into account surrounding chars
 						<br>
 						not defined - fudge factor
 						<br>
@@ -125,7 +129,8 @@
 				</section>
 
 				<section>
-					<h1>Lexer (AKA tokenizer)</h1>
+					<h1>Lexer</h1>
+					<h4>(AKA tokenizer)</h4>
 					<ul>
 						<li>Breaks input into chunks (valid tokens)</li>
 						<li>HTML tokens are start tags, end tags, attribute names and attribute values</li>
@@ -139,38 +144,40 @@
 				<section>
 					<h1>Parser</h1>
 					<ul>
-						<li>Reads off stream</li>
-						<li>Responsible for constructing the parse tree by analyzing the document structure according to the language syntax rules</li>
-						<li>Constructs AST from stream</li>
-						<li>The compiler that compiles source code into machine code first parses it into a parse tree and then translates the tree into a machine code document</li>
+						<li>Reads off lexer stream</li>
+						<li>Responsible for analyzing the document structure according to the language syntax rules</li>
+						<li>Constructs tree structure from stream</li>
+						<li>The compiler first parses source code into a parse tree, and then translates the tree into a machine code document</li>
 					</ul>
 					<aside class="notes">
-						AST = JS EX
+						tree structure similiar to AST = JS EX
 					</aside>
 				</section>
 
 				<section>
 					<h1>DOM</h1>
 					<ul>
-						<li>source code =></li>
-						<li>parsing => </li>
-						<li>parse tree (similar to AST) =></li>
-						<li>translation (compilation) =></li>
-						<li>machine code</li>
+						<li>Source code &darr;</li>
+						<li>Parsing &darr;</li>
+						<li>Parse tree (think AST) &darr;</li>
+						<li>Translation (compilation) &darr;</li>
+						<li>Machine code</li>
 					</ul>
 					<aside class="notes">
+						translation = turning AST into machine code
 					</aside>
 				</section>
 
 				<section>
 					<h1>Recap:</h1>
 					<ul>
-						<li>browser sends HTTP request for page</li>
-						<li>browser receives response from web server</li>
-						<li>browser converts response data (bytes) into tokens, via tokenization</li>
-						<li>browser turns tokens into nodes</li>
-						<li>browser turns nodes into the DOM tree</li>
-						<li>DOM tree construction finished, awaiting CSSOM tree construction</li>
+						<li>Browser sends HTTP request for page</li>
+						<li>Web server sends response</li>
+						<li>Browser converts response data (bytes) into tokens, via tokenization</li>
+						<li>Browser turns tokens into nodes</li>
+						<li>Browser turns nodes into the DOM tree</li>
+						<li>DOM tree construction finished</li>
+						<li>Awaits CSSOM tree construction</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -186,8 +193,7 @@
 				<section>
 					<h1>CCSOM</h1>
 					<ul>
-						<li>By default CSS is treated as render blocking resource</li>
-						<li>Synchronous</li>
+						<li>By default CSS is treated as a render blocking resource</li>
 						<li>Browser will hold rendering of any process until the CSSOM is constructed</li>
 						<li>DOM can be built while loading scripts</li>
 					</ul>
@@ -199,8 +205,8 @@
 				<section>
 					<h1>CCSOM</h1>
 					<ul>
-						<li>Not 1 to 1 with DOM</li>
-						<li>display none, script tags, meta tags head element and so on are omitted since they are not reflected in the render output</li>
+						<li>Not 1 to 1 with the DOM</li>
+						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the render output</li>
 					</ul>
 					<aside class="notes">
 						Whereas elements with "hidden" visibility will appear in the tree
@@ -210,9 +216,9 @@
 				<section>
 					<h1>CCSOM</h1>
 					<ul>
-						<li>CSS file is parsed into a StyleSheet object</li>
-						<li>Each object contains CSS rules object</li>
-						<li>The rule objects contain selector and declaration objects and other objects corresponding to CSS grammar</li>
+						<li>CSS files are parsed into stylesheet objects</li>
+						<li>Each object contains a CSS rules object</li>
+						<li>Each rules objects contains selector and declaration objects and other objects corresponding to CSS grammar</li>
 					</ul>
 					<aside class="notes">
 						Again, think AST/tree structure
@@ -235,7 +241,7 @@
 				<section>
 					<h1>Purpose</h1>
 					<ul>
-						<li>Stores RenderObject's or “renderer” (frames in firefox)</li>
+						<li>Stores RenderObject's or "renderers" (AKA frames in Firefox)</li>
 						<li>A renderer knows how to lay out and paint itself and its children</li>
 						<li>Includes geometric information like width, height and position</li>
 						<li>Each node in the DOM tree that produces visual output has a corresponding RenderObject</li>
@@ -245,35 +251,39 @@
 				</section>
 
 				<section>
-					<h1>Render Tree Construction</h1>
+					<h1>Construction</h1>
 					<ul>
 						<li>Starting at the root of the DOM tree, traverse each visible node</li>
-						<li>Omit not visible nodes</li>
-						<li>For each visible node finds the appropriate matching CSSOM rules and apply them</li>
+						<li>Omit non visible nodes</li>
+						<li>For each visible node find the appropriate matching CSSOM rules and apply them</li>
 						<li>Emit visible nodes with content and their computed styles</li>
-						<li>The final output is a render that contains both the content and style information of all visible content on the screen. We can now proceed to the “layout” stage.</li>
+						<li>Final output is a render tree that contains both the content and style information of all visible content on the screen</li>
 					</ul>
 					<aside class="notes">
 						To construct a render tree, the browser does the following:
+						<br>
+						After proceeds to the layout stage
 					</aside>
 				</section>
 
 				<section>
 					<h1>Rendering Phases</h1>
 					<ul>
-						<li>layout =></li>
-						<li>paint =></li>
-						<li>composite =></li>						
+						<li>Layout &darr;</li>
+						<li>Paint &darr;</li>
+						<li>Composite &darr;</li>						
 					</ul>
 					<aside class="notes">
 					</aside>
 				</section>
 
 				<section>
-					<h1>Layout AKA Relow</h1>
+					<h1>Layout</h1>
+					<h4>(AKA Relow)</h4>
 					<ul>
-						<li>When the renderer is created and added to the tree, it does not have a position and size. Calculating these values is called layout or reflow</li>
-						<li>The output of the layout process is a “box-model” which precisely captures the position and size of every element within the viewport</li>
+						<li>When the renderer is created and added to the tree, it does not have a position and size</li>
+						<li>Calculating these values is called layout or reflow</li>
+						<li>The output of the layout process is a "box-model" that contains the position and size of every element within the viewport</li>
 					</ul>
 					<aside class="notes">
 						Up to this point we’ve calculated which nodes should be visible and their computed styles
@@ -285,9 +295,10 @@
 				</section>
 
 				<section>
-					<h1>Paint AKA Rasterizing</h1>
+					<h1>Paint</h1>
+					<h4>(AKA Rasterizing)</h4>
 					<ul>
-						<li>When we have the visible nodes (DOM), their computed styles (CSSOM) and geometry (Layout), we can pass this information to our second stage</li>
+						<li>Once we have visible nodes (DOM), computed styles (CSSOM) and geometry (Layout), this information is passed to the second stage</li>
 						<li>Converts each node in the render tree to actual pixels on the screen</li>
 					</ul>
 					<aside class="notes">
@@ -296,22 +307,25 @@
 				</section>
 
 				<section>
-					<h1>Painting Cont.</h1>
+					<h1>Painting</h1>
 					<ul>
 						<li>Multiple rounds of painting can be caused by JS being loaded that changes the DOM</li>
 						<li>Includes: text, colors, shadows, background images, etc.</li>
+						<li>
+							<a href="https://www.youtube.com/watch?v=ZTnIxIA5KGw">Gecko Reflow Visualization</a>
+						</li>
 					</ul>
 					<aside class="notes">
-						show paint rectangles mode website???
+						painting cont.
 					</aside>
 				</section>
 
 				<section>
 					<h1>Painting Time</h1>
 					<ul>
-						<li>Painting time may vary based on render tree construction</li>
+						<li>Time varies based on render tree construction</li>
 						<li>The bigger the width and height of the element, the longer the painting</li>
-						<li>Adding different effects will also increase the painting time???</li>
+						<li>Adding different effects also increases painting time</li>
 					</ul>
 					<aside class="notes">
 						The first thing to look for is the area of the element
@@ -319,11 +333,11 @@
 				</section>
 	
 				<section>
-					<h1>Painting Process Order</h1>
+					<h1>Painting Order</h1>
 					<ul>
 						<li>Painted from back to front</li>
-						<li>Actual order in which elements are stacked in the stacking contexts</li>
-						<li>Example: background color => background image => border, children</li>
+						<li>Follows order that elements are stacked in their stacking contexts</li>
+						<li>Example: background color &rarr; background image &rarr; border &rarr; children</li>
 					</ul>
 					<aside class="notes">
 						Like layout, painting can also be global (entire tree is painted or incremental)
@@ -337,24 +351,24 @@
 				<section>
 					<h1>Composite</h1>
 					<ul>
-						<li>We render different elements of a web page in different layers (think of layers as photoshop layers)</li>
-						<li>Compositing is the action of flattening all these layers into the final image that gets to the screen</li>
+						<li>Render different elements of a web page in different layers (think photoshop layers)</li>
+						<li>Action of flattening all layers into the final image that is visible on the screen</li>
 					</ul>
 					<aside class="notes">
-						When people around the internet speak of hardware acceleration in web browsers, they almost always refer to accelerated compositing
+						When people around the internet speak of hardware acceleration in web browsers, almost always refer to accelerated compositing
 						<br>
-						Composite is where painted parts are put together
+						Composite where painted parts put together
 					</aside>
 				</section>
 
 				<section>
 					<h1>Summary</h1>
 					<ul>
-						<li>The browsers try to do the minimal possible actions in response to a change</li>
-						<li>Changes to an elements color will cause only repaint of the element</li>
-						<li>Changes to the element position will cause layout and repaint of the element, its children and possibly siblings</li>
+						<li>Browsers try to do the minimal possible actions in response to a change</li>
+						<li>Changes to an element's color will only repaint that element</li>
+						<li>Changes to the element's' position will cause layout and repaint of that element, its children and possibly siblings</li>
 						<li>Adding a DOM node will cause layout and repaint of the node</li>
-						<li>Major changes, like increasing font size of the "html" element, will cause invalidation of caches, relayout and repaint of the entire tree</li>
+						<li>Major changes, like increasing font size of the html element will cause invalidation of caches, relayout and repaint of the entire tree</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -374,6 +388,7 @@
 						<li>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will “win”</li>
 					</ul>
 					<aside class="notes">
+						TODO
 					</aside>
 				</section>
 
