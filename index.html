@@ -382,18 +382,17 @@
 				</section>
 
 				<section>
-					<h1>Cascade and Specificity</h1>
+					<h1>Specificity</h1>
 					<ul>
 						<li>Applying rules in correct cascade order</li>
 						<li>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will “win”</li>
 					</ul>
 					<aside class="notes">
-						TODO
 					</aside>
 				</section>
 
 				<section>
-					<h1>Specificity Cont.</h1>
+					<h1>Specificity</h1>
 					<ul>
 						<li>There are many ways to target a specific tag using CSS selectors</li>
 						<li>The browser needs a way to negotiate which color it should give to a specific tag</li>
@@ -403,18 +402,19 @@
 				</section>
 
 				<section>
-					<h1>Specificity Cont.</h1>
+					<h1>Specificity</h1>
 					<ul>
 						<li>The way the browser makes the decision is by first calculating each selectors' specificity value</li>
 						<li>Then it checks which selector has the highest value to determine the winner</li>
 					</ul>
 					<aside class="notes">
+						TODO: add examples
 					</aside>
 				</section>
 
 				<section>
 					<h1>Positioning</h1>
-					<img src="img/css_is_awesome">
+					<img src="img/css_is_awesome.jpg">
 					<aside class="notes">
 					</aside>
 				</section>
@@ -422,33 +422,33 @@
 				<section>
 					<h1>Positioning</h1>
 					<ul>
-						<li>Before starting positioning layout, a tree of render objects is created</li>
+						<li>Before starting layout (positioning), a tree of render objects is created</li>
 						<li>When renderers are first created and added to the tree, they have no position or size yet</li>
 					</ul>
 					<aside class="notes">
-						Can only happen once we have the render tree
+						The process by which all of the boxes have their positions and sizes determined is called layout
+						<br>
+						Can only happen once we have the render tree						
 						<br>
 						All renderers have a layout method
-						<br>
-						The process by which all of the boxes have their positions and sizes determined is called layout
 					</aside>
 				</section>
 
 				<section>
-					<h1>Positioning Cont.</h1>
-					<h3>Normal & Relative</h3>
+					<h1>Positioning</h1>
+					<h4>Normal & Relative</h4>
 					<ul>
 						<li>Normal: The object is positioned according to its place in the document</li>
 						<li>Relative: Positioned like usual and then moved by the required delta</li>
 					</ul>
 					<aside class="notes">
-						Its place in the render tree is like its place in the DOM tree and laid out according to its box type and dimensions
+						Its place in the render tree is like its place in the DOM tree & laid out according to its box type and dimensions
 					</aside>
 				</section>
 
 				<section>
-					<h1>Positioning Cont.</h1>
-					<h3>Float</h3>
+					<h1>Positioning</h1>
+					<h4>Float</h4>
 					<ul>
 						<li>The object is first laid out like normal flow, then moved as far left or right as possible</li>
 					</ul>
@@ -457,8 +457,8 @@
 				</section>				
 
 				<section>
-					<h1>Positioning Cont.</h1>
-					<h3>Absolute</h3>
+					<h1>Positioning</h1>
+					<h4>Absolute</h4>
 					<ul>
 						<li>The object is put in the render tree in a different place than in the DOM tree</li>
 					</ul>
@@ -471,7 +471,7 @@
 					<ul>
 						<li>Layout is a recursive process</li>
 						<li>The current renderer computes its width</li>
-						<li>For each child, the current renderer: determines the position of the child, asks the child to compute its dimensions, finally, the current renderer computes its height</li>
+						<li>For each child, the current renderer: determines the position of the child, asks the child to compute its dimensions, then the current renderer can compute its height</li>
 					</ul>
 					<aside class="notes">
 						Parent tells child to fit into it’s width - also responsible for dimensions
@@ -499,6 +499,7 @@
 						<li>Example: when new renderers are appended to the render tree after extra content came from the network and was added to the DOM tree</li>
 					</ul>
 					<aside class="notes">
+						TODO: define renderer
 					</aside>
 				</section>
 
