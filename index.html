@@ -499,7 +499,7 @@
 						<li>Example: when new renderers are appended to the render tree after extra content came from the network and was added to the DOM tree</li>
 					</ul>
 					<aside class="notes">
-						TODO: define renderer
+						renderer: object in render tree, knows how to layout & paint itself & children
 					</aside>
 				</section>
 
@@ -526,8 +526,8 @@
 					<h1>AKA Stacking Order</h1>
 					<ul>
 						<li>Groups of elements with a common parent that move forward or backward together in the stacking order make up what is known as a stacking context</li>
-						<li>Every stacking context has a single HTML element as its root elemen</li>
-						<li>When the z-index and position properties aren’t involved, the rules are simple: the stacking order is the same as the order of appearance in the HTML</li>
+						<li>Every stacking context has a single HTML element as its root element</li>
+						<li>When z-index and position properties aren’t involved, the rules are simple: the stacking order is the same as the order of appearance in the HTML</li>
 					</ul>
 					<aside class="notes">
 						Layered representation
@@ -541,12 +541,21 @@
 				<section>
 					<h1>What is a stacking context?</h1>
 					<ul>
-						<li>Stacking context is the three-dimensional conceptualization of HTML elements along an imaginary z-axis relative to the user who is assumed to be facing the viewport or the webpage</li>
-						<li>A stacking context is an element that contains a set of layers</li>
-						<li>This can be a root stacking context, as created by the html element</li>
-						<li>Can be a local stacking context, as created by specific properties and values</li>
-						<li>Within a local stacking context, the z-index values of its children are set relative to that element rather than to the document root</li>
-						<li>Layers outside of that context — i.e. sibling elements of a local stacking context — can't sit between layers within it</li>
+						<li>A three-dimensional conceptualization of HTML elements along an imaginary z-axis relative to the user facing the viewport</li>
+						<li>An element that contains a set of layers</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>Stacking context?</h1>
+					<h4>Types</h4>
+					<ul>
+						<li>Root stacking context, created by the html element</li>
+						<li>Local stacking context, created by specific properties and values</li>
+						<li>Within a local stacking context, the z-index values of children are relative to that element rather than to the document root</li>
+						<li>Layers outside of that context (sibling elements of a local stacking context) can't sit between layers within it</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -559,6 +568,7 @@
 						<li>z-index values can create stacking contexts (this is where things get complicated)</li>
 					</ul>
 					<aside class="notes">
+						TODO
 						At first it’s natural to assume elements with higher z-index values are in front of elements with lower z-index values, and any element with a z-index is in front of any element without a z-index, but it’s not that simple. 
 					</aside>
 				</section>
