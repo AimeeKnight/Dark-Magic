@@ -549,7 +549,7 @@
 				</section>
 
 				<section>
-					<h1>Stacking context?</h1>
+					<h1>Stacking Context</h1>
 					<h4>Types</h4>
 					<ul>
 						<li>Root stacking context, created by the html element</li>
@@ -562,14 +562,15 @@
 				</section>
 
 				<section>
-					<h1>Stacking Order</h1>
+					<h1>Stacking Context</h1>
+					<h4>z-index</h4>
 					<ul>
-						<li>z-index only works on positioned elements (if you try to set a z-index on an element with no position specified, it will do nothing)</li>
-						<li>z-index values can create stacking contexts (this is where things get complicated)</li>
+						<li>Can create new stacking contexts (this is where things get complicated)</li>
+						<li>Only works on positioned elements (if you try to set a z-index on an element with no position specified, it won't do anything)</li>
 					</ul>
 					<aside class="notes">
 						TODO
-						At first it’s natural to assume elements with higher z-index values are in front of elements with lower z-index values, and any element with a z-index is in front of any element without a z-index, but it’s not that simple. 
+						At first it’s natural to assume elements with higher z-index values are in front of elements with lower values, and any element with a z-index is in front of any element without a z-index, but it’s not that simple
 					</aside>
 				</section>
 
@@ -581,28 +582,47 @@
 					</ul>
 					<aside class="notes">
 						Can't even change if in diff contexts even with a z-index of a billion!
-						A full understanding of stacking contexts is key to really grasping how z-index and the stacking order work.
+						<br>
+						A full understanding of stacking contexts is key to really grasping how z-index and the stacking order work
 					</aside>
 				</section>
 
 				<section>
 					<h1>Stacking Context Rules</h1>
 					<ul>
-						<li>The stacking context’s root element</li>
-						<li>Positioned elements (and their children) with negative z-index values higher values: stacked in front of lower values; elements with the same value are stacked according to appearance in the HTML</li>
+						<li>Check the stacking context’s root element</li>
 						<li>Non-positioned elements: ordered by appearance in the HTML</li>
-						<li>Positioned elements (and their children) with a z-index value of auto: ordered by appearance in the HTML</li>
-						<li>Positioned elements (and their children) with positive z-index values: higher values are stacked in front of lower values; elements with the same value are stacked according to appearance in the HTML</li>
-						<li>Positioned elements with negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li>
 					</ul>
 					<aside class="notes">
 						Here are the basic rules to determine stacking order within a single stacking context (from back to front)
 						<br>
 						Because of this, it becomes possible for an element to appear behind its own parent, which is normally not possible
-						<br>
-						This will only work if the element’s parent is in the same stacking context and is not the root element of that stacking context.
 					</aside>
 				</section>
+
+				<section>
+					<h1>Stacking Context Rules</h1>
+					<h4>Positioned elements (and their children)</h4>
+					<ul>
+						<li>Negative z-index values: higher values are stacked in front of lower values and elements with the same value are stacked according to appearance in the HTML</li>						
+						<li>Positioned elements with negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li>
+					</ul>
+					<aside class="notes">
+						-1 higher than -5
+					</aside>
+				</section>
+
+				<section>
+					<h1>Stacking Context Rules</h1>
+					<h4>Positioned elements (and their children)</h4>
+					<ul>
+						<li>Auto z-index values: ordered by appearance in the HTML</li>
+						<li>Positive z-index values: higher values are stacked in front of lower values and elements with the same value are stacked according to appearance in the HTML</li>
+					</ul>
+					<aside class="notes">
+							Will only work if the element’s parent is in the same stacking context and is not the root element of that stacking context
+					</aside>
+				</section>				
 
 				<section>
 					<h1>Painting order</h1>
@@ -616,6 +636,7 @@
 						<li>The transform property can trigger a stacking context — but only when its value isn't none. This includes identity transforms1, such as scale(1) and translate3d(0,0,0)</li>
 					</ul>
 					<aside class="notes">
+						TODO
 						Children of a stacking context are painted from bottom to top in the following order
 					</aside>
 				</section>
