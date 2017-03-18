@@ -660,31 +660,35 @@
 						<br>
 						If you’re setting a z-index of a billion on an element and it’s not moving forward in the stacking order, take a look up its ancestor tree and see if any of its parents form stacking contexts
 						<br>
-						If new stack context, your z-index of a billion isn’t going to do you any good
+						if new stack context, your z-index of a billion isn’t going to do you any good
 					</aside>
 				</section>
 
 				<section>
 					<h1>Conclusion</h1>
 					<ul>
-						<li>Begin constructing the DOM by parsing the HTML - DOM construction may be incremental, so response may not arrive all at once, so we may not finish constructing it all at once</li>
-						<li>Request CSS and JavaScript resources - the browser send request for all CSS or JavaScript files. If the script is synchronous it will not be executed until the CSS is received (CSS is render-blocking)</li>
-						<li>Execute JavaScript - completing the CSSOM will un-block the JavaScript engine and the scripts will be executed</li>
+						<li>Construct the DOM by parsing the HTML</li>
+						<li>May be incremental and a response may not arrive all at once, so may not finish construction all at once</li>
+						<li>Request CSS and JavaScript resources</li>
+						<li>If scripts are synchronous it will not be executed until the CSS is received (CSS is render-blocking)</li>
 					</ul>
 					<aside class="notes">
-						TODO
-						So, here are the steps the browser goes through when loading a page:
+						here are the steps the browser goes through when loading a page
 					</aside>
 				</section>
 
 				<section>
 					<h1>Conclusion</h1>
 					<ul>
-						<li>Merge the DOM and CSSOM into Render Tree - we have the DOM and CSSOM trees, so the browser will now build the Render Tree</li>
-						<li>Run layout and paint - in this final step, the browser run the layout process and paint the page</li>
+						<li>Complete CSSOM construction to un-block the JavaScript engine</li>
+						<li>Execute JavaScript</li>
+						<li>Merge the DOM and CSSOM into the Render Tree</li>
+						<li>Run layout, paint, and composite</li>
 					</ul>
 					<aside class="notes">
-						So, here are the steps the browser goes through when loading a page:
+						we have the DOM and CSSOM trees, so the browser will now build the Render Tree	
+						<br>
+						in final step, the browser runs the layout process and paints the page				
 					</aside>
 				</section>
 
