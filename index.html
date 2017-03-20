@@ -477,6 +477,65 @@ a {
 				</section>
 
 				<section>
+					<table>
+					<tr>
+						<th>Letter (ABC)</th>
+						<th>Total number of...</th>
+					</tr>
+					<tr>
+						<td>A</td>
+						<td>
+							<ul>
+								<li>ID selectors</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>B</td>
+						<td>
+							<ul>
+								<li>Class selectors</li>
+								<li>Attribute selectors</li>
+								<li>Pseudo-classes</li>
+							</ul>
+						</td>
+					</tr>	
+					<tr>
+						<td>C</td>
+						<td>
+							<ul>
+								<li>Type selectors</li>
+								<li>Pseudo-elements</li>
+							</ul>
+						</td>
+					</tr>								
+					</table>
+					<aside class="notes">
+						I had to write down my calculations on a piece of paper
+					</aside>
+				</section>
+
+				<section>
+					<h4>Specificity value: 122</h4>		
+					<pre><code>#header .navbar li a:visited</code></pre>
+					<table>
+						<tr>
+							<th>A</th>
+							<th>B</th>
+							<th>C</th>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>2</td>
+						</tr>
+					</table>
+					<aside class="notes">
+						1 id, 1 class + 1 Pseudo-class, 2 type selectors (li, a)
+					</aside>
+				</section>
+
+				<section>
 					<h1>Positioning</h1>
 					<img src="img/css_is_awesome.jpg">
 					<aside class="notes">
