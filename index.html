@@ -169,7 +169,7 @@
 				</section>
 
 				<section>
-					<h1>Recap:</h1>
+					<h1>Recap</h1>
 					<ul>
 						<li>Browser sends HTTP request for page</li>
 						<li>Web server sends response</li>
@@ -408,7 +408,71 @@
 						<li>Then it checks which selector has the highest value to determine the winner</li>
 					</ul>
 					<aside class="notes">
-						TODO: add examples
+					</aside>
+				</section>
+
+				<section>
+					<h1>Specificity</h1>
+						<pre><code><div class="container">
+ <div id="main">
+  <p>
+   <a href="#">Link</a>
+  </p>
+ </div>
+</div></code></pre>
+					<aside class="notes">
+					</aside>
+				</section>			
+
+				<section>
+					<h1>Specificity</h1>
+						<pre><code>#main a {
+  color: green;
+}
+p a {
+  color: yellow;
+}
+.container #main a {
+  color: pink;
+}
+div #main p a {
+  color: orange;
+}
+a {
+  color: red;
+}</code></pre>
+					<aside class="notes">
+					</aside>
+				</section>		
+
+				<section>
+					<table>
+					<tr>
+						<th>Selector</th>
+						<th>Specificity Value</th>
+					</tr>
+					<tr>
+						<td>.container #main a</td>
+						<td>111</td>
+					</tr>
+					<tr>
+						<td>div #main p a</td>
+						<td>103</td>
+					</tr>	
+					<tr>
+						<td>#main a</td>
+						<td>101</td>
+					</tr>				
+					<tr>
+						<td>p a</td>
+						<td>2</td>
+					</tr>	
+					<tr>
+						<td>a</td>
+						<td>1</td>
+					</tr>							
+					</table>
+					<aside class="notes">
 					</aside>
 				</section>
 
@@ -704,15 +768,6 @@
 					</aside>
 				</section>
 
-				<section>
-					<h1>Blank</h1>
-					<ul>
-						<li></li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
 				<section style="text-align: left;">
 					<h1>Thank you!</h1>
 					<ul>
@@ -723,7 +778,9 @@
 
 				<section>
 					<ul>
-						<li><cite></cite></li>
+						<li>
+							<a href="https://gist.github.com/AimeeKnight/77b36738ec876965c6db5c6d39f4ef4f">References</a>
+						</li>
 					</ul>
 				</section>
 
