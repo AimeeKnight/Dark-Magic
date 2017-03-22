@@ -234,7 +234,6 @@
 						<li>CSSOM Can have drastic effects on the render tree but none on the DOM tree</li>
 					</ul>
 					<aside class="notes">
-						TODO:
 						tree is of visual elements in order in which displayed
 					</aside>
 				</section>
@@ -261,9 +260,9 @@
 						<li>Final output is a render tree that contains both the content and style information of all visible content on the screen</li>
 					</ul>
 					<aside class="notes">
-						To construct a render tree, the browser does the following:
+						to construct render tree, browser does following:
 						<br>
-						After proceeds to the layout stage
+						after proceeds to layout stage
 					</aside>
 				</section>
 
@@ -287,9 +286,9 @@
 						<li>The output of the layout process is a "box-model" that contains the position and size of every element within the viewport</li>
 					</ul>
 					<aside class="notes">
-						Up to this point we’ve calculated which nodes should be visible and their computed styles
+						up to this we’ve calculated which nodes should be visible and their computed styles
 						<br>
-						but we haven't calculated their exact position & size within the viewport of the device
+						but haven't calculated their exact position & size within the viewport of the device
 						<br>
 						that’s the layout stage, also known as reflow
 					</aside>
@@ -303,7 +302,7 @@
 						<li>Converts each node in the render tree to actual pixels on the screen</li>
 					</ul>
 					<aside class="notes">
-						Once the render tree is constructed, the browser can paint (draw) the render tree nodes on the screen
+						once render tree is constructed, browser can paint (draw) the render tree nodes on the screen
 					</aside>
 				</section>
 
@@ -329,7 +328,7 @@
 						<li>Adding different effects also increases painting time</li>
 					</ul>
 					<aside class="notes">
-						The first thing to look for is the area of the element
+						first thing to look for is the area of the element
 					</aside>
 				</section>
 	
@@ -341,11 +340,11 @@
 						<li>Example: background color &rarr; background image &rarr; border &rarr; children</li>
 					</ul>
 					<aside class="notes">
-						Like layout, painting can also be global (entire tree is painted or incremental)
+						like layout, painting can also be global (entire tree is painted or incremental)
 						<br>
-						Incremental: some renderers change in way that doesn't affect entire tree
+						incremental: some renderers change in way that doesn't affect entire tree
 						<br>
-						The changed renderer invalidates its rectangle on the screen causing the OS to see it as a "dirty region" and generate a "paint” event
+						the changed renderer invalidates its rectangle on the screen causing OS to see it as a 'dirty region' & generates a 'paint' event
 					</aside>
 				</section>
 	
@@ -356,9 +355,9 @@
 						<li>Action of flattening all layers into the final image that is visible on the screen</li>
 					</ul>
 					<aside class="notes">
-						When people around the internet speak of hardware acceleration in web browsers, almost always refer to accelerated compositing
+						when pl speak of hardware acceleration in browsers, almost always refer to accelerated compositing
 						<br>
-						Composite where painted parts put together
+						composite where painted parts put together
 					</aside>
 				</section>
 
@@ -378,7 +377,7 @@
 				<section>
 					<img src="img/delete.gif" >
 					<aside class="notes">
-						Ever moved something around only to see another part of the page break?
+						ever moved something around only to see another part of page break?
 					</aside>
 				</section>
 
@@ -512,7 +511,7 @@ a {
 					</tr>								
 					</table>
 					<aside class="notes">
-						I had to write down my calculations on a piece of paper
+						had to write down my calculations on a piece of paper
 					</aside>
 				</section>
 
@@ -532,7 +531,7 @@ a {
 						</tr>
 					</table>
 					<aside class="notes">
-						1 id, 1 class + 1 Pseudo-class, 2 type selectors (li, a)
+						1 id, 1 class + 1 pseudo-class, 2 type selectors (li, a)
 					</aside>
 				</section>
 
@@ -550,11 +549,11 @@ a {
 						<li>When renderers are first created and added to the tree, they have no position or size yet</li>
 					</ul>
 					<aside class="notes">
-						The process by which all of the boxes have their positions and sizes determined is called layout
+						process by which all boxes have their positions & sizes determined = layout
 						<br>
-						Can only happen once we have the render tree						
+						can only happen once have the render tree						
 						<br>
-						All renderers have a layout method
+						all renderers have layout method
 					</aside>
 				</section>
 
@@ -566,7 +565,11 @@ a {
 						<li>Relative: Positioned like usual and then moved by the required delta</li>
 					</ul>
 					<aside class="notes">
-						Its place in the render tree is like its place in the DOM tree & laid out according to its box type and dimensions
+						norm: its place in render tree is like its place in DOM tree & is laid out according to its box type and dimensions
+						<br>
+						block box: have their own rectangle on the browser window
+						<br>
+						inline box: does not have its own block, is inside containing block
 					</aside>
 				</section>
 
@@ -598,9 +601,9 @@ a {
 						<li>For each child, the current renderer: determines the position of the child, asks the child to compute its dimensions, then the current renderer can compute its height</li>
 					</ul>
 					<aside class="notes">
-						Parent tells child to fit into it’s width - also responsible for dimensions
+						parent tells child to fit into it’s width - also responsible for dimensions
 						<br>
-						This happens whenever a position changes - repaint and then composite back together still needs to happen
+						happens whenever position changes - repaint and then composite back together still needs to happen
 					</aside>
 				</section>
 
@@ -633,16 +636,16 @@ a {
 						<li>Every element in an HTML document can be either in front of or behind every other element in the document</li>
 					</ul>
 					<aside class="notes">
-						So simple!
+						so simple right?!
 						<br>
-						Elements with a higher z-index are stacked in front of elements with a lower z-index
+						elements with higher z-index are stacked in front of elements with lower z-index
 					</aside>
 				</section>
 
 				<section>
 					<img src="img/so_hard.gif" >
 					<aside class="notes">
-						It appears so simple, so most developers don’t take the time to read the rules.
+					appears so simple, so most devs don’t take time to read rules
 					</aside>
 				</section>
 
@@ -654,11 +657,11 @@ a {
 						<li>When z-index and position properties aren’t involved, the rules are simple: the stacking order is the same as the order of appearance in the HTML</li>
 					</ul>
 					<aside class="notes">
-						Layered representation
+						layered representation
 						<br>
-						When you introduce the position property into the mix, any positioned elements (and their children) are displayed in front of any non-positioned elements
+						when you introduce position property into the mix, any positioned elements (& their children) are displayed in front of any non-positioned elements
 						<br>
-						To say an element is “positioned” means that it has a position value other than static, e.g., relative, absolute, etc
+						to say an element is 'positioned' means that it has position value other than static, e.g., relative, absolute, etc
 					</aside>
 				</section>
 
@@ -693,8 +696,11 @@ a {
 						<li>Only works on positioned elements (if you try to set a z-index on an element with no position specified, it won't do anything)</li>
 					</ul>
 					<aside class="notes">
-						TODO
-						At first it’s natural to assume elements with higher z-index values are in front of elements with lower values, and any element with a z-index is in front of any element without a z-index, but it’s not that simple
+						At first it’s natural to assume elements with higher z-index values are in front of elements with lower values
+						<br>
+						& any element with z-index is in front of any element without a z-index
+						<br>
+						but it’s not that simple
 					</aside>
 				</section>
 
@@ -705,9 +711,9 @@ a {
 						<li>If an element is contained in a stacking context at the bottom of the stacking order, there is no way to get it to appear in front of another element in a different stacking context that is higher in the stacking order</li>
 					</ul>
 					<aside class="notes">
-						Can't even change if in diff contexts even with a z-index of a billion!
+						can't even change if in diff contexts even with a z-index of billion!
 						<br>
-						A full understanding of stacking contexts is key to really grasping how z-index and the stacking order work
+						full understanding of stacking contexts is key to grasping how z-index & stacking order work
 					</aside>
 				</section>
 
@@ -718,9 +724,9 @@ a {
 						<li>Non-positioned elements: ordered by appearance in the HTML</li>
 					</ul>
 					<aside class="notes">
-						Here are the basic rules to determine stacking order within a single stacking context (from back to front)
+						here are basic rules to determine stacking order w/in single stacking context (from back to front)
 						<br>
-						Because of this, it becomes possible for an element to appear behind its own parent, which is normally not possible
+						cause of this, becomes possible for element to appear behind own parent, normally not possible
 					</aside>
 				</section>
 
@@ -744,7 +750,7 @@ a {
 						<li>Positive z-index values: higher values are stacked in front of lower values and elements with the same value are stacked according to appearance in the HTML</li>
 					</ul>
 					<aside class="notes">
-							Will only work if the element’s parent is in the same stacking context and is not the root element of that stacking context
+							only works if element’s parent is in same stacking context & not root element of that stacking context
 					</aside>
 				</section>				
 
@@ -758,7 +764,7 @@ a {
 						<li>Elements with the same stack level are layered based on their source order (successive elements stack on top of their predecessors)</li>
 					</ul>
 					<aside class="notes">
-						Children of a stacking context are painted from bottom to top in the following order
+						children of a stacking context are painted from bottom to top in following order
 					</aside>
 				</section>
 
@@ -769,7 +775,7 @@ a {
 						<li>Transform property can trigger a stacking context when its value isn't none. Examples: scale(1), translate3d(0,0,0)</li>
 					</ul>
 					<aside class="notes">
-						TODO: This includes identity transforms1, such as scale(1) and translate3d(0,0,0)
+						includes identity transforms1, such as scale(1) and translate3d(0,0,0)
 					</aside>
 				</section>
 
@@ -780,11 +786,11 @@ a {
 						<li>Look up the ancestor tree and see if any parents form stacking contexts</li>
 					</ul>
 					<aside class="notes">
-						Key: Be able to spot when new stacking contexts are formed
+						key: Be able to spot when new stacking contexts formed
 						<br>
-						If you’re setting a z-index of a billion on an element and it’s not moving forward in the stacking order, take a look up its ancestor tree and see if any of its parents form stacking contexts
+						if setting z-index of billion on element & not moving forward in stacking order, look up ancestor tree see if any parents form stacking contexts
 						<br>
-						if new stack context, your z-index of a billion isn’t going to do you any good
+						if new stack context, z-index of billion isn’t doing any good
 					</aside>
 				</section>
 
@@ -797,7 +803,7 @@ a {
 						<li>If scripts are synchronous it will not be executed until the CSS is received (CSS is render-blocking)</li>
 					</ul>
 					<aside class="notes">
-						here are the steps the browser goes through when loading a page
+						here are steps the browser goes through when loading a page
 					</aside>
 				</section>
 
@@ -810,9 +816,9 @@ a {
 						<li>Run layout, paint, and composite</li>
 					</ul>
 					<aside class="notes">
-						we have the DOM and CSSOM trees, so the browser will now build the Render Tree	
+						we have the DOM and CSSOM trees, so browser will now build Render Tree	
 						<br>
-						in final step, the browser runs the layout process and paints the page				
+						in final step, browser runs layout process & paints page				
 					</aside>
 				</section>
 
