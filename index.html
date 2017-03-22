@@ -101,11 +101,11 @@
 						<li>Nodes (block nodes & text nodes)</li>
 					</ul>
 					<aside class="notes">
-						The HTML5 specification explains that these bytes undergo a process called 'tokenization', however before these bytes can be tokenized, they must first be converted into characters. 						
+						HTML5 spec explains bytes undergo process called 'tokenization', however bytes can be tokenized, first converted into characters				
 						<br>
-						browser reads raw bytes of the HTML off the disk or network and translates them to individual based on specified encoding of the file
+						browser reads raw bytes of HTML/CSS off disk/network, translates them to individual chars based on specified encoding of file
 						<br>
-						These tokens are then turned into nodes
+						chars > tokens are then turned into nodes
 					</aside>
 				</section>
 
@@ -118,7 +118,7 @@
 					<aside class="notes">
 						When constructing DOM tree, the browser first needs bytes from network
 						<br>
-						when parsing, you have to take into account surrounding chars
+						when parsing, have to take into account surrounding chars
 						<br>
 						not defined - fudge factor
 						<br>
@@ -198,7 +198,7 @@
 						<li>DOM can be built while loading scripts</li>
 					</ul>
 					<aside class="notes">
-						Stylesheets are synchronous and block
+						stylesheets are synchronous and block
 					</aside>
 				</section>
 
@@ -209,7 +209,7 @@
 						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the render output</li>
 					</ul>
 					<aside class="notes">
-						Whereas elements with "hidden" visibility will appear in the tree
+						whereas elements with 'hidden' visibility will appear in the tree
 					</aside>
 				</section>
 
@@ -221,7 +221,7 @@
 						<li>Each rules objects contains selector and declaration objects and other objects corresponding to CSS grammar</li>
 					</ul>
 					<aside class="notes">
-						Again, think AST/tree structure
+						again, think AST/tree structure
 					</aside>
 				</section>
 
@@ -234,7 +234,8 @@
 						<li>CSSOM Can have drastic effects on the render tree but none on the DOM tree</li>
 					</ul>
 					<aside class="notes">
-						This tree is of visual elements in the order in which they will be displayed
+						TODO:
+						tree is of visual elements in order in which displayed
 					</aside>
 				</section>
 
