@@ -98,14 +98,15 @@
 					<ul>
 						<li>Conversion</li>
 						<li>Tokenization</li>
-						<li>Nodes (block nodes & text nodes)</li>
+						<li>Lexing</li>
+						<li>Nodes (block nodes & text nodes for DOM construction)</li>
 					</ul>
 					<aside class="notes">
-						HTML5 spec > bytes undergo process 'tokenization', however before bytes can be tokenized, first converted into chars.
-						<br>
 						browser reads raw bytes HTML/CSS off disk/network, translates to individual chars based on file encoding
 						<br>
-						chars > tokens are then turned into nodes
+						HTML5 spec > bytes undergo process 'tokenization', however before bytes can be tokenized, first converted into chars.
+						<br>
+						chars > tokens > obj. are turned into nodes
 					</aside>
 				</section>
 
@@ -138,6 +139,7 @@
 						<li>Outputs token stream</li>
 					</ul>
 					<aside class="notes">
+						emitted tokens from tokenization are converted into "objects," which define their properties & rules
 					</aside>
 				</section>
 
@@ -164,7 +166,9 @@
 						<li>Machine code</li>
 					</ul>
 					<aside class="notes">
-						translation = turning AST into machine code
+						translation: turns AST into machine code
+						<br>
+						since HTML markup defines relation between tags (some tags contained within others) created objs are linked in tree data structure that also captures parent-child relation from orig markup: HTML obj is parent of body obj, body parent of p obj, so on
 					</aside>
 				</section>
 
@@ -187,6 +191,10 @@
 					<img src="img/confused.gif" >
 					<aside class="notes">
 						Now for CSS
+						<br>
+						DOM and CSSOM are independent data structures
+						<br>
+						As with HTML, need to convert received CSS rules into something browser can understand & work with. Hence, repeat HTML process, but for CSS instead
 					</aside>
 				</section>
 
@@ -198,6 +206,8 @@
 						<li>DOM can be built while loading scripts</li>
 					</ul>
 					<aside class="notes">
+						While browser was constructing DOM it encountered link tag in head of document referencing an external CSS stylesheet. Anticipating it needs this resource to render pg, it immediately dispatches req for resource
+						<br>
 						stylesheets are synchronous and block
 					</aside>
 				</section>
@@ -209,6 +219,8 @@
 						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the render output</li>
 					</ul>
 					<aside class="notes">
+						DOM tree captures properties & relations of document markup, but doesn't tell how element will look when rendered. That’s responsibility of CSSOM
+						<br>
 						whereas elements with 'hidden' visibility will appear in the tree
 					</aside>
 				</section>
@@ -222,6 +234,8 @@
 					</ul>
 					<aside class="notes">
 						again, think AST/tree structure
+						<br>
+						Why tree structure? When computing final set of styles for any obj on pg, browser starts with most general rule applicable to a node (ex: if it's child of body element, then all body styles apply) then recursively refines the computed styles by applying more specific rules: rules cascade down
 					</aside>
 				</section>
 
@@ -274,6 +288,10 @@
 						<li>Composite &darr;</li>						
 					</ul>
 					<aside class="notes">
+						TODO: add dev tools screen shot
+						Chrome DevTools Timeline allows us to capture and inspect the construction and processing costs of DOM and CSSOM
+						<br>
+						open Chrome DevTools & record timeline while the page is loaded, can see actual time taken to perform steps
 					</aside>
 				</section>
 
