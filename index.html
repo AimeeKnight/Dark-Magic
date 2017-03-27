@@ -101,9 +101,9 @@
 						<li>Nodes (block nodes & text nodes)</li>
 					</ul>
 					<aside class="notes">
-						HTML5 spec explains bytes undergo process called 'tokenization', however bytes can be tokenized, first converted into characters				
+						HTML5 spec > bytes undergo process 'tokenization', however before bytes can be tokenized, first converted into chars.
 						<br>
-						browser reads raw bytes of HTML/CSS off disk/network, translates them to individual chars based on specified encoding of file
+						browser reads raw bytes HTML/CSS off disk/network, translates to individual chars based on file encoding
 						<br>
 						chars > tokens are then turned into nodes
 					</aside>
@@ -340,11 +340,11 @@
 						<li>Example: background color &rarr; background image &rarr; border &rarr; children</li>
 					</ul>
 					<aside class="notes">
-						like layout, painting can also be global (entire tree is painted or incremental)
+						like layout, paint can be global (entire tree painted or incremental)
 						<br>
 						incremental: some renderers change in way that doesn't affect entire tree
 						<br>
-						the changed renderer invalidates its rectangle on the screen causing OS to see it as a 'dirty region' & generates a 'paint' event
+						changed renderer invalidates its rectangle on screen causing OS to see it as a 'dirty region' & generates a 'paint' event
 					</aside>
 				</section>
 	
@@ -659,9 +659,9 @@ a {
 					<aside class="notes">
 						layered representation
 						<br>
-						when you introduce position property into the mix, any positioned elements (& their children) are displayed in front of any non-positioned elements
+						when you introduce position property into mix, any positioned elements (& children) are displayed in front of any non-positioned elements
 						<br>
-						to say an element is 'positioned' means that it has position value other than static, e.g., relative, absolute, etc
+						to say an element is 'positioned' means it has position value other than static, e.g., relative, absolute, etc
 					</aside>
 				</section>
 
