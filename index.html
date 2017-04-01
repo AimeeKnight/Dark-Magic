@@ -69,6 +69,10 @@
 					</ul>
 					<aside class="notes">
 						why it’s important
+						<br>
+						my story - front end
+						<br>
+						guessing vs systematic
 					</aside>
 				</section>
 
@@ -85,6 +89,7 @@
 						<li>Trident/EdgeHTML</li>
 					</ul>
 					<aside class="notes">
+						TODO:
 						Webkit (apple) forked into blink
 						<br>
 						2m loc
@@ -102,6 +107,7 @@
 						<li>Nodes (block nodes & text nodes for DOM construction)</li>
 					</ul>
 					<aside class="notes">
+						TODO: Define where lexing fits in with tokenization and parsing
 						browser reads raw bytes HTML/CSS off disk/network, translates to individual chars based on file encoding
 						<br>
 						HTML5 spec > bytes undergo process 'tokenization', however before bytes can be tokenized, first converted into chars.
@@ -206,6 +212,7 @@
 						<li>DOM can be built while loading scripts</li>
 					</ul>
 					<aside class="notes">
+						TODO: DOM can be built while loading scripts
 						While browser was constructing DOM it encountered link tag in head of document referencing an external CSS stylesheet. Anticipating it needs this resource to render pg, it immediately dispatches req for resource
 						<br>
 						stylesheets are synchronous and block
@@ -216,7 +223,7 @@
 					<h1>CCSOM</h1>
 					<ul>
 						<li>Not 1 to 1 with the DOM</li>
-						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the render output</li>
+						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the rendered output</li>
 					</ul>
 					<aside class="notes">
 						DOM tree captures properties & relations of document markup, but doesn't tell how element will look when rendered. That’s responsibility of CSSOM
@@ -276,7 +283,7 @@
 					<aside class="notes">
 						to construct render tree, browser does following:
 						<br>
-						after proceeds to layout stage
+						after render tree finally to layout stage
 					</aside>
 				</section>
 
@@ -358,6 +365,7 @@
 						<li>Example: background color &rarr; background image &rarr; border &rarr; children</li>
 					</ul>
 					<aside class="notes">
+						TODO: further clarify example
 						like layout, paint can be global (entire tree painted or incremental)
 						<br>
 						incremental: some renderers change in way that doesn't affect entire tree
@@ -373,6 +381,7 @@
 						<li>Action of flattening all layers into the final image that is visible on the screen</li>
 					</ul>
 					<aside class="notes">
+						TODO: Further definition needed
 						when pl speak of hardware acceleration in browsers, almost always refer to accelerated compositing
 						<br>
 						composite where painted parts put together
@@ -460,6 +469,7 @@ a {
   color: red;
 }</code></pre>
 					<aside class="notes">
+						TODO define winner
 					</aside>
 				</section>		
 
@@ -530,6 +540,7 @@ a {
 					</table>
 					<aside class="notes">
 						had to write down my calculations on a piece of paper
+						TODO: add slide with example of each of these
 					</aside>
 				</section>
 
@@ -567,7 +578,7 @@ a {
 						<li>When renderers are first created and added to the tree, they have no position or size yet</li>
 					</ul>
 					<aside class="notes">
-						process by which all boxes have their positions & sizes determined = layout
+						process by which all boxes have their positions & sizes determined = going back to layout
 						<br>
 						can only happen once have the render tree						
 						<br>
@@ -583,6 +594,7 @@ a {
 						<li>Relative: Positioned like usual and then moved by the required delta</li>
 					</ul>
 					<aside class="notes">
+						TODO: block box and inline examples, define delta
 						norm: its place in render tree is like its place in DOM tree & is laid out according to its box type and dimensions
 						<br>
 						block box: have their own rectangle on the browser window
@@ -619,14 +631,14 @@ a {
 						<li>For each child, the current renderer: determines the position of the child, asks the child to compute its dimensions, then the current renderer can compute its height</li>
 					</ul>
 					<aside class="notes">
-						parent tells child to fit into it’s width - also responsible for dimensions
+						parent tells child to fit into it’s width - also responsible for both dimensions
 						<br>
 						happens whenever position changes - repaint and then composite back together still needs to happen
 					</aside>
 				</section>
 
 				<section>
-					<h1>Global and incremental layout</h1>
+					<h1>Global Layout</h1>
 					<ul>
 						<li>Layout can be triggered on the entire render tree as a result of a global style change that affects all renderers</li>
 						<li>Global layout will usually be triggered synchronously</li>
@@ -637,14 +649,14 @@ a {
 				</section>
 
 				<section>
-					<h1>Global and incremental layout</h1>
+					<h1>Incremental layout</h1>
 					<ul>
 						<li>Layout can be incremental, where only the dirty renderers will be laid out</li>
 						<li>Incremental layout is triggered asynchronously when renderers are dirty</li>
-						<li>Example: when new renderers are appended to the render tree after extra content came from the network and was added to the DOM tree</li>
+						<li>Example: new renderers are appended to the render tree after extra content came from the network and was added to the DOM tree</li>
 					</ul>
 					<aside class="notes">
-						renderer: object in render tree, knows how to layout & paint itself & children
+						renderer object in render tree, knows how to layout & paint itself & children
 					</aside>
 				</section>
 
@@ -677,9 +689,9 @@ a {
 					<aside class="notes">
 						layered representation
 						<br>
-						when you introduce position property into mix, any positioned elements (& children) are displayed in front of any non-positioned elements
+						when you introduce position property, positioned elements (& children) are displayed in front of non-positioned elements
 						<br>
-						to say an element is 'positioned' means it has position value other than static, e.g., relative, absolute, etc
+						'positioned' means relative, absolute, etc. (value other than static)
 					</aside>
 				</section>
 
@@ -697,8 +709,8 @@ a {
 					<h1>Stacking Context</h1>
 					<h4>Types</h4>
 					<ul>
-						<li>Root stacking context, created by the html element</li>
-						<li>Local stacking context, created by specific properties and values</li>
+						<li>Root Stacking Context: created by the html element</li>
+						<li>Local Stacking Context: created by specific properties and values</li>
 						<li>Within a local stacking context, the z-index values of children are relative to that element rather than to the document root</li>
 						<li>Layers outside of that context (sibling elements of a local stacking context) can't sit between layers within it</li>
 					</ul>
@@ -729,22 +741,23 @@ a {
 						<li>If an element is contained in a stacking context at the bottom of the stacking order, there is no way to get it to appear in front of another element in a different stacking context that is higher in the stacking order</li>
 					</ul>
 					<aside class="notes">
-						can't even change if in diff contexts even with a z-index of billion!
-						<br>
 						full understanding of stacking contexts is key to grasping how z-index & stacking order work
+						<br>
+						diff contexts ? can't even change even with a z-index of billion!
 					</aside>
 				</section>
 
 				<section>
 					<h1>Stacking Context Rules</h1>
+					<h4>Non-positioned elements</h4>
 					<ul>
 						<li>Check the stacking context’s root element</li>
-						<li>Non-positioned elements: ordered by appearance in the HTML</li>
+						<li>Check order of appearance in the HTML</li>
 					</ul>
 					<aside class="notes">
-						here are basic rules to determine stacking order w/in single stacking context (from back to front)
+						here are basic rules to determine stacking order w/in simple single stacking context (from back to front)
 						<br>
-						cause of this, becomes possible for element to appear behind own parent, normally not possible
+						TODO - this is on wrong slide: cause of this, becomes possible for element to appear behind own parent, normally not possible
 					</aside>
 				</section>
 
@@ -753,7 +766,7 @@ a {
 					<h4>Positioned elements (and their children)</h4>
 					<ul>
 						<li>Negative z-index values: higher values are stacked in front of lower values and elements with the same value are stacked according to appearance in the HTML</li>						
-						<li>Positioned elements with negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li>
+						<li>Negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li>
 					</ul>
 					<aside class="notes">
 						-1 higher than -5
@@ -769,6 +782,7 @@ a {
 					</ul>
 					<aside class="notes">
 							only works if element’s parent is in same stacking context & not root element of that stacking context
+							TODO: not root element of that stacking context
 					</aside>
 				</section>				
 
@@ -787,10 +801,10 @@ a {
 				</section>
 
 				<section>
-					<h1>Painting order</h1>
+					<h1>New Stacking Contexts</h1>
 					<ul>
-						<li>Opacity less than 1 (.99), filter when its value is something other than none, and mix-blend-mode when its value is something other than normal all trigger a new stacking context</li>
-						<li>Transform property can trigger a stacking context when its value isn't none. Examples: scale(1), translate3d(0,0,0)</li>
+						<li>Opacity less than 1 (.99), filter when its value is something other than none, and mix-blend-mode when its value is something other than normal</li>
+						<li>Transform property also triggers a stacking context when its value isn't none. Examples: scale(1), translate3d(0,0,0)</li>
 					</ul>
 					<aside class="notes">
 						includes identity transforms1, such as scale(1) and translate3d(0,0,0)
