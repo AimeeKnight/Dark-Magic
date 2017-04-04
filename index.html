@@ -79,18 +79,19 @@
 				<section>
 					<h1>Vocabulary</h1>
 					<ul>
-						<li>Chromium (Open source browser)</li>
+						<li>Chromium</li>
 						<li>Chrome</li>
-						<li>V8</li>
-						<li>Chakra</li>
 						<li>Webkit</li>
 						<li>Blink</li>
 						<li>Gecko</li>
 						<li>Trident/EdgeHTML</li>
+						<li>V8</li>
+						<li>Chakra</li>						
 					</ul>
 					<aside class="notes">
-						TODO:
-						Webkit (apple) forked into blink
+						Open source browser vs rendering/layout engine 
+						<br>
+						Webkit (apple) forked into blink - Gecko = Firefox, EdgeHTML = fork of trident for IE11
 						<br>
 						2m loc
 						<br>
@@ -107,7 +108,6 @@
 						<li>Nodes (block nodes & text nodes for DOM construction)</li>
 					</ul>
 					<aside class="notes">
-						TODO: Define where lexing fits in with tokenization and parsing
 						browser reads raw bytes HTML/CSS off disk/network, translates to individual chars based on file encoding
 						<br>
 						HTML5 spec > bytes undergo process 'tokenization', however before bytes can be tokenized, first converted into chars.
@@ -136,15 +136,48 @@
 				</section>
 
 				<section>
-					<h1>Lexer</h1>
-					<h4>(AKA tokenizer)</h4>
+					<h1>Tokenizer</h1>
 					<ul>
 						<li>Breaks input into chunks (valid tokens)</li>
 						<li>HTML tokens are start tags, end tags, attribute names and attribute values</li>
 						<li>Knows how to strip irrelevant characters like white spaces and line breaks</li>
+					</ul>
+					<aside class="notes">
+						often combined with lexing
+					</aside>
+				</section>
+
+				<section>
+					<h1>Tokenizer</h1>
+						<pre><code>["<", "html", ">", 
+     "<", "head", ">", 
+         "<", "title", ">", "My HTML Page", "</", "title", ">",
+     "</", "head", ">",
+     "<", "body", ">",
+         "<", "p", "style", "=", "\"", "special", "\"", ">",
+            "This paragraph has special style",
+        "</", "p", ">",
+        "<", "p", ">",
+            "This paragraph is not special",
+        "</", "p", ">",
+    "</", "body", ">",
+"</", "html", ">"
+]</code></pre>
+					<aside class="notes">
+					</aside>
+				</section>						
+
+				<section>
+					<h1>Lexer</h1>
+					<ul>
+						<li>Identifies the type of each token</li>
 						<li>Outputs token stream</li>
 					</ul>
 					<aside class="notes">
+						once input stream chopped into discrete tokens move to lexer
+						<br>
+						the meanings of those tokens, or their acceptable order, are matters for parser
+						<br>
 						emitted tokens from tokenization are converted into "objects," which define their properties & rules
 					</aside>
 				</section>
@@ -158,7 +191,13 @@
 						<li>The compiler first parses source code into a parse tree, and then translates the tree into a machine code document</li>
 					</ul>
 					<aside class="notes">
-						tree structure similiar to AST = JS EX
+						alpha order: lex then parse
+						<br>
+						tree structure similiar to AST = JS Ex.s
+						<br>
+						concerns itself with the context in which each token appears
+						<br>
+						which is a way of saying it cares about whether or not the sequence & combination of tokens detected fits expected grammar
 					</aside>
 				</section>
 
