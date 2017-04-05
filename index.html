@@ -248,13 +248,9 @@
 					<ul>
 						<li>By default CSS is treated as a render blocking resource</li>
 						<li>Browser will hold rendering of any process until the CSSOM is constructed</li>
-						<li>DOM can be built while loading scripts</li>
 					</ul>
 					<aside class="notes">
-						TODO: DOM can be built while loading scripts
-						While browser was constructing DOM it encountered link tag in head of document referencing an external CSS stylesheet. Anticipating it needs this resource to render pg, it immediately dispatches req for resource
-						<br>
-						stylesheets are synchronous and block
+						While browser constructs DOM, encountered link tag in head referencing sheet. Anticipation = needs this for render, dispatches req || seems since sheets don't change DOM tree, no reason to stop parsing. Issue: scripts asking for style information during doc parsing. If style not loaded & parsed, script = wrong answers
 					</aside>
 				</section>
 
@@ -508,7 +504,7 @@ a {
   color: red;
 }</code></pre>
 					<aside class="notes">
-						TODO define winner
+						a tag is pink!
 					</aside>
 				</section>		
 
