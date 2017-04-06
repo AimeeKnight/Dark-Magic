@@ -395,16 +395,15 @@
 				<section>
 					<h1>Painting Order</h1>
 					<ul>
-						<li>Painted from back to front</li>
 						<li>Follows order that elements are stacked in their stacking contexts</li>
+						<li>Painted from back to front</li>
 						<li>Example: background color &rarr; background image &rarr; border &rarr; children</li>
+						<li>Can be global or incremental</li>
 					</ul>
 					<aside class="notes">
-						TODO: further clarify example
-						like layout, paint can be global (entire tree painted or incremental)
+						order affects painting since stacks are painted back - front. Stacking order = 
 						<br>
-						incremental: some renderers change in way that doesn't affect entire tree
-						<br>
+						like layout (entire tree painted or incremental - some renderers change in way that doesn't affect entire tree)
 						changed renderer invalidates its rectangle on screen causing OS to see it as a 'dirty region' & generates a 'paint' event
 					</aside>
 				</section>
@@ -416,10 +415,13 @@
 						<li>Action of flattening all layers into the final image that is visible on the screen</li>
 					</ul>
 					<aside class="notes">
-						TODO: Further definition needed
 						when pl speak of hardware acceleration in browsers, almost always refer to accelerated compositing
 						<br>
-						composite where painted parts put together
+						Using GPU to composite contents of a web page = speed up vs old CPU (CPU & GPU in parallel)
+						<br>
+						cache and group chunks of render tree
+						<br>
+						where painted parts put together
 					</aside>
 				</section>
 
