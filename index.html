@@ -629,7 +629,6 @@ a {
 						<li>Relative: Positioned like usual and then moved by the required delta</li>
 					</ul>
 					<aside class="notes">
-						TODO: block box and inline examples, define delta
 						norm: its place in render tree is like its place in DOM tree & is laid out according to its box type and dimensions
 						<br>
 						block box: have their own rectangle on the browser window
@@ -791,8 +790,6 @@ a {
 					</ul>
 					<aside class="notes">
 						here are basic rules to determine stacking order w/in simple single stacking context (from back to front)
-						<br>
-						TODO - this is on wrong slide: cause of this, becomes possible for element to appear behind own parent, normally not possible
 					</aside>
 				</section>
 
@@ -800,11 +797,13 @@ a {
 					<h1>Stacking Context Rules</h1>
 					<h4>Positioned elements (and their children)</h4>
 					<ul>
-						<li>Negative z-index values: higher values are stacked in front of lower values and elements with the same value are stacked according to appearance in the HTML</li>						
+						<li>Negative z-index values: higher values are stacked in front of lower values and elements with the same value are stacked according to appearance in the HTML</li>
 						<li>Negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li>
 					</ul>
 					<aside class="notes">
 						-1 higher than -5
+						<br>
+						positioned elements with negative z-index ordered first w/in stacking context: means they appear behind all other. Because of this, possible for an element to appear behind own parent - normally not possible. Only works if element’s parent is in same stacking context & not root element of that context
 					</aside>
 				</section>
 
@@ -816,8 +815,6 @@ a {
 						<li>Positive z-index values: higher values are stacked in front of lower values and elements with the same value are stacked according to appearance in the HTML</li>
 					</ul>
 					<aside class="notes">
-							only works if element’s parent is in same stacking context & not root element of that stacking context
-							TODO: not root element of that stacking context
 					</aside>
 				</section>				
 
