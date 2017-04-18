@@ -104,33 +104,23 @@
 					<ul>
 						<li>Conversion</li>
 						<li>Tokenization</li>
-						<li>Lexing (block nodes & text nodes for DOM construction)</li>
+						<li>Lexing</li>
+						<li>Parsing</li>						
 					</ul>
 					<aside class="notes">
-						browser reads raw bytes HTML/CSS off disk/network, translates to individual chars based on file encoding
-						<br>
 						HTML5 spec > bytes converted to chars then undergo 'tokenization' process
 						<br>
-						chars > tokens > obj. are turned into nodes
+						chars > tokens > obj. are turned into text & block nodes for DOM construction
 					</aside>
 				</section>
 
 				<section>
-					<h1>DOM (Elements)</h1>
+					<h1>Conversion</h1>
 					<ul>
-						<li>Not context free</li>
-						<li>Never get a syntax error</li>
+						<li>Reading raw bytes of HTML & CSS off of disk/network</li>
 					</ul>
 					<aside class="notes">
-						When constructing DOM tree, the browser first needs bytes from network
-						<br>
-						when parsing, have to take into account surrounding chars
-						<br>
-						not defined - fudge factor
-						<br>
-						missing info, need more than the spec
-						<br>
-						edge cases
+						!!browser reads raw bytes HTML/CSS off disk/network, translates to individual chars based on file encoding!!
 					</aside>
 				</section>
 
@@ -142,6 +132,7 @@
 						<li>Knows how to strip irrelevant characters like white spaces and line breaks</li>
 					</ul>
 					<aside class="notes">
+						!!breaks into chunks!!
 						often combined with lexing
 					</aside>
 				</section>
@@ -175,9 +166,7 @@
 					<aside class="notes">
 						once input stream chopped into discrete tokens move to lexer
 						<br>
-						emitted tokens from tokenization are converted into "objects," which define their properties & rules
-						<br>
-						the meanings of those tokens, or their acceptable order, are matters for parser
+						!!emitted tokens from tokenization are converted into "objects," which define have their own properties & rules!!
 					</aside>
 				</section>
 
@@ -192,11 +181,28 @@
 					<aside class="notes">
 						alpha order: lex then parse
 						<br>
-						tree structure similiar to AST = JS Ex.s
+						!!tree structure similiar to AST = JS Ex.s!!
 						<br>
-						concerns itself with the context in which each token appears
+						care about the context in which the token appears
 						<br>
-						which is a way of saying it cares about whether or not the sequence & combination of tokens detected fits expected grammar
+						cares about whether or not the sequence & combination of tokens detected fits expected grammar (the meanings of tokens, and if in acceptable order)
+					</aside>
+				</section>
+
+				<section>
+					<h1>DOM (Elements)</h1>
+					<ul>
+						<li>Not context free</li>
+						<li>Never get a syntax error</li>
+					</ul>
+					<aside class="notes">
+						when parsing, have to take into account surrounding chars
+						<br>
+						not defined - fudge factor
+						<br>
+						missing info, need more than the spec
+						<br>
+						edge cases
 					</aside>
 				</section>
 
