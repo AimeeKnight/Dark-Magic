@@ -104,13 +104,12 @@
 					<ul>
 						<li>Conversion</li>
 						<li>Tokenization</li>
-						<li>Lexing</li>
-						<li>Nodes (block nodes & text nodes for DOM construction)</li>
+						<li>Lexing (block nodes & text nodes for DOM construction)</li>
 					</ul>
 					<aside class="notes">
 						browser reads raw bytes HTML/CSS off disk/network, translates to individual chars based on file encoding
 						<br>
-						HTML5 spec > bytes undergo process 'tokenization', however before bytes can be tokenized, first converted into chars.
+						HTML5 spec > bytes converted to chars then undergo 'tokenization' process
 						<br>
 						chars > tokens > obj. are turned into nodes
 					</aside>
@@ -176,9 +175,9 @@
 					<aside class="notes">
 						once input stream chopped into discrete tokens move to lexer
 						<br>
-						the meanings of those tokens, or their acceptable order, are matters for parser
-						<br>
 						emitted tokens from tokenization are converted into "objects," which define their properties & rules
+						<br>
+						the meanings of those tokens, or their acceptable order, are matters for parser
 					</aside>
 				</section>
 
