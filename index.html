@@ -78,16 +78,37 @@
 
 				<section>
 					<h1>Vocabulary</h1>
-					<ul>
-						<li>Chromium</li>
-						<li>Chrome</li>
-						<li>Webkit</li>
-						<li>Blink</li>
-						<li>Gecko</li>
-						<li>Trident/EdgeHTML</li>
-						<li>V8</li>
-						<li>Chakra</li>						
-					</ul>
+					<table>
+					<tr>
+						<td>Browsers</td>
+						<td>
+							<ul>
+								<li>Chromium</li>
+								<li>Chrome</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>Rendering Engines</td>
+						<td>
+							<ul>
+								<li>Webkit</li>
+								<li>Blink</li>
+							<li>Gecko</li>
+							<li>Trident/EdgeHTML</li>								
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>JavaScript Engines</td>
+						<td>
+							<ul>
+								<li>V8</li>
+								<li>Chakra</li>
+							</ul>
+						</td>
+					</tr>													
+					</table>
 					<aside class="notes">
 						Open source browser vs rendering/layout engine 
 						<br>
@@ -95,9 +116,22 @@
 						<br>
 						2m loc
 						<br>
-						each tab has own rendering engine in chrome
+						each tab has own rendering engine
 					</aside>
 				</section>
+
+				<section>
+					<img src="img/layers.png" style="width: 800px;">
+					<aside class="notes">
+						UI: this includes the address bar, back/forward button, bookmarking menu, etc. Every part of the browser display except the window where you see the requested page.
+						BROWSER ENGINE: marshals actions between the UI and the rendering engine.
+						RENDERING ENGINE: responsible for displaying requested content. For example if the requested content is HTML, the rendering engine parses HTML and CSS, and displays the parsed content on the screen.
+						NETWORKING: for network calls such as HTTP requests, using different implementations for different platform behind a platform-independent interface.
+						UI backend: used for drawing basic widgets like combo boxes and windows. This backend exposes a generic interface that is not platform specific. Underneath it uses operating system user interface methods.
+						JS INTERPRETER. Used to parse and execute JavaScript code.
+						DATA STORAGE. This is a persistence layer. The browser may need to save all sorts of data locally, such as cookies. Browsers also support storage mechanisms such as localStorage, IndexedDB, WebSQL and FileSystem.
+					</aside>
+				</section>				
 
 				<section>
 					<h1>Parsing - High Level</h1>
@@ -115,6 +149,12 @@
 				</section>
 
 				<section>
+					<img src="img/flow.png" style="width: 1500px;">
+					<aside class="notes">
+					</aside>
+				</section>					
+
+				<section>
 					<h1>Conversion</h1>
 					<ul>
 						<li>Reading raw bytes of HTML & CSS off of disk/network</li>
@@ -127,12 +167,12 @@
 				<section>
 					<h1>Tokenizer</h1>
 					<ul>
-						<li>Breaks input into chunks (valid tokens)</li>
-						<li>HTML tokens are start tags, end tags, attribute names and attribute values</li>
-						<li>Knows how to strip irrelevant characters like white spaces and line breaks</li>
+						<li>Breaks input into chunks</li>
+						<li>HTML tokens: start tags, end tags, attribute names, attribute values</li>
+						<li>Strips irrelevant characters: white space, line breaks</li>
 					</ul>
 					<aside class="notes">
-						!!breaks into chunks!!
+						!!breaks into chunks (valid tokens)!!
 						often combined with lexing
 					</aside>
 				</section>
@@ -161,10 +201,10 @@
 					<h1>Lexer</h1>
 					<ul>
 						<li>Identifies the type of each token</li>
-						<li>Outputs token stream</li>
+						<li>Outputs token stream for the parser</li>
 					</ul>
 					<aside class="notes">
-						once input stream chopped into discrete tokens move to lexer
+						once input stream chopped into discrete tokens by tokenizer move to lexer
 						<br>
 						!!emitted tokens from tokenization are converted into "objects," which define have their own properties & rules!!
 					</aside>
@@ -173,10 +213,9 @@
 				<section>
 					<h1>Parser</h1>
 					<ul>
-						<li>Reads off lexer stream</li>
+						<li>Reads off lexer stream to construct tree structure</li>
 						<li>Responsible for analyzing the document structure according to the language syntax rules</li>
-						<li>Constructs tree structure from stream</li>
-						<li>The compiler first parses source code into a parse tree, and then translates the tree into a machine code document</li>
+						<li>The compiler first parses source code into a parse tree, and then translates the tree into a machine code</li>
 					</ul>
 					<aside class="notes">
 						alpha order: lex then parse
@@ -186,6 +225,8 @@
 						care about the context in which the token appears
 						<br>
 						cares about whether or not the sequence & combination of tokens detected fits expected grammar (the meanings of tokens, and if in acceptable order)
+						<br>
+						parser is part of compiler
 					</aside>
 				</section>
 
