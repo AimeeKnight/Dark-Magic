@@ -213,16 +213,16 @@
 				<section>
 					<h1>Parser</h1>
 					<ul>
-						<li>Reads off lexer stream to construct tree structure</li>
+						<li>Reads off lexer stream</li>
+						<li>Compiler parses source code into a tree structure, and then translates that into machine code</li>
 						<li>Responsible for analyzing the document structure according to the language syntax rules</li>
-						<li>The compiler first parses source code into a parse tree, and then translates the tree into a machine code</li>
 					</ul>
 					<aside class="notes">
 						alpha order: lex then parse
 						<br>
 						!!tree structure similiar to AST in JS!!
 						<br>
-						care about the context in which the token appears
+						concerned with context in which token appears
 						<br>
 						cares about whether or not the sequence & combination of tokens detected fits expected grammar (the meanings of tokens, and if in acceptable order)
 						<br>
