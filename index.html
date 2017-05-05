@@ -292,18 +292,18 @@
 				</section>
 
 				<section>
-					<h1>CCSOM</h1>
+					<h1>CSSOM</h1>
 					<ul>
 						<li>By default CSS is treated as a render blocking resource</li>
 						<li>Browser will hold rendering of any process until the CSSOM is constructed</li>
 					</ul>
 					<aside class="notes">
-						While browser constructs DOM, encountered link tag in head referencing sheet. Anticipation = needs this for render, dispatches req || seems since sheets don't change DOM tree, no reason to stop parsing. Issue: scripts asking for style information during doc parsing. If style not loaded & parsed, script = wrong answers
+						While browser constructs DOM, encounter link tag in head for sheet. Anticipation = needs for render, dispatches req || since sheets don't change DOM tree, no reason to stop parsing. Issue: scripts asking for style information during doc parsing. If style not loaded & parsed, script = wrong answers
 					</aside>
 				</section>
 
 				<section>
-					<h1>CCSOM</h1>
+					<h1>CSSOM</h1>
 					<ul>
 						<li>Not 1 to 1 with the DOM</li>
 						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the rendered output</li>
@@ -316,7 +316,7 @@
 				</section>
 
 				<section>
-					<h1>CCSOM</h1>
+					<h1>CSSOM</h1>
 					<ul>
 						<li>CSS files are parsed into stylesheet objects</li>
 						<li>Each object contains a CSS rules object</li>
@@ -331,7 +331,7 @@
 
 				<section>
 					<h1>Render Tree</h1>
-					<h4>DOM + CCSOM</h4>
+					<h4>DOM + CSSOM</h4>
 					<ul>
 						<li>Visual representation of the document</li>
 						<li>Enable painting the contents in their correct order</li>
