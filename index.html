@@ -345,8 +345,8 @@
 				<section>
 					<h1>Purpose</h1>
 					<ul>
-						<li>Stores RenderObject's or "renderers" (AKA frames in Firefox)</li>
-						<li>A renderer knows how to lay out and paint itself and its children</li>
+						<li>Stores RenderObjects or "renderers" (AKA frames in Firefox)</li>
+						<li>Knows how to lay out and paint itself and its children</li>
 						<li>Includes geometric information like width, height and position</li>
 						<li>Each node in the DOM tree that produces visual output has a corresponding RenderObject</li>
 					</ul>
@@ -392,7 +392,7 @@
 					<ul>
 						<li>When the renderer is created and added to the tree, it does not have a position and size</li>
 						<li>Calculating these values is called layout or reflow</li>
-						<li>The output of the layout process is a "box-model" that contains the position and size of every element within the viewport</li>
+						<li>The output of the layout process is a box model that contains the position and size of every element within the viewport</li>
 					</ul>
 					<aside class="notes">
 						up to this we’ve calculated which nodes should be visible and their computed styles
@@ -407,7 +407,7 @@
 					<h1>Paint</h1>
 					<h4>(AKA Rasterizing)</h4>
 					<ul>
-						<li>Once we have visible nodes (DOM), computed styles (CSSOM) and geometry (Layout), this information is passed to the second stage</li>
+						<li>Once you have visible nodes (DOM), computed styles (CSSOM) and geometry (Layout), the information is passed to the second stage, painting</li>
 						<li>Converts each node in the render tree to actual pixels on the screen</li>
 					</ul>
 					<aside class="notes">
@@ -433,7 +433,7 @@
 					<h1>Painting Time</h1>
 					<ul>
 						<li>Time varies based on render tree construction</li>
-						<li>The bigger the width and height of the element, the longer the painting</li>
+						<li>The bigger the width and height of the element, the longer the painting time</li>
 						<li>Adding different effects also increases painting time</li>
 					</ul>
 					<aside class="notes">
@@ -498,7 +498,7 @@
 					<h1>Specificity</h1>
 					<ul>
 						<li>Applying rules in correct cascade order</li>
-						<li>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will “win”</li>
+						<li>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will win</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -507,8 +507,8 @@
 				<section>
 					<h1>Specificity</h1>
 					<ul>
-						<li>There are many ways to target a specific tag using CSS selectors</li>
-						<li>The browser needs a way to negotiate which color it should give to a specific tag</li>
+						<li>Many ways to target a specific tag using CSS selectors</li>
+						<li>Browser needs a way to negotiate which color it should give to a specific tag</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -517,8 +517,8 @@
 				<section>
 					<h1>Specificity</h1>
 					<ul>
-						<li>The way the browser makes the decision is by first calculating each selectors' specificity value</li>
-						<li>Then it checks which selector has the highest value to determine the winner</li>
+						<li>Browser makes a decision by first calculating each selectors' specificity value</li>
+						<li>Second, it checks which selector has the highest value to determine the winner</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -587,6 +587,7 @@ a {
 					</tr>							
 					</table>
 					<aside class="notes">
+						a tag is pink!						
 					</aside>
 				</section>
 
@@ -754,7 +755,7 @@ a {
 						<li>For each child, the current renderer: determines the position of the child, asks the child to compute its dimensions, then the current renderer can compute its height</li>
 					</ul>
 					<aside class="notes">
-						parent tells child to fit into it’s width - also responsible for both dimensions
+						parent tells child to fit into it’s width
 						<br>
 						happens whenever position changes - repaint and then composite back together still needs to happen
 					</aside>
@@ -779,7 +780,7 @@ a {
 						<li>Example: new renderers are appended to the render tree after extra content came from the network and was added to the DOM tree</li>
 					</ul>
 					<aside class="notes">
-						renderer object in render tree, knows how to layout & paint itself & children
+						remember renderer object in render tree, knows how to layout & paint itself & children
 					</aside>
 				</section>
 
@@ -892,7 +893,7 @@ a {
 					<aside class="notes">
 						-1 higher than -5
 						<br>
-						positioned elements with negative z-index ordered first w/in stacking context: means they appear behind all other. Because of this, possible for an element to appear behind own parent - normally not possible. Only works if element’s parent is in same stacking context & not root element of that context
+						(2)...because of this, possible for an element to appear behind own parent - normally not possible. Only works if element’s parent is in same stacking context & not root element of that context
 					</aside>
 				</section>
 
@@ -924,11 +925,13 @@ a {
 				<section>
 					<h1>New Stacking Contexts</h1>
 					<ul>
-						<li>Opacity less than 1 (.99), filter when its value is something other than none, and mix-blend-mode when its value is something other than normal</li>
+						<li>Opacity less than 1, filter when its value is something other than none, and mix-blend-mode when its value is something other than normal</li>
 						<li>Transform property also triggers a stacking context when its value isn't none. Examples: scale(1), translate3d(0,0,0)</li>
 					</ul>
 					<aside class="notes">
-						includes identity transforms1, such as scale(1) and translate3d(0,0,0)
+						blend mode determines how the pixels on that layer interact with the visible pixels on the layers below it
+						<br>
+						scale: size, translate3d: GPU into action for CSS transitions, making them smoother
 					</aside>
 				</section>
 
@@ -939,9 +942,8 @@ a {
 						<li>Look up the ancestor tree and see if any parents form stacking contexts</li>
 					</ul>
 					<aside class="notes">
-						key: Be able to spot when new stacking contexts formed
 						<br>
-						if setting z-index of billion on element & not moving forward in stacking order, look up ancestor tree see if any parents form stacking contexts
+						(2) if setting z-index of billion on element & not moving forward in stacking order...
 						<br>
 						if new stack context, z-index of billion isn’t doing any good
 					</aside>
@@ -969,9 +971,6 @@ a {
 						<li>Run layout, paint, and composite</li>
 					</ul>
 					<aside class="notes">
-						we have the DOM and CSSOM trees, so browser will now build Render Tree	
-						<br>
-						in final step, browser runs layout process & paints page				
 					</aside>
 				</section>
 
