@@ -242,8 +242,6 @@
 					<aside class="notes">
 						!!translation!!: turns AST into machine code
 						<br>
-						markup defines relation between tags (some tags contained within others)
-						<br>
 						created objs are linked in tree data structure that also captures parent-child relation from orig markup: HTML obj is parent of body obj, body parent of p obj, so on
 					</aside>
 				</section>
@@ -311,7 +309,7 @@
 					<aside class="notes">
 						DOM tree captures properties & relations of document markup, but doesn't tell how element will look when rendered. That’s responsibility of CSSOM
 						<br>
-						elements with 'hidden' visibility will appear in the tree
+						elements with 'hidden' visibility WILL appear in the tree
 					</aside>
 				</section>
 
@@ -450,9 +448,6 @@
 						<li>Can be global or incremental</li>
 					</ul>
 					<aside class="notes">
-						order affects painting since stacks are painted back - front. Stacking order = 
-						<br>
-						like layout (entire tree painted or incremental - some renderers change in way that doesn't affect entire tree)
 						changed renderer invalidates its rectangle on screen causing OS to see it as a 'dirty region' & generates a 'paint' event
 					</aside>
 				</section>
@@ -715,12 +710,10 @@ a {
 					<h1>Positioning</h1>
 					<h4>Normal & Relative</h4>
 					<ul>
-						<li>Normal: The object is positioned according to its place in the document</li>
+						<li>Normal: The object is positioned according to its place in the document, box type, and dimensions</li>
 						<li>Relative: Positioned like usual and then moved by the required delta</li>
 					</ul>
 					<aside class="notes">
-						norm: its place in render tree is like its place in DOM tree & is laid out according to its box type and dimensions
-						<br>
 						block box: have their own rectangle on the browser window
 						<br>
 						inline box: does not have its own block, is inside containing block
