@@ -179,9 +179,9 @@
 				<section>
 					<h1>Tokenizer</h1>
 					<ul>
-						<li>Breaks input into chunks</li>
+						<li>Breaks input into chunks.</li>
 						<li>HTML tokens: start tags, end tags, attribute names, attribute values</li>
-						<li>Strips irrelevant characters: white space, line breaks</li>
+						<li>Strips irrelevant characters: white space, line breaks.</li>
 					</ul>
 					<aside class="notes">
 						!!breaks into chunks (valid tokens)!!
@@ -212,8 +212,8 @@
 				<section>
 					<h1>Lexer</h1>
 					<ul>
-						<li>Identifies the type of each token</li>
-						<li>Outputs token stream for the parser</li>
+						<li>Like the tokenizer, but it also identifies the type of each token (this token is a number, that token is a string literal, this other token is an equality operator).</li>
+						<li>Outputs token stream for the parser.</li>
 					</ul>
 					<aside class="notes">
 						once input stream chopped into discrete tokens by tokenizer move to lexer
@@ -225,14 +225,14 @@
 				<section>
 					<h1>Parser</h1>
 					<ul>
-						<li>Reads off lexer stream</li>
+						<li>Takes the stream of tokens from the lexer.</li>
 						<li>Compiler parses source code into a tree structure, and then translates that into machine code</li>
 						<li>Responsible for analyzing the document structure according to the language syntax rules</li>
 					</ul>
 					<aside class="notes">
 						alpha order: lex then parse
 						<br>
-						!!tree structure similiar to AST in JS!!
+						!!interprets the tokens using a specific grammar, and turns it into tree structure similiar to AST in JS!!
 						<br>
 						concerned with context in which token appears
 						<br>
