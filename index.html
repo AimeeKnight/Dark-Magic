@@ -738,6 +738,7 @@ a {
 						<li>The object is first laid out like normal flow, then moved as far left or right as possible</li>
 					</ul>
 					<aside class="notes">
+						Flexbox stats
 					</aside>
 				</section>				
 
@@ -794,8 +795,6 @@ a {
 						<li>Every element in an HTML document can be either in front of or behind every other element in the document</li>
 					</ul>
 					<aside class="notes">
-						so simple right?!
-						<br>
 						elements with higher z-index are stacked in front of elements with lower z-index
 					</aside>
 				</section>
@@ -803,23 +802,7 @@ a {
 				<section>
 					<img src="img/so_hard.gif" >
 					<aside class="notes">
-					appears so simple, so most devs don’t take time to read rules
-					</aside>
-				</section>
-
-				<section>
-					<h1>AKA Stacking Order</h1>
-					<ul>
-						<li>Groups of elements with a common parent that move forward or backward together in the stacking order make up what is known as a stacking context</li>
-						<li>Every stacking context has a single HTML element as its root element</li>
-						<li>When z-index and position properties aren’t involved, the rules are simple: the stacking order is the same as the order of appearance in the HTML</li>
-					</ul>
-					<aside class="notes">
-						layered representation
-						<br>
-						when you introduce position property, positioned elements (& children) are displayed in front of non-positioned elements
-						<br>
-						'positioned' means relative, absolute, etc. (value other than static)
+						appears so simple, so most devs don’t take time to read rules
 					</aside>
 				</section>
 
@@ -828,8 +811,25 @@ a {
 					<ul>
 						<li>A three-dimensional conceptualization of HTML elements along an imaginary z-axis relative to the user facing the viewport</li>
 						<li>An element that contains a set of layers</li>
+						<li>Groups of elements with a common parent that move forward or backward together</li>
 					</ul>
 					<aside class="notes">
+						full understanding of stacking contexts is key to grasping how z-index & stacking order work
+						<br>
+						layered representation
+					</aside>
+				</section>
+
+				<section>
+					<h1>Stacking Order</h1>
+					<ul>
+						<li>Every stacking context has a single HTML element as its root element</li>
+						<li>When z-index and position properties aren’t involved, the rules are simple: the stacking order is the same as the order of appearance in the HTML</li>
+					</ul>
+					<aside class="notes">
+						when you introduce position property, positioned elements (& children) are displayed in front of non-positioned elements
+						<br>
+						'positioned' means relative, absolute, etc. (value other than static)
 					</aside>
 				</section>
 
@@ -837,7 +837,7 @@ a {
 					<h1>Stacking Context</h1>
 					<h4>Types</h4>
 					<ul>
-						<li>Root Stacking Context: created by the html element</li>
+						<li>Root Stacking Context: created by an html element</li>
 						<li>Local Stacking Context: created by specific properties and values</li>
 						<li>Within a local stacking context, the z-index values of children are relative to that element rather than to the document root</li>
 						<li>Layers outside of that context (sibling elements of a local stacking context) can't sit between layers within it</li>
@@ -869,7 +869,6 @@ a {
 						<li>If an element is contained in a stacking context at the bottom of the stacking order, there is no way to get it to appear in front of another element in a different stacking context that is higher in the stacking order</li>
 					</ul>
 					<aside class="notes">
-						full understanding of stacking contexts is key to grasping how z-index & stacking order work
 						<br>
 						diff contexts ? can't even change even with a z-index of billion!
 					</aside>
@@ -946,10 +945,7 @@ a {
 						<li>Look up the ancestor tree and see if any parents form stacking contexts</li>
 					</ul>
 					<aside class="notes">
-						<br>
-						(2) if setting z-index of billion on element & not moving forward in stacking order...
-						<br>
-						if new stack context, z-index of billion isn’t doing any good
+						if setting z-index of billion on element & not moving forward in stacking order...
 					</aside>
 				</section>
 
@@ -959,7 +955,7 @@ a {
 						<li>Construct the DOM by parsing the HTML</li>
 						<li>May be incremental and a response may not arrive all at once, so may not finish construction all at once</li>
 						<li>Request CSS and JavaScript resources</li>
-						<li>If scripts are synchronous it will not be executed until the CSS is received (CSS is render-blocking)</li>
+						<li>If scripts are synchronous it will not be executed until the CSS is received since CSS is render-blocking</li>
 					</ul>
 					<aside class="notes">
 						here are steps the browser goes through when loading a page
