@@ -128,18 +128,18 @@
 						<br>
 						2m loc
 						<br>
-						each tab has own rendering engine
+						each tab = own rendering engine
 					</aside>
 				</section>
 
 				<section>
 					<img src="img/layers.png" style="width: 800px;">
 					<aside class="notes">
-						UI: includes address bar, back/forward button, bookmarking menu, etc. Every part of browser display except the window where you see the requested page.
-						BROWSER ENGINE: coordinates actions between UI and rendering engine.
-						RENDERING ENGINE: responsible for displaying requested content. Parses HTML and CSS, and displays the parsed content on the screen.
-						NETWORKING: Network calls such as HTTP requests.
-						UI BACKEND: used for drawing basic boxes & windows. Underneath it uses operating system user interface methods.
+						UI: includes address bar, back/fwd button, bookmarking menu, etc. Every part of browser display except window where you see the requested page.
+						BROWSER ENGINE: coordinates actions between UI - rendering engine.
+						RENDERING ENGINE: responsible for displaying requested content. Parses HTML & CSS, displays parsed content on the screen.
+						NETWORKING: Network calls - HTTP requests.
+						UI BACKEND: used for drawing basic boxes & windows. Underneath uses operating system.
 						JS INTERPRETER. Parse & execute JS code.
 						DATA STORAGE. Persistence layer. Saves data locally, such as cookies, localStorage.
 					</aside>
@@ -172,7 +172,7 @@
 						<li>Reading raw bytes of HTML & CSS off of disk/network</li>
 					</ul>
 					<aside class="notes">
-						!!browser reads raw bytes HTML/CSS off disk/network, translates to individual chars based on file encoding!!
+						browser reads raw bytes HTML/CSS off disk/network, translates to individual chars based on file encoding
 					</aside>
 				</section>
 
@@ -184,7 +184,8 @@
 						<li>Strips irrelevant characters: white space, line breaks.</li>
 					</ul>
 					<aside class="notes">
-						!!breaks into chunks (valid tokens)!!
+						breaks into valid tokens
+						<br>
 						often combined with lexing
 					</aside>
 				</section>
@@ -216,29 +217,25 @@
 						<li>Outputs token stream for the parser.</li>
 					</ul>
 					<aside class="notes">
-						once input stream chopped into discrete tokens by tokenizer move to lexer
-						<br>
-						!!emitted tokens from tokenization are converted into "objects," which define have their own properties & rules!!
+						emitted tokens from tokenization are converted into 'objects' which define have their own properties & rules
 					</aside>
 				</section>
 
 				<section>
 					<h1>Parser</h1>
 					<ul>
-						<li>Takes the stream of tokens from the lexer.</li>
-						<li>Compiler parses source code into a tree structure, and then translates that into machine code</li>
-						<li>Responsible for analyzing the document structure according to the language syntax rules</li>
+						<li>Reads the stream of tokens from the lexer.</li>
+						<li>Responsible for analyzing the document structure according to the language syntax rules.</li>
+						<li>Compiler parses source code into a tree structure, and then translates that into machine code.</li>
 					</ul>
 					<aside class="notes">
-						alpha order: lex then parse
-						<br>
-						!!interprets the tokens using a specific grammar, and turns it into tree structure similiar to AST in JS!!
-						<br>
-						concerned with context in which token appears
+						interprets the tokens using a specific grammar, and turns it into tree structure similiar to AST in JS
 						<br>
 						cares about whether or not the sequence & combination of tokens detected fits expected grammar (the meanings of tokens, and if in acceptable order)
 						<br>
-						parser is part of compiler
+						other words: context in which token appears						
+						<br>
+						alpha order: lex then parse
 					</aside>
 				</section>
 
@@ -251,9 +248,9 @@
 						<li>Machine code</li>
 					</ul>
 					<aside class="notes">
-						!!translation!!: turns AST into machine code
+						translation: turns AST into machine code
 						<br>
-						created objs are linked in tree data structure that also captures parent-child relation from orig markup: HTML obj is parent of body obj, body parent of p obj, so on
+						created objs are linked in tree structure that captures parent-child relation from orig markup: HTML obj is parent of body obj, body parent of p obj, so on
 					</aside>
 				</section>
 
@@ -307,7 +304,9 @@
 						<li>Browser will hold rendering of any process until the CSSOM is constructed</li>
 					</ul>
 					<aside class="notes">
-						While browser constructs DOM, encounter link tag in head for sheet. Anticipation = needs for render, dispatches req || since sheets don't change DOM tree, no reason to stop parsing. Issue: scripts asking for style information during doc parsing. If style not loaded & parsed, script = wrong answers
+						While browser constructs DOM, encounter link tag in head for sheet. Anticipation = needs for render, dispatches req
+						<br>
+						since sheets don't change DOM tree, no reason to stop parsing? Issue: scripts asking for style information during doc parsing. If style not loaded & parsed, script = wrong answers
 					</aside>
 				</section>
 
@@ -348,6 +347,8 @@
 					</ul>
 					<aside class="notes">
 						tree is of visual elements in order in which displayed
+						<br>
+						since CSSOM can reorder nodes
 					</aside>
 				</section>
 
@@ -375,7 +376,7 @@
 					<aside class="notes">
 						to construct render tree, browser does following:
 						<br>
-						after render tree finally to layout stage
+						after render tree - layout stage
 					</aside>
 				</section>
 
@@ -387,7 +388,7 @@
 						<li>Composite &darr;</li>						
 					</ul>
 					<aside class="notes">
-						Chrome DevTools Timeline allows us to capture and inspect the construction and processing costs of DOM and CSSOM
+						Chrome DevTools Timeline can capture and inspect the construction and processing costs of DOM and CSSOM
 						<br>
 						open Chrome DevTools & record timeline while the page is loaded, can see actual time taken to perform steps
 						<br>
@@ -407,8 +408,6 @@
 						up to this we’ve calculated which nodes should be visible and their computed styles
 						<br>
 						but haven't calculated their exact position & size within the viewport of the device
-						<br>
-						that’s the layout stage, also known as reflow
 					</aside>
 				</section>
 
@@ -420,7 +419,7 @@
 						<li>Converts each node in the render tree to actual pixels on the screen</li>
 					</ul>
 					<aside class="notes">
-						once render tree is constructed, browser can paint (draw) the render tree nodes on the screen
+						draws the render tree
 					</aside>
 				</section>
 
@@ -434,7 +433,6 @@
 						</li>
 					</ul>
 					<aside class="notes">
-						painting cont.
 					</aside>
 				</section>
 
@@ -447,6 +445,8 @@
 					</ul>
 					<aside class="notes">
 						first thing to look for is the area of the element
+						<br>
+						TODO: flexbox vs float
 					</aside>
 				</section>
 	
@@ -459,7 +459,7 @@
 						<li>Can be global or incremental</li>
 					</ul>
 					<aside class="notes">
-						changed renderer invalidates its rectangle on screen causing OS to see it as a 'dirty region' & generates a 'paint' event
+						Incremental: when styles change the renderer will become invalid causing OS to see it as a 'dirty region' & generates a 'paint' event
 					</aside>
 				</section>
 	
@@ -472,7 +472,7 @@
 					<aside class="notes">
 						when pl speak of hardware acceleration in browsers, almost always refer to accelerated compositing
 						<br>
-						Using GPU to composite contents of a web page = speed up vs old CPU (CPU & GPU in parallel)
+						Using GPU to composite contents of a web page = speed up vs old CPU
 						<br>
 						cache and group chunks of render tree
 						<br>
@@ -485,9 +485,9 @@
 					<ul>
 						<li>Browsers try to do the minimal possible actions in response to a change</li>
 						<li>Changes to an element's color will only repaint that element</li>
-						<li>Changes to the element's' position will cause layout and repaint of that element, its children and possibly siblings</li>
-						<li>Adding a DOM node will cause layout and repaint of the node</li>
-						<li>Major changes, like increasing font size of the html element will cause invalidation of caches, relayout and repaint of the entire tree</li>
+						<li>Changes to the element's position will cause relayout and repaint of that element, its children and possibly siblings</li>
+						<li>Adding a DOM node will cause relayout and repaint of the parent node</li>
+						<li>Major changes, like increasing font size of the html element will cause relayout and repaint of the entire tree</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -705,15 +705,12 @@ a {
 				<section>
 					<h1>Positioning</h1>
 					<ul>
-						<li>Before starting layout (positioning), a tree of render objects is created</li>
-						<li>When renderers are first created and added to the tree, they have no position or size yet</li>
+						<li>Before starting layout (positioning), a tree of render objects is always required</li>
+						<li>When renderers are first created and added to the render tree, they have no position or size yet</li>
+						<li>All renderers have own layout method</li>
 					</ul>
 					<aside class="notes">
 						process by which all boxes have their positions & sizes determined = going back to layout
-						<br>
-						can only happen once have the render tree						
-						<br>
-						all renderers have layout method
 					</aside>
 				</section>
 
@@ -725,9 +722,9 @@ a {
 						<li>Relative: Positioned like usual and then moved by the required delta</li>
 					</ul>
 					<aside class="notes">
-						block box: have their own rectangle on the browser window
+						block: has own rectangle on the browser window
 						<br>
-						inline box: does not have its own block, is inside containing block
+						inline: does not have its own block, is inside containing block
 					</aside>
 				</section>
 
@@ -735,10 +732,9 @@ a {
 					<h1>Positioning</h1>
 					<h4>Float</h4>
 					<ul>
-						<li>The object is first laid out like normal flow, then moved as far left or right as possible</li>
+						<li>The object is first laid out in normal flow, then moved as far left/rt as possible</li>
 					</ul>
 					<aside class="notes">
-						Flexbox stats
 					</aside>
 				</section>				
 
@@ -762,7 +758,9 @@ a {
 					<aside class="notes">
 						parent tells child to fit into it’s width
 						<br>
-						happens whenever position changes - repaint and then composite back together still needs to happen
+						happens whenever position changes
+						<br>
+						repaint and then composite back together still needs to happen
 					</aside>
 				</section>
 
@@ -827,7 +825,7 @@ a {
 						<li>When z-index and position properties aren’t involved, the rules are simple: the stacking order is the same as the order of appearance in the HTML</li>
 					</ul>
 					<aside class="notes">
-						when you introduce position property, positioned elements (& children) are displayed in front of non-positioned elements
+						when you introduce position property, positioned elements (& children) can be displayed in front of non-positioned elements
 						<br>
 						'positioned' means relative, absolute, etc. (value other than static)
 					</aside>
@@ -839,26 +837,10 @@ a {
 					<ul>
 						<li>Root Stacking Context: created by an html element</li>
 						<li>Local Stacking Context: created by specific properties and values</li>
-						<li>Within a local stacking context, the z-index values of children are relative to that element rather than to the document root</li>
-						<li>Layers outside of that context (sibling elements of a local stacking context) can't sit between layers within it</li>
+						<li>Within a local stacking context, the z-index values of children are relative to the root element rather than to the document root</li>
+						<li>Layers outside of a context (sibling elements of a local stacking context) can't sit between layers within that context</li>
 					</ul>
 					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<h1>Stacking Context</h1>
-					<h4>z-index</h4>
-					<ul>
-						<li>Can create new stacking contexts (this is where things get complicated)</li>
-						<li>Only works on positioned elements (if you try to set a z-index on an element with no position specified, it won't do anything)</li>
-					</ul>
-					<aside class="notes">
-						At first it’s natural to assume elements with higher z-index values are in front of elements with lower values
-						<br>
-						& any element with z-index is in front of any element without a z-index
-						<br>
-						but it’s not that simple
 					</aside>
 				</section>
 
@@ -928,6 +910,21 @@ a {
 				<section>
 					<h1>New Stacking Contexts</h1>
 					<ul>
+						<li>Some additional properties can create new stacking contexts (this is where things get complicated)!</li>
+						<li>Only works on positioned elements (if you try to set a z-index on an element with no position specified, it won't do anything)</li>
+					</ul>
+					<aside class="notes">
+						At first it’s natural to assume elements with higher z-index values are in front of elements with lower values
+						<br>
+						& any element with z-index is in front of any element without a z-index
+						<br>
+						but it’s not that simple
+					</aside>
+				</section>
+
+				<section>
+					<h1>New Stacking Contexts</h1>
+					<ul>
 						<li>Opacity less than 1, filter when its value is something other than none, and mix-blend-mode when its value is something other than normal</li>
 						<li>Transform property also triggers a stacking context when its value isn't none. Examples: scale(1), translate3d(0,0,0)</li>
 					</ul>
@@ -958,7 +955,7 @@ a {
 						<li>If scripts are synchronous it will not be executed until the CSS is received since CSS is render-blocking</li>
 					</ul>
 					<aside class="notes">
-						here are steps the browser goes through when loading a page
+						here are steps the browser goes through when loading page
 					</aside>
 				</section>
 
