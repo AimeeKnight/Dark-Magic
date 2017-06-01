@@ -84,7 +84,7 @@
 						<br>
 						guessing vs systematic
 						<br>
-						parsing, drawn, common issues
+						parsing, drawn, common issues: specificity, positioning, z-index
 					</aside>
 				</section>
 
@@ -135,10 +135,10 @@
 				<section>
 					<img src="img/layers.png" style="width: 800px;">
 					<aside class="notes">
-						UI: includes address bar, back/fwd button, bookmarking menu, etc. Every part of browser display except window where you see the requested page.
+						UI: includes address bar, back/fwd btn, bookmarking menu, etc. Every part of browser display except window see requested page.
 						BROWSER ENGINE: coordinates actions between UI - rendering engine.
-						RENDERING ENGINE: responsible for displaying requested content. Parses HTML & CSS, displays parsed content on the screen.
-						NETWORKING: Network calls - HTTP requests.
+						RENDERING ENGINE: displaying requested content. Parse HTML/CSS, displays parsed content on the screen.
+						NETWORKING: HTTP requests.
 						UI BACKEND: used for drawing basic boxes & windows. Underneath uses operating system.
 						JS INTERPRETER. Parse & execute JS code.
 						DATA STORAGE. Persistence layer. Saves data locally, such as cookies, localStorage.
@@ -154,9 +154,6 @@
 						<li>Parsing</li>						
 					</ul>
 					<aside class="notes">
-						HTML5 spec > bytes converted to chars then undergo 'tokenization' process
-						<br>
-						chars > tokens > obj. are turned into text & block nodes for DOM construction
 					</aside>
 				</section>
 
@@ -179,13 +176,11 @@
 				<section>
 					<h1>Tokenizer</h1>
 					<ul>
-						<li>Breaks input into chunks.</li>
+						<li>Breaks input valid tokens.</li>
 						<li>HTML tokens: start tags, end tags, attribute names, attribute values</li>
 						<li>Strips irrelevant characters: white space, line breaks.</li>
 					</ul>
 					<aside class="notes">
-						breaks into valid tokens
-						<br>
 						often combined with lexing
 					</aside>
 				</section>
@@ -248,9 +243,9 @@
 						<li>Machine code</li>
 					</ul>
 					<aside class="notes">
-						translation: turns AST into machine code
-						<br>
 						created objs are linked in tree structure that captures parent-child relation from orig markup: HTML obj is parent of body obj, body parent of p obj, so on
+						<br>
+						translation: turns AST into machine code
 					</aside>
 				</section>
 
@@ -415,11 +410,10 @@
 					<h1>Paint</h1>
 					<h4>(AKA Rasterizing)</h4>
 					<ul>
-						<li>Once you have visible nodes (DOM), computed styles (CSSOM) and geometry (Layout), the information is passed to the second stage, painting</li>
 						<li>Converts each node in the render tree to actual pixels on the screen</li>
 					</ul>
 					<aside class="notes">
-						draws the render tree
+						once you have visible nodes (DOM), computed styles (CSSOM) and geometry (Layout), the information is passed to the second stage and can draw the render tree
 					</aside>
 				</section>
 
