@@ -571,15 +571,15 @@ a {
 					</tr>
 					<tr>
 						<td>.container #main a</td>
-						<td>111</td>
+						<td>1,1,1</td>
 					</tr>
 					<tr>
 						<td>div #main p a</td>
-						<td>103</td>
+						<td>1,0,3</td>
 					</tr>	
 					<tr>
 						<td>#main a</td>
-						<td>101</td>
+						<td>1,0,1</td>
 					</tr>				
 					<tr>
 						<td>p a</td>
@@ -674,7 +674,7 @@ a {
 				</section>
 
 				<section>
-					<h4>Specificity value: 122</h4>		
+					<h4>Specificity value: 1,2,2</h4>		
 					<pre><code>#header .navbar li a:visited</code></pre>
 					<table>
 						<tr>
@@ -690,6 +690,17 @@ a {
 					</table>
 					<aside class="notes">
 						1 id, 1 class + 1 pseudo-class, 2 type selectors (li, a)
+					</aside>
+				</section>
+
+				<section>
+					<h1>Specificity</h1>
+					<ul>
+						<li>You can read the values as if they were just a number, like 1,2,2 is 122.</li>
+						<li>The commas are there to remind you that this isn’t a base 10 system.</li>
+						<li>You could technically have a specificity value of 0,1,13,4 and 13 wouldn’t spill over like a base 10 system would.</li>
+					</ul>
+					<aside class="notes">
 					</aside>
 				</section>
 
