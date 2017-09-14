@@ -256,7 +256,7 @@
 						<li>Never get a syntax error</li>
 					</ul>
 					<aside class="notes">
-						when parsing, have to take into account surrounding chars
+						when parsing, have to take into account surrounding chars, what came before or after
 						<br>
 						not defined - fudge factor
 						<br>
@@ -329,6 +329,8 @@
 						again, think AST/tree structure
 						<br>
 						Why tree structure? When computing final set of styles for any obj on pg, browser starts with most general rule applicable to a node (ex: if it's child of body element, then all body styles apply) then recursively refines the computed styles by applying more specific rules: rules cascade down
+						<br>
+						CSS loading has to be incremental because of the cascade. We can’t paint something red and then paint it blue later because that would be jarring for the user.						
 					</aside>
 				</section>
 
