@@ -59,8 +59,8 @@
 					<img src="img/amk_skate.gif" style="width: 370px;">
 					<ul>
 						<li>Work For: Warner Bros Entertainment</li>
-						<li>Hobbies: JavaScript Jabber, figure skating, running, crossfit</li>
-						<li>Likes: cats, macros, Kombucha</li>
+						<li>Hobbies: JavaScript Jabber, ⛸, running, crossfit</li>
+						<li>Likes: 😻😻, macros, kombucha</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -90,8 +90,8 @@
 				</section>
 
 				<section>
-					<h1>Vocabulary</h1>
-					<table>
+					<h3>Vocabulary</h3>
+					<table style="font-size: 80%">
 					<tr>
 						<td>Browsers</td>
 						<td>
@@ -105,10 +105,11 @@
 						<td>Rendering Engines</td>
 						<td>
 							<ul>
-								<li>Webkit</li>
-								<li>Blink</li>
-							<li>Gecko</li>
-							<li>Trident/EdgeHTML</li>								
+								<li>Webkit <i>(Safari)</i></li>
+								<li>Blink <i>(Chrome, Opera)</i></li>
+								<li>Gecko <i>(Firefox)</i></li>
+								<li>Trident <i>(IE)</i></li>
+								<li>EdgeHTML <i>(Edge)</i></li>								
 							</ul>
 						</td>
 					</tr>
@@ -116,16 +117,19 @@
 						<td>JavaScript Engines</td>
 						<td>
 							<ul>
-								<li>V8</li>
-								<li>Chakra</li>
+								<li>Nitro <i>(Safari)</i></li>									
+								<li>V8 <i>(Chrome)</i></li>
+								<li>SpiderMonkey <i>(Firefox)</i></li>		
+								<li>Chakra <i>(IE)</i></li>								
+								<li>Chakra <i>(Edge)</i></li>
 							</ul>
 						</td>
-					</tr>													
+					</tr>											
 					</table>
 					<aside class="notes">
 						Open source browser vs rendering/layout engine 
 						<br>
-						Webkit (apple) forked into blink - Gecko = Firefox, EdgeHTML = fork of trident for IE11
+						Webkit (apple) forked into blink, EdgeHTML = fork of trident
 						<br>
 						2m loc
 						<br>
@@ -134,7 +138,13 @@
 				</section>
 
 				<section>
-					<img src="img/layers.png" style="width: 800px;">
+						<h1>So, how do browsers actually work? 🤔</h1>
+						<aside class="notes">
+						</aside>
+					</section>
+
+				<section>
+					<img src="img/browser_components.jpg" style="width: 800px;">
 					<aside class="notes">
 						UI: includes address bar, back/fwd btn, bookmarking menu, etc. Every part of browser display except window see requested page.
 						BROWSER ENGINE: coordinates actions between UI - rendering engine.
@@ -144,25 +154,49 @@
 						JS INTERPRETER. Parse & execute JS code.
 						DATA STORAGE. Persistence layer. Saves data locally, such as cookies, localStorage.
 					</aside>
-				</section>				
-
+				</section>	
+				
 				<section>
-					<h1>Parsing - High Level</h1>
-					<ul>
-						<li>Conversion</li>
-						<li>Tokenization</li>
-						<li>Lexing</li>
-						<li>Parsing</li>						
-					</ul>
+					<img src="img/main_flow.jpg">
 					<aside class="notes">
 					</aside>
 				</section>
 
 				<section>
-					<img src="img/flow.png" style="width: 1500px;">
+					<img src="img/rendering_engine_dom.jpg">
 					<aside class="notes">
 					</aside>
-				</section>					
+				</section>
+
+				<section>
+						<pre><code><div class="container">
+ <div id="main">
+  <p>
+   <a href="#">Link</a>
+  </p>
+ </div>
+</div></code></pre>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/html_parser.jpg">
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/how_browsers_work_breakdown.jpg">
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/bytes.jpg">
+					<aside class="notes">
+					</aside>
+				</section>
 
 				<section>
 					<h1>Conversion</h1>
@@ -171,6 +205,18 @@
 					</ul>
 					<aside class="notes">
 						browser reads raw bytes HTML/CSS off disk/network, translates to individual chars based on file encoding
+					</aside>
+				</section>				
+
+				<section>
+					<img src="img/characters.jpg">
+					<aside class="notes">
+					</aside>
+				</section>				
+
+				<section>
+					<img src="img/tokens.jpg">
+					<aside class="notes">
 					</aside>
 				</section>
 
@@ -187,7 +233,7 @@
 				</section>
 
 				<section>
-					<h1>Tokenizer</h1>
+					<h1>Tokenizer Output</h1>
 						<pre><code>["<", "html", ">", 
      "<", "head", ">", 
          "<", "title", ">", "My HTML Page", "</", "title", ">",
@@ -204,7 +250,93 @@
 ]</code></pre>
 					<aside class="notes">
 					</aside>
-				</section>						
+				</section>
+
+				<section>
+					<img src="img/syntax_analysis.jpg">
+					<aside class="notes">
+					</aside>
+				</section>				
+	
+				<section>
+					<img src="img/dom.jpg">
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/cssom_flow.jpg">
+					<aside class="notes">
+					</aside>
+				</section>
+				
+				<section>
+						<pre><code>#main a {
+  color: green;
+}
+p a {
+  color: yellow;
+}
+.container #main a {
+  color: pink;
+}
+div #main p a {
+  color: orange;
+}
+a {
+  color: red;
+}</code></pre>
+					<aside class="notes">
+					</aside>
+				</section>				
+
+				<section>
+					<img src="img/css_parser.jpg">
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/cssom.jpg">
+					<aside class="notes">
+					</aside>
+				</section>			
+
+				<section>
+					<img src="img/render_tree.jpg">
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/render_tree_construction.jpg">
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/render_tree_construction_dom.jpg">
+					<aside class="notes">
+					</aside>
+				</section>				
+
+				<section>
+					<img src="img/render_tree_construction_cssom.jpg">
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/layout_flow.jpg">
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/flow.png" style="width: 1500px;">
+					<aside class="notes">
+					</aside>
+				</section>				
 
 				<section>
 					<h1>Lexer</h1>
@@ -396,7 +528,7 @@
 
 				<section>
 					<h1>Layout</h1>
-					<h4>(AKA Relow)</h4>
+					<h4>(AKA Reflow)</h4>
 					<ul>
 						<li>When the renderer is created and added to the tree, it does not have a position and size</li>
 						<li>Calculating these values is called layout or reflow</li>
@@ -406,6 +538,12 @@
 						up to this we’ve calculated which nodes should be visible and their computed styles
 						<br>
 						but haven't calculated their exact position & size within the viewport of the device
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/paint_flow.jpg">
+					<aside class="notes">
 					</aside>
 				</section>
 
@@ -482,6 +620,12 @@
 				</section>
 
 				<section>
+					<img src="img/reflow_repaint.jpg">
+					<aside class="notes">
+					</aside>
+				</section>				
+
+				<section>
 					<h1>Summary</h1>
 					<ul>
 						<li>Browsers try to do the minimal possible actions in response to a change</li>
@@ -532,120 +676,15 @@
 				</section>
 
 				<section>
-					<h1>Specificity</h1>
-						<pre><code><div class="container">
- <div id="main">
-  <p>
-   <a href="#">Link</a>
-  </p>
- </div>
-</div></code></pre>
-					<aside class="notes">
-					</aside>
-				</section>			
-
-				<section>
-					<h1>Specificity</h1>
-						<pre><code>#main a {
-  color: green;
-}
-p a {
-  color: yellow;
-}
-.container #main a {
-  color: pink;
-}
-div #main p a {
-  color: orange;
-}
-a {
-  color: red;
-}</code></pre>
-					<aside class="notes">
-						a tag is pink!
-					</aside>
-				</section>		
-
-				<section>
+					<h3>Selector Prerequisite Refresher</h3>						
 					<table>
 					<tr>
-						<th>Selector</th>
-						<th>Specificity Value</th>
-					</tr>
-					<tr>
-						<td>.container #main a</td>
-						<td>1,1,1</td>
-					</tr>
-					<tr>
-						<td>div #main p a</td>
-						<td>1,0,3</td>
-					</tr>	
-					<tr>
-						<td>#main a</td>
-						<td>1,0,1</td>
-					</tr>				
-					<tr>
-						<td>p a</td>
-						<td>2</td>
-					</tr>	
-					<tr>
-						<td>a</td>
-						<td>1</td>
-					</tr>							
-					</table>
-					<aside class="notes">
-						a tag is pink!						
-					</aside>
-				</section>
-
-				<section>
-					<img src="img/sponge_bob.gif">
-				</section>				
-
-				<section>
-					<table>
-					<tr>
-						<th>Letter (ABC)</th>
-						<th>Total number of...</th>
-					</tr>
-					<tr>
-						<td>A</td>
-						<td>
-							<ul>
-								<li>ID selectors</li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>B</td>
-						<td>
-							<ul>
-								<li>Class selectors</li>
-								<li>Attribute selectors</li>
-								<li>Pseudo-classes</li>
-							</ul>
-						</td>
-					</tr>	
-					<tr>
-						<td>C</td>
-						<td>
-							<ul>
-								<li>Type selectors</li>
-								<li>Pseudo-elements</li>
-							</ul>
-						</td>
-					</tr>								
-					</table>
-					<aside class="notes">
-						had to write down my calculations on a piece of paper
-					</aside>
-				</section>
-
-				<section>
-					<table>
-					<tr>
-						<th>Type</th>
-						<th>Examples</th>
+						<th>
+							<h4>Type</h4>
+						</th>
+						<th>
+							<h4>Examples</h4>								
+						</th>
 					</tr>
 					<tr>
 						<td>Attribute selectors</td>
@@ -681,22 +720,97 @@ a {
 				</section>
 
 				<section>
-					<h4>Specificity value: 1,2,2</h4>		
+						<pre><code><div class="container">
+ <div id="main">
+  <p>
+   <a href="#">Link</a>
+  </p>
+ </div>
+</div></code></pre>
+
+						<pre><code>#main a {
+  color: green;
+}
+p a {
+  color: yellow;
+}
+.container #main a {
+  color: pink;
+}
+div #main p a {
+  color: orange;
+}
+a {
+  color: red;
+}</code></pre>
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/sponge_bob.gif">
+					<h1 class="fragment fade-in">Answer: <span style="color:#FF69B4;">Pink!</span></h1>
+				</section>	
+
+				<section>
+					<table style="font-size: 70%">
+					<tr>
+						<th>
+							<h5>Selector</h5>
+						</th>
+						<th>
+							<h5>Specificity Value (<span style="color: #9932CC">A</span>,<span style="color: #00BFFF">B</span>,<span style="color: #7CFC00">C</span>,<span style="color: #EE82EE">D</span>)</h5>						
+						</th>
+					</tr>
+					<tr>
+						<td>.container #main a</td>
+						<td><span style="color: #EE82EE">0</span>,<span style="color: #9932CC">1</span>,<span style="color: #00BFFF">1</span>,<span style="color: #7CFC00">1</span></td>
+					</tr>
+					<tr>
+						<td>div #main p a</td>
+						<td><span style="color: #EE82EE">0</span>,<span style="color: #9932CC">1</span>,<span style="color: #00BFFF">0</span>,<span style="color: #7CFC00">3</span></td>						
+					</tr>	
+					<tr>
+						<td>#main a</td>
+						<td><span style="color: #EE82EE">0</span>,<span style="color: #9932CC">1</span>,<span style="color: #00BFFF">0</span>,<span style="color: #7CFC00">1</span></td>												
+					</tr>				
+					<tr>
+						<td>p a</td>
+						<td><span style="color: #EE82EE">0</span>,<span style="color: #9932CC">0</span>,<span style="color: #00BFFF">0</span>,<span style="color: #7CFC00">2</span></td>																		
+					</tr>	
+					<tr>
+						<td>a</td>
+						<td><span style="color: #EE82EE">0</span>,<span style="color: #9932CC">0</span>,<span style="color: #00BFFF">0</span>,<span style="color: #7CFC00">1</span></td>																		
+					</tr>							
+					</table>
+					<p class="fragment fade-in" style="color: #EE82EE; font-size: 40px !important">A: Styles attribute (1,0,0,0 points)</p>					
+					<p class="fragment fade-in" style="color: #9932CC; font-size: 40px !important">B: Number of ID selectors (0,1,0,0 points)</p>					
+					<p class="fragment fade-in" style="color: #00BFFF; font-size: 40px !important">C: Number of class selectors, attribute selectors, pseudo-classes (0,0,1,0 points)</p>					
+					<p class="fragment fade-in" style="color: #7CFC00; font-size: 40px !important">D: Number of type selectors, pseudo-elements (0,0,0,1 points)</p>					
+					<aside class="notes">
+						had to write down my calculations on a piece of paper
+					</aside>
+				</section>
+
+				<section>
+					<h4>Specificity value: 0,1,2,2</h4>		
 					<pre><code>#header .navbar li a:visited</code></pre>
 					<table>
 						<tr>
-							<th>A</th>
+							<th>A</th>								
 							<th>B</th>
 							<th>C</th>
+							<th>D</th>							
 						</tr>
 						<tr>
+							<td>0</td>								
 							<td>1</td>
 							<td>2</td>
 							<td>2</td>
 						</tr>
 					</table>
 					<aside class="notes">
-						1 id, 1 class + 1 pseudo-class, 2 type selectors (li, a)
+						0 style attrs, 1 id, 1 class + 1 pseudo-class, 2 type selectors (li, a)
 					</aside>
 				</section>
 
@@ -777,6 +891,12 @@ a {
 						happens whenever position changes
 						<br>
 						repaint and then composite back together still needs to happen
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/layout.jpg">
+					<aside class="notes">
 					</aside>
 				</section>
 
