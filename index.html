@@ -163,7 +163,7 @@
 				</section>
 
 				<section>
-					<img src="img/rendering_engine_dom.jpg">
+					<img src="img/rendering_engine_dom.jpg" style="width: 80%">
 					<aside class="notes">
 					</aside>
 				</section>
@@ -259,8 +259,26 @@
 				</section>				
 	
 				<section>
-					<img src="img/dom.jpg">
+					<img src="img/dom.jpg" style="width: 30%">
 					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h1>DOM</h1>
+					<ul>
+						<li>Not context free</li>
+						<li>Never get a syntax error</li>
+					</ul>
+					<aside class="notes">
+						when parsing, have to take into account surrounding chars, what came before or after
+						<br>
+						not defined - fudge factor
+						<br>
+						missing info, need more than the spec
+						<br>
+						edge cases
+						TODO 
 					</aside>
 				</section>
 
@@ -269,6 +287,17 @@
 					<aside class="notes">
 					</aside>
 				</section>
+
+				<section>
+					<img src="img/confused.gif" >
+					<aside class="notes">
+						Now for CSS
+						<br>
+						DOM and CSSOM are independent data structures
+						<br>
+						As with HTML, need to convert received CSS rules into something browser can understand & work with. Hence, repeat HTML process, but for CSS instead
+					</aside>
+				</section>				
 				
 				<section>
 						<pre><code>#main a {
@@ -288,7 +317,20 @@ a {
 }</code></pre>
 					<aside class="notes">
 					</aside>
-				</section>				
+				</section>	
+				
+				<section>
+					<h1>CSSOM</h1>
+					<ul>
+						<li>By default CSS is treated as a render blocking resource</li>
+						<li>Browser will hold rendering of any process until the CSSOM is constructed</li>
+					</ul>
+					<aside class="notes">
+						While browser constructs DOM, encounter link tag in head for sheet. Anticipation = needs for render, dispatches req
+						<br>
+						since sheets don't change DOM tree, no reason to stop parsing? Issue: scripts asking for style information during doc parsing. If style not loaded & parsed, script = wrong answers
+					</aside>
+				</section>			
 
 				<section>
 					<img src="img/css_parser.jpg">
@@ -297,10 +339,39 @@ a {
 				</section>
 
 				<section>
+					<h1>CSSOM</h1>
+					<ul>
+						<li>Not 1 to 1 with the DOM</li>
+						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the rendered output</li>
+					</ul>
+					<aside class="notes">
+						DOM tree captures properties & relations of document markup, but doesn't tell how element will look when rendered. That’s responsibility of CSSOM
+						<br>
+						elements with 'hidden' visibility WILL appear in the tree
+					</aside>
+				</section>					
+
+				<section>
 					<img src="img/cssom.jpg">
 					<aside class="notes">
 					</aside>
-				</section>			
+				</section>
+				
+				<section>
+					<h1>CSSOM</h1>
+					<ul>
+						<li>CSS files are parsed into stylesheet objects</li>
+						<li>Each object contains a CSS rules object</li>
+						<li>Each rules objects contains selector and declaration objects and other objects corresponding to CSS grammar</li>
+					</ul>
+					<aside class="notes">
+						again, think AST/tree structure
+						<br>
+						Why tree structure? When computing final set of styles for any obj on pg, browser starts with most general rule applicable to a node (ex: if it's child of body element, then all body styles apply) then recursively refines the computed styles by applying more specific rules: rules cascade down
+						<br>
+						CSS loading has to be incremental because of the cascade. We can’t paint something red and then paint it blue later because that would be jarring for the user.						
+					</aside>
+				</section>				
 
 				<section>
 					<img src="img/render_tree.jpg">
@@ -321,13 +392,13 @@ a {
 				</section>				
 
 				<section>
-					<img src="img/render_tree_construction_cssom.jpg">
+					<img src="img/render_tree_construction_cssom.jpg" style="width: 90%">
 					<aside class="notes">
 					</aside>
 				</section>
 
 				<section>
-					<img src="img/layout_flow.jpg">
+					<img src="img/layout_flow.jpg" style="width: 90%">
 					<aside class="notes">
 					</aside>
 				</section>
@@ -383,23 +454,6 @@ a {
 				</section>
 
 				<section>
-					<h1>DOM</h1>
-					<ul>
-						<li>Not context free</li>
-						<li>Never get a syntax error</li>
-					</ul>
-					<aside class="notes">
-						when parsing, have to take into account surrounding chars, what came before or after
-						<br>
-						not defined - fudge factor
-						<br>
-						missing info, need more than the spec
-						<br>
-						edge cases
-					</aside>
-				</section>
-
-				<section>
 					<h1>Recap</h1>
 					<ul>
 						<li>Browser sends HTTP request for page</li>
@@ -411,59 +465,6 @@ a {
 						<li>Awaits CSSOM tree construction</li>
 					</ul>
 					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<img src="img/confused.gif" >
-					<aside class="notes">
-						Now for CSS
-						<br>
-						DOM and CSSOM are independent data structures
-						<br>
-						As with HTML, need to convert received CSS rules into something browser can understand & work with. Hence, repeat HTML process, but for CSS instead
-					</aside>
-				</section>
-
-				<section>
-					<h1>CSSOM</h1>
-					<ul>
-						<li>By default CSS is treated as a render blocking resource</li>
-						<li>Browser will hold rendering of any process until the CSSOM is constructed</li>
-					</ul>
-					<aside class="notes">
-						While browser constructs DOM, encounter link tag in head for sheet. Anticipation = needs for render, dispatches req
-						<br>
-						since sheets don't change DOM tree, no reason to stop parsing? Issue: scripts asking for style information during doc parsing. If style not loaded & parsed, script = wrong answers
-					</aside>
-				</section>
-
-				<section>
-					<h1>CSSOM</h1>
-					<ul>
-						<li>Not 1 to 1 with the DOM</li>
-						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the rendered output</li>
-					</ul>
-					<aside class="notes">
-						DOM tree captures properties & relations of document markup, but doesn't tell how element will look when rendered. That’s responsibility of CSSOM
-						<br>
-						elements with 'hidden' visibility WILL appear in the tree
-					</aside>
-				</section>
-
-				<section>
-					<h1>CSSOM</h1>
-					<ul>
-						<li>CSS files are parsed into stylesheet objects</li>
-						<li>Each object contains a CSS rules object</li>
-						<li>Each rules objects contains selector and declaration objects and other objects corresponding to CSS grammar</li>
-					</ul>
-					<aside class="notes">
-						again, think AST/tree structure
-						<br>
-						Why tree structure? When computing final set of styles for any obj on pg, browser starts with most general rule applicable to a node (ex: if it's child of body element, then all body styles apply) then recursively refines the computed styles by applying more specific rules: rules cascade down
-						<br>
-						CSS loading has to be incremental because of the cascade. We can’t paint something red and then paint it blue later because that would be jarring for the user.						
 					</aside>
 				</section>
 
