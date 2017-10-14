@@ -253,13 +253,44 @@
 				</section>
 
 				<section>
+					<h1>Lexer</h1>
+					<ul>
+						<li>Like the tokenizer, but it also identifies the type of each token (this token is a number, that token is a string literal, this other token is an equality operator).</li>
+						<li>Feeds token stream to the parser.</li>
+					</ul>
+					<aside class="notes">
+						mitted tokens from tokenization are converted into 'objects' which define have their own properties & rules.
+						<br>
+						AKA does same as token plus attachs extra info to each token. If tokenize into words, lexer would attach tags like number, word, punctuation etc.
+					</aside>
+				</section>
+
+				<section>
+					<h1>Parser</h1>
+					<ul>
+						<li>Reads the stream of tokens from the lexer.</li>
+						<li>Responsible for analyzing the document structure according to the language syntax rules.</li>
+						<li>Compiler parses source code into a tree structure, and then translates that into machine code.</li>
+					</ul>
+					<aside class="notes">
+						interprets the tokens using a specific grammar, and turns it into tree structure similiar to AST in JS
+						<br>
+						cares about whether or not the sequence & combination of tokens detected fits expected grammar (the meanings of tokens, and if in acceptable order)
+						<br>
+						other words: context in which token appears						
+						<br>
+						alpha order: lex then parse
+					</aside>
+				</section>
+
+				<section>
 					<img src="img/syntax_analysis.jpg">
 					<aside class="notes">
 					</aside>
 				</section>				
 	
 				<section>
-					<img src="img/dom.jpg" style="width: 30%">
+					<img src="img/dom.jpg">
 					<aside class="notes">
 					</aside>
 				</section>
@@ -278,9 +309,23 @@
 						missing info, need more than the spec
 						<br>
 						edge cases
-						TODO 
 					</aside>
 				</section>
+
+				<section>
+					<h1>Recap</h1>
+					<ul>
+						<li>Browser sends HTTP request for page</li>
+						<li>Web server sends response</li>
+						<li>Browser converts response data (bytes) into tokens, via tokenization</li>
+						<li>Browser turns tokens into nodes</li>
+						<li>Browser turns nodes into the DOM tree</li>
+						<li>DOM tree construction finished</li>
+						<li>Awaits CSSOM tree construction</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>				
 
 				<section>
 					<img src="img/cssom_flow.jpg">
@@ -386,89 +431,6 @@ a {
 				</section>
 
 				<section>
-					<img src="img/render_tree_construction_dom.jpg">
-					<aside class="notes">
-					</aside>
-				</section>				
-
-				<section>
-					<img src="img/render_tree_construction_cssom.jpg" style="width: 90%">
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<img src="img/layout_flow.jpg" style="width: 90%">
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<img src="img/flow.png" style="width: 1500px;">
-					<aside class="notes">
-					</aside>
-				</section>				
-
-				<section>
-					<h1>Lexer</h1>
-					<ul>
-						<li>Like the tokenizer, but it also identifies the type of each token (this token is a number, that token is a string literal, this other token is an equality operator).</li>
-						<li>Outputs token stream for the parser.</li>
-					</ul>
-					<aside class="notes">
-						emitted tokens from tokenization are converted into 'objects' which define have their own properties & rules
-					</aside>
-				</section>
-
-				<section>
-					<h1>Parser</h1>
-					<ul>
-						<li>Reads the stream of tokens from the lexer.</li>
-						<li>Responsible for analyzing the document structure according to the language syntax rules.</li>
-						<li>Compiler parses source code into a tree structure, and then translates that into machine code.</li>
-					</ul>
-					<aside class="notes">
-						interprets the tokens using a specific grammar, and turns it into tree structure similiar to AST in JS
-						<br>
-						cares about whether or not the sequence & combination of tokens detected fits expected grammar (the meanings of tokens, and if in acceptable order)
-						<br>
-						other words: context in which token appears						
-						<br>
-						alpha order: lex then parse
-					</aside>
-				</section>
-
-				<section>
-					<ul>
-						<li>Source code &darr;</li>
-						<li>Parsing &darr;</li>
-						<li>Parse tree (think AST) &darr;</li>
-						<li>Translation (compilation) &darr;</li>
-						<li>Machine code</li>
-					</ul>
-					<aside class="notes">
-						created objs are linked in tree structure that captures parent-child relation from orig markup: HTML obj is parent of body obj, body parent of p obj, so on
-						<br>
-						translation: turns AST into machine code
-					</aside>
-				</section>
-
-				<section>
-					<h1>Recap</h1>
-					<ul>
-						<li>Browser sends HTTP request for page</li>
-						<li>Web server sends response</li>
-						<li>Browser converts response data (bytes) into tokens, via tokenization</li>
-						<li>Browser turns tokens into nodes</li>
-						<li>Browser turns nodes into the DOM tree</li>
-						<li>DOM tree construction finished</li>
-						<li>Awaits CSSOM tree construction</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
 					<h1>Render Tree</h1>
 					<h4>DOM + CSSOM</h4>
 					<ul>
@@ -500,14 +462,26 @@ a {
 					<ul>
 						<li>Starting at the root of the DOM tree, traverse each visible node</li>
 						<li>Omit non visible nodes</li>
-						<li>For each visible node find the appropriate matching CSSOM rules and apply them</li>
-						<li>Emit visible nodes with content and their computed styles</li>
-						<li>Final output is a render tree that contains both the content and style information of all visible content on the screen</li>
+						<li>For each visible node find the matching CSSOM rules and apply it</li>
+						<li>Emit visible nodes with content and computed styles</li>
+						<li>Output a render tree that contains both the content and style information of all visible content on the screen</li>
 					</ul>
 					<aside class="notes">
 						to construct render tree, browser does following:
 						<br>
 						after render tree - layout stage
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/render_tree_construction_dom.jpg">
+					<aside class="notes">
+					</aside>
+				</section>				
+
+				<section>
+					<img src="img/render_tree_construction_cssom.jpg" style="width: 90%">
+					<aside class="notes">
 					</aside>
 				</section>
 
@@ -525,7 +499,34 @@ a {
 						<br>
 						paint capture option, you can visualize composited layers at each frame of recording
 					</aside>
+				</section>				
+
+				<section>
+					<img src="img/layout_flow.jpg" style="width: 90%">
+					<aside class="notes">
+					</aside>
 				</section>
+
+				<!-- <section>
+					<img src="img/flow.png" style="width: 1500px;">
+					<aside class="notes">
+					</aside>
+				</section> -->
+
+				<!-- <section>
+					<ul>
+						<li>Source code &darr;</li>
+						<li>Parsing &darr;</li>
+						<li>Parse tree (think AST) &darr;</li>
+						<li>Translation (compilation) &darr;</li>
+						<li>Machine code</li>
+					</ul>
+					<aside class="notes">
+						created objs are linked in tree structure that captures parent-child relation from orig markup: HTML obj is parent of body obj, body parent of p obj, so on
+						<br>
+						translation: turns AST into machine code
+					</aside>
+				</section> -->
 
 				<section>
 					<h1>Layout</h1>
@@ -621,7 +622,7 @@ a {
 				</section>
 
 				<section>
-					<img src="img/reflow_repaint.jpg">
+					<img src="img/reflow_repaint.jpg" style="width: 80%">
 					<aside class="notes">
 					</aside>
 				</section>				
@@ -896,7 +897,7 @@ a {
 				</section>
 
 				<section>
-					<img src="img/layout.jpg">
+					<img src="img/layout.jpg" style="width: 80%">
 					<aside class="notes">
 					</aside>
 				</section>
