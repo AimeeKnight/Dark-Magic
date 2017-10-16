@@ -269,11 +269,11 @@
 					<h1>Parser</h1>
 					<ul>
 						<li>Reads the stream of tokens from the lexer.</li>
-						<li>Responsible for analyzing the document structure according to the language syntax rules.</li>
+						<li>Analyzes the document structure according to the language syntax rules.</li>
 						<li>Compiler parses source code into a tree structure, and then translates that into machine code.</li>
 					</ul>
 					<aside class="notes">
-						interprets the tokens using a specific grammar, and turns it into tree structure similiar to AST in JS
+						interprets tokens using specific grammar, & turns it into tree structure similiar to AST in JS
 						<br>
 						cares about whether or not the sequence & combination of tokens detected fits expected grammar (the meanings of tokens, and if in acceptable order)
 						<br>
@@ -405,16 +405,16 @@ a {
 				<section>
 					<h1>CSSOM</h1>
 					<ul>
-						<li>CSS files are parsed into stylesheet objects</li>
-						<li>Each object contains a CSS rules object</li>
-						<li>Each rules objects contains selector and declaration objects and other objects corresponding to CSS grammar</li>
+						<li>CSS files are parsed into <strong style="color: #42affa">stylesheet objects</strong></li>
+						<li>Each stylesheet object contains a CSS <strong style="color: #42affa">rules object</strong></li>
+						<li>Each rules object contains a <strong style="color: #42affa">selector and declaration objects</strong> and <strong style="color: #42affa">other objects corresponding to CSS grammar</strong></li>
 					</ul>
 					<aside class="notes">
-						again, think AST/tree structure
+						AST/tree structure
 						<br>
-						Why tree structure? When computing final set of styles for any obj on pg, browser starts with most general rule applicable to a node (ex: if it's child of body element, then all body styles apply) then recursively refines the computed styles by applying more specific rules: rules cascade down
+						When computing final set of styles for any obj on pg, browser starts with most general rule for a node (body element) then recursively refines computed styles by applying more specific rules (cascade down)
 						<br>
-						CSS loading has to be incremental because of the cascade. We can’t paint something red and then paint it blue later because that would be jarring for the user.						
+						CSS loading has to be incremental because of cascade. Can’t paint something red and then paint blue later because that would be jarring						
 					</aside>
 				</section>				
 
@@ -582,14 +582,22 @@ a {
 					</ul>
 					<aside class="notes">
 						first thing to look for is the area of the element
-						<br>
-						flexbox is great from a usability standpoint
-						<br>
-						render: 3.5ms vs 14ms
-						<br>
-						keep up with css skills
 					</aside>
 				</section>
+
+				<section>
+						<h1>Painting Time</h1>
+						<ul>
+							<li>Float: 14ms</li>
+							<li>Flexbox: 3.5ms</li>							
+						</ul>
+						<aside class="notes">
+							<br>
+							flexbox is great from a usability standpoint
+							<br>
+							keep up with css skills
+						</aside>
+					</section>				
 	
 				<section>
 					<h1>Painting Order</h1>
@@ -611,13 +619,13 @@ a {
 						<li>Action of flattening all layers into the final image that is visible on the screen</li>
 					</ul>
 					<aside class="notes">
-						when pl speak of hardware acceleration in browsers, almost always refer to accelerated compositing
+						hardware acceleration = compositing
 						<br>
-						Using GPU to composite contents of a web page = speed up vs old CPU
+						GPU = speed up vs old CPU
 						<br>
-						cache and group chunks of render tree
+						cache & group chunks of render tree
 						<br>
-						where painted parts put together
+						painted parts put together
 					</aside>
 				</section>
 
@@ -631,10 +639,10 @@ a {
 					<h1>Summary</h1>
 					<ul>
 						<li>Browsers try to do the minimal possible actions in response to a change</li>
+						<li>Changes to the element's position will cause relayout and repaint of that element, its children and possibly siblings</li>						
+						<li>Adding a DOM node will cause relayout and repaint of the parent node</li>						
+						<li>Major changes, like increasing font size of the html element will cause relayout and repaint of the entire tree</li>						
 						<li>Changes to an element's color will only repaint that element</li>
-						<li>Changes to the element's position will cause relayout and repaint of that element, its children and possibly siblings</li>
-						<li>Adding a DOM node will cause relayout and repaint of the parent node</li>
-						<li>Major changes, like increasing font size of the html element will cause relayout and repaint of the entire tree</li>
 					</ul>
 					<aside class="notes">
 					</aside>
