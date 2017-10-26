@@ -59,8 +59,8 @@
 					<img src="img/amk_skate.gif" style="width: 370px;">
 					<ul>
 						<li>Work For: Warner Bros Entertainment</li>
-						<li>Hobbies: JavaScript Jabber, ⛸, running, crossfit</li>
-						<li>Likes: 😻😻, macros, kombucha</li>
+						<li>Hobbies: JavaScript Jabber, ⛸, 🏋, running</li>
+						<li>Likes: 😻😻, 🍵, kombucha</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -259,7 +259,7 @@
 						<li>Feeds token stream to the parser.</li>
 					</ul>
 					<aside class="notes">
-						mitted tokens from tokenization are converted into 'objects' which define have their own properties & rules.
+						emitted tokens from tokenization are converted into 'objects' which define have their own properties & rules.
 						<br>
 						AKA does same as token plus attachs extra info to each token. If tokenize into words, lexer would attach tags like number, word, punctuation etc.
 					</aside>
@@ -269,13 +269,13 @@
 					<h1>Parser</h1>
 					<ul>
 						<li>Reads the stream of tokens from the lexer.</li>
-						<li>Analyzes the document structure according to the language syntax rules.</li>
+						<li>Analyzes the document structure according to the language grammar (vocabulary + syntax rules.</li>
 						<li>Compiler parses source code into a tree structure, and then translates that into machine code.</li>
 					</ul>
 					<aside class="notes">
-						interprets tokens using specific grammar, & turns it into tree structure similiar to AST in JS
+						interprets tokens via grammar => tree (AST JS)
 						<br>
-						cares about whether or not the sequence & combination of tokens detected fits expected grammar (the meanings of tokens, and if in acceptable order)
+						cares abt. sequence & combo of tokens detected fits expected grammar
 						<br>
 						other words: context in which token appears						
 						<br>
