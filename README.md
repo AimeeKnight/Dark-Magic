@@ -2,7 +2,7 @@
 It's Not Dark Magic - Pulling Back the Curtains From Your Stylesheets
 
 ### Description
-All too often developers are left completely puzzled when the browser renders CSS in ways they didn’t expect. It’s not dark magic though and as developers we know that computers are just parsing our instructions. While many talks discuss how to fix common bugs, this talk will focus on the why by taking a deep dive into browser internals to see how our styles are parsed and rendered.
+All too often developers are left completely puzzled when the browser renders CSS in ways they didn’t expect. It’s not dark magic though and as developers, we know that computers are just parsing our instructions. While many talks discuss how to fix common bugs, this talk will focus on the why by taking a deep dive into browser internals to see how our styles are parsed and rendered.
 
 ### Notes
 Chances are if you're a web developer you're going to have to write some CSS from time to time. When you first looked at CSS it probably seemed like a breeze. You added some border here, changed some colors there. JavaScript was the hard part of front-end development! Somewhere during your progression as a front-end developer that changed though! What's worse is that many developers in the front end community have simply learned to dismiss CSS as a toy language. The truth, however, is that when we hit a wall many of us don’t actually understand what our CSS is doing under the hood!
