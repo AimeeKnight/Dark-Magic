@@ -470,7 +470,7 @@ a {
 					<ul>
 						<li>CSS files are parsed into <strong style="color: #42affa">stylesheet objects</strong></li>
 						<li>Each stylesheet object contains a CSS <strong style="color: #42affa">rules object</strong></li>
-						<li>Each rules object contains a <strong style="color: #42affa">selector and declaration objects</strong> and <strong style="color: #42affa">other objects corresponding to CSS grammar</strong></li>
+						<li>Each rules object contains <strong style="color: #42affa">selector and declaration objects</strong> and <strong style="color: #42affa">other objects corresponding to CSS grammar</strong></li>
 					</ul>
 					<aside class="notes">
 						AST/tree structure
@@ -893,9 +893,9 @@ a {
 				<section>
 					<h1>Specificity</h1>
 					<ul>
-						<li>You can read the values as if they were just a number, like 1,2,2 is 122.</li>
-						<li>The commas are there to remind you that this isn’t a base 10 system.</li>
-						<li>You could technically have a specificity value of 0,1,13,4 and 13 wouldn’t spill over like a base 10 system would.</li>
+						<li>You can read values as if they were a number. 1,2,2 = 122.</li>
+						<li>Commas are there to remind us that it's not a base 10 system.</li>
+						<li>Can have a specificity value of 0,1,13,4 and 13 won't spill over like a base 10 system.</li>
 					</ul>
 					<aside class="notes">
 					</aside>
