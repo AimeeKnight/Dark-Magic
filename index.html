@@ -255,13 +255,13 @@
 						<li>Reading raw bytes of HTML & CSS off of disk/network</li>
 					</ul>
 					<aside class="notes">
-						browser reads raw bytes HTML/CSS off disk/network, translates to individual chars based on file encoding
 					</aside>
 				</section>				
 
 				<section>
 					<img src="img/characters.jpg">
 					<aside class="notes">
+						translates tokens to individual chars based on file encoding							
 					</aside>
 				</section>				
 
@@ -303,42 +303,43 @@
 					</aside>
 				</section>
 
-				<section>
+				<!-- <section>
 					<h1>Lexer</h1>
 					<ul>
 						<li>Like the tokenizer, but it also identifies the type of each token (this token is a number, that token is a string literal, this other token is an equality operator).</li>
 						<li>Feeds token stream to the parser.</li>
 					</ul>
 					<aside class="notes">
-						emitted tokens from tokenization are converted into 'objects' which define have their own properties & rules.
-						<br>
 						AKA does same as token plus attachs extra info to each token. If tokenize into words, lexer would attach tags like number, word, punctuation etc.
 					</aside>
-				</section>
+				</section> -->
+
+				<section>
+					<img src="img/syntax_analysis.jpg">
+					<aside class="notes">
+						emitted tokens from tokenization are converted into objects				
+					</aside>
+				</section>				
 
 				<section>
 					<h1>Parser</h1>
 					<ul>
-						<li>Reads the stream of tokens from the lexer.</li>
+						<!-- <li>Reads the stream of tokens from the lexer.</li> -->
+						<li>Reads the stream of tokens.</li>						
 						<li>Analyzes the document structure according to the language grammar (vocabulary + syntax rules.</li>
-						<li>Compiler parses source code into a tree structure, and then translates that into machine code.</li>
+						<!-- <li>Compiler parses source code into a tree structure, and then translates that into machine code.</li> -->
+						<li>Compiler parses source code into a tree structure</li>						
 					</ul>
 					<aside class="notes">
 						interprets tokens via grammar => tree (AST JS)
 						<br>
 						cares abt. sequence & combo of tokens detected fits expected grammar
-						<br>
-						other words: context in which token appears						
-						<br>
-						alpha order: lex then parse
+						<!-- <br>
+						AKA: context in which token appears						 -->
+						<!-- <br>
+						alpha order: lex then parse -->
 					</aside>
-				</section>
-
-				<section>
-					<img src="img/syntax_analysis.jpg">
-					<aside class="notes">
-					</aside>
-				</section>				
+				</section>			
 	
 				<section>
 					<img src="img/dom.jpg">
@@ -355,10 +356,10 @@
 					<aside class="notes">
 						when parsing, have to take into account surrounding chars, what came before or after
 						<br>
-						not defined - fudge factor
+						<!-- not defined - fudge factor
 						<br>
 						missing info, need more than the spec
-						<br>
+						<br> -->
 						edge cases
 					</aside>
 				</section>
@@ -373,7 +374,9 @@
 				<section>
 					<img src="img/jump.gif">
 					<aside class="notes">
-						CSS = conventional parser						
+						CSS = conventional parser		
+						<br>
+						give it same input, always get same output				
 					</aside>
 				</section>
 
@@ -399,10 +402,15 @@
 				</section>
 
 				<section>
+					<img src="img/cssom.jpg">
+					<aside class="notes">
+							AST/tree structure							
+					</aside>
+				</section>				
+
+				<section>
 					<img src="img/confused.gif" >
 					<aside class="notes">
-						Now for CSS
-						<br>
 						DOM and CSSOM are independent data structures
 						<br>
 						As with HTML, need to convert received CSS rules into something browser can understand & work with. Hence, repeat HTML process, but for CSS instead
@@ -436,9 +444,11 @@ a {
 						<li>Browser will hold rendering of any process until the CSSOM is constructed</li>
 					</ul>
 					<aside class="notes">
-						While browser constructs DOM, encounter link tag in head for sheet. Anticipation = needs for render, dispatches req
+						encounter link tag in head for sheet. dispatches req
 						<br>
-						since sheets don't change DOM tree, no reason to stop parsing? Issue: scripts asking for style information during doc parsing. If style not loaded & parsed, script = wrong answers
+						STOP? scripts asking for style information during doc parsing. If style not loaded & parsed, script = wrong answers
+						<br>
+						incremental = because of cascade. RED => BLUE: jarring
 					</aside>
 				</section>			
 
@@ -451,37 +461,27 @@ a {
 				<section>
 					<h1>CSSOM</h1>
 					<ul>
+						<li>CSS files are parsed into <strong style="color: #42affa">stylesheet objects</strong></li>
+						<li>Each stylesheet object contains a CSS <strong style="color: #42affa">rules object</strong></li>
+						<li>Each rules object contains <strong style="color: #42affa">selector and declaration objects</strong> and <strong style="color: #42affa">other objects corresponding to CSS grammar</strong></li>
+					</ul>
+					<aside class="notes">
+						to compute final styles for obj on pg, browser starts with most general rule for a node (body element) then recursively computed styles by applying more specific rules (cascade)
+					</aside>
+				</section>				
+
+				<section>
+					<h1>CSSOM</h1>
+					<ul>
 						<li>Not 1 to 1 with the DOM</li>
 						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the rendered output</li>
 					</ul>
 					<aside class="notes">
 						DOM tree captures properties & relations of document markup, but doesn't tell how element will look when rendered. That’s responsibility of CSSOM
 						<br>
-						elements with 'hidden' visibility WILL appear in the tree
+						'hidden' visibility WILL appear
 					</aside>
-				</section>					
-
-				<section>
-					<img src="img/cssom.jpg">
-					<aside class="notes">
-					</aside>
-				</section>
-				
-				<section>
-					<h1>CSSOM</h1>
-					<ul>
-						<li>CSS files are parsed into <strong style="color: #42affa">stylesheet objects</strong></li>
-						<li>Each stylesheet object contains a CSS <strong style="color: #42affa">rules object</strong></li>
-						<li>Each rules object contains <strong style="color: #42affa">selector and declaration objects</strong> and <strong style="color: #42affa">other objects corresponding to CSS grammar</strong></li>
-					</ul>
-					<aside class="notes">
-						AST/tree structure
-						<br>
-						When computing final set of styles for any obj on pg, browser starts with most general rule for a node (body element) then recursively refines computed styles by applying more specific rules (cascade down)
-						<br>
-						CSS loading has to be incremental because of cascade. Can’t paint something red and then paint blue later because that would be jarring						
-					</aside>
-				</section>				
+				</section>			
 
 				<section>
 					<img src="img/render_tree.jpg">
@@ -492,6 +492,7 @@ a {
 				<section>
 					<img src="img/render_tree_construction.jpg">
 					<aside class="notes">
+						tree is of visual elements in order in which displayed							
 					</aside>
 				</section>
 
@@ -504,8 +505,6 @@ a {
 						<li>CSSOM Can have drastic effects on the render tree but none on the DOM tree</li>
 					</ul>
 					<aside class="notes">
-						tree is of visual elements in order in which displayed
-						<br>
 						since CSSOM can reorder nodes
 					</aside>
 				</section>
@@ -513,10 +512,10 @@ a {
 				<section>
 					<h1>Purpose</h1>
 					<ul>
-						<li>Stores RenderObjects or "renderers" (AKA frames in Firefox)</li>
+						<!-- <li>Stores RenderObjects or "renderers" (AKA frames in Firefox)</li> -->
 						<li>Knows how to lay out and paint itself and its children</li>
 						<li>Includes geometric information like width, height and position</li>
-						<li>Each node in the DOM tree that produces visual output has a corresponding RenderObject</li>
+						<li>Each node in the DOM tree that produces visual output has a corresponding render object in the tree</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -532,9 +531,6 @@ a {
 						<li>Output a render tree that contains both the content and style information of all visible content on the screen</li>
 					</ul>
 					<aside class="notes">
-						to construct render tree, browser does following:
-						<br>
-						after render tree - layout stage
 					</aside>
 				</section>
 
@@ -558,13 +554,13 @@ a {
 						<li>Composite &darr;</li>						
 					</ul>
 					<aside class="notes">
-						Chrome DevTools perf tab capture & inspect construction/processing of DOM & CSSOM
 					</aside>
 				</section>				
 
 				<section>
 					<img src="img/layout_flow.jpg" style="width: 90%">
 					<aside class="notes">
+							Chrome DevTools perf tab capture							
 					</aside>
 				</section>
 
@@ -593,14 +589,14 @@ a {
 					<h1>Layout</h1>
 					<h4>(AKA Reflow)</h4>
 					<ul>
-						<li>When the renderer is created and added to the tree, it does not have a position and size</li>
-						<li>Calculating these values is called layout or reflow</li>
+						<li>Calculating the position and size of the tree's render objects</li>
+						<!-- <li>Calculating these values is called layout or reflow</li> -->
 						<li>The output of the layout process is a box model that contains the position and size of every element within the viewport</li>
 					</ul>
 					<aside class="notes">
-						up to this we’ve calculated which nodes should be visible and their computed styles
+						<!-- up to this we’ve calculated which nodes should be visible and their computed styles
 						<br>
-						but haven't calculated their exact position & size within the viewport of the device
+						but haven't calculated their exact position & size within the viewport of the device -->
 					</aside>
 				</section>
 
@@ -617,7 +613,7 @@ a {
 						<li>Converts each node in the render tree to actual pixels on the screen</li>
 					</ul>
 					<aside class="notes">
-						once you have visible nodes (DOM), computed styles (CSSOM) and geometry (Layout), the information is passed to the second stage and can draw the render tree
+						<!-- once you have visible nodes (DOM), computed styles (CSSOM) and geometry (Layout), the information is passed to the second stage and can draw the render tree -->
 					</aside>
 				</section>
 
@@ -665,7 +661,7 @@ a {
 					<ul>
 						<li>Follows order that elements are stacked in their stacking contexts</li>
 						<li>Painted from back to front</li>
-						<li>Example: background color &rarr; background image &rarr; border &rarr; children</li>
+						<!-- <li>Example: background color &rarr; background image &rarr; border &rarr; children</li> -->
 						<li>Can be global or incremental</li>
 					</ul>
 					<aside class="notes">
@@ -690,11 +686,11 @@ a {
 					</aside>
 				</section>
 
-				<section>
+				<!-- <section>
 					<img src="img/reflow_repaint.jpg" style="width: 80%">
 					<aside class="notes">
 					</aside>
-				</section>				
+				</section>				 -->
 
 				<section>
 					<h1>Summary</h1>
@@ -737,7 +733,7 @@ a {
 					<h1>Specificity</h1>
 					<ul>
 						<li>Many ways to target a specific tag using CSS selectors</li>
-						<li>Browser needs a way to negotiate which color it should give to a specific tag</li>
+						<li>Browser needs a way to negotiate which style it should give to a specific tag</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -793,7 +789,7 @@ a {
 					</tr>								
 					</table>
 					<aside class="notes">
-						all know type (div) selectors, class and id...
+						all know type (div)
 					</aside>
 				</section>
 
@@ -895,7 +891,7 @@ a {
 				<section>
 					<h1>Specificity</h1>
 					<ul>
-						<li>You can read values as if they were a number. 1,2,2 = 122.</li>
+						<li>You can read values as if they were a number. 0,1,2,2 = 122.</li>
 						<li>Commas are there to remind us that it's not a base 10 system.</li>
 						<li>Can have a specificity value of 0,1,13,4 and 13 won't spill over like a base 10 system.</li>
 					</ul>
@@ -907,10 +903,11 @@ a {
 					<h1>Positioning</h1>
 					<img src="img/css_is_awesome.jpg">
 					<aside class="notes">
+							process of determining the position and size of all boxes = going back to layout							
 					</aside>
 				</section>
 
-				<section>
+				<!-- <section>
 					<h1>Positioning</h1>
 					<ul>
 						<li>Before starting layout (positioning), a tree of render objects is always required</li>
@@ -920,7 +917,7 @@ a {
 					<aside class="notes">
 						process of determining the position and size of all boxes = going back to layout
 					</aside>
-				</section>
+				</section> -->
 
 				<section>
 					<h1>Positioning</h1>
@@ -930,9 +927,9 @@ a {
 						<li>Relative: Positioned like usual and then moved by the required delta</li>
 					</ul>
 					<aside class="notes">
-						block: has own rectangle on the browser window
+						<!-- block: has own rectangle on the browser window
 						<br>
-						inline: does not have its own block, is inside containing block
+						inline: does not have its own block, is inside containing block -->
 					</aside>
 				</section>
 
@@ -940,7 +937,7 @@ a {
 					<h1>Positioning</h1>
 					<h4>Float</h4>
 					<ul>
-						<li>The object is first laid out in normal flow, then moved as far left/rt as possible</li>
+						<li>The object is first laid out in normal flow, then moved as far left or right as possible</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -960,8 +957,8 @@ a {
 					<h1>Positioning Phases</h1>
 					<ul>
 						<li>Layout is a recursive process</li>
-						<li>The current renderer computes its width</li>
-						<li>For each child, the current renderer: determines the position of the child, asks the child to compute its dimensions, then the current renderer can compute its height</li>
+						<li>Width: Computed by the current renderer</li>
+						<li>Height: For each child, the current renderer determines the position of the child, asks the child to compute its dimensions, then the current renderer can compute its height</li>
 					</ul>
 					<aside class="notes">
 						parent tells child to fit into it’s width
@@ -975,6 +972,7 @@ a {
 				<section>
 					<img src="img/layout.jpg" style="width: 80%">
 					<aside class="notes">
+						1. Width, 2. Height
 					</aside>
 				</section>
 
@@ -982,7 +980,7 @@ a {
 					<h1>Global Layout</h1>
 					<ul>
 						<li>Layout can be triggered on the entire render tree as a result of a global style change that affects all renderers</li>
-						<li>Global layout will usually be triggered synchronously</li>
+						<li>Triggered synchronously</li>
 						<li>Example: font size change, screen being resized</li>
 					</ul>
 					<aside class="notes">
@@ -992,12 +990,12 @@ a {
 				<section>
 					<h1>Incremental layout</h1>
 					<ul>
-						<li>Layout can be incremental, where only the dirty renderers will be laid out</li>
-						<li>Incremental layout is triggered asynchronously when renderers are dirty</li>
-						<li>Example: new renderers are appended to the render tree after extra content came from the network and was added to the DOM tree</li>
+						<li>Only dirty render objects will be laid out</li>
+						<li>Triggered asynchronously</li>
+						<li>Example: new render objects are appended to the render tree after extra content came from the network and was added to the DOM tree</li>
 					</ul>
 					<aside class="notes">
-						remember renderer object in render tree, knows how to layout & paint itself & children
+						remember render objects knows how to layout & paint themselves + children
 					</aside>
 				</section>
 
@@ -1014,21 +1012,19 @@ a {
 				<section>
 					<img src="img/so_hard.gif" >
 					<aside class="notes">
-						appears so simple, so most devs don’t take time to read rules
+						appears so simple, so most devs don’t dig deeper
 					</aside>
 				</section>
 
 				<section>
-					<h1>What is a stacking context?</h1>
+					<h1>Stacking Context</h1>
 					<ul>
 						<li>A three-dimensional representation of HTML elements along an imaginary z-axis relative to the user facing the viewport</li>
 						<li>An element that contains a set of layers</li>
 						<li>Groups of elements with a common parent that move forward or backward together</li>
 					</ul>
 					<aside class="notes">
-						full understanding of stacking contexts is key to grasping how z-index & stacking order work
-						<br>
-						layered representation
+						understanding of stacking contexts is key
 					</aside>
 				</section>
 
@@ -1039,15 +1035,14 @@ a {
 						<li>When z-index and position properties aren’t involved, the rules are simple: the stacking order is the same as the order of appearance in the HTML</li>
 					</ul>
 					<aside class="notes">
-						when you introduce position property, positioned elements (& children) can be displayed in front of non-positioned elements
+						<!-- when you introduce position property, positioned elements (& children) can be displayed in front of non-positioned elements -->
 						<br>
-						'positioned' means relative, absolute, etc. (value other than static)
+						POSITIONED: relative, absolute, etc. (value other than static)
 					</aside>
 				</section>
 
 				<section>
 					<h1>Stacking Context</h1>
-					<h4>Types</h4>
 					<ul>
 						<li>Root Stacking Context: created by an html element</li>
 						<li>Local Stacking Context: created by specific properties and values</li>
@@ -1062,7 +1057,7 @@ a {
 					<h1>Stacking Context</h1>
 					<ul>
 						<li>When a new stacking context is formed on an element, that stacking context confines all of its child elements to a particular place in the stacking order</li>
-						<li>If an element is contained in a stacking context at the bottom of the stacking order, there is no way to get it to appear in front of another element in a different stacking context that is higher in the stacking order</li>
+						<li>If an element is contained in a stacking context at the bottom of the stacking order, there is no way to get it to appear in front of another element in a different stacking context</li>
 					</ul>
 					<aside class="notes">
 						<br>
@@ -1092,7 +1087,7 @@ a {
 					<aside class="notes">
 						-1 higher than -5
 						<br>
-						(2)...because of this, possible for an element to appear behind own parent - normally not possible. Only works if element’s parent is in same stacking context & not root element of that context
+						(2)...because of this, possible for an element to appear behind own parent
 					</aside>
 				</section>
 
@@ -1107,7 +1102,7 @@ a {
 					</aside>
 				</section>				
 
-				<section>
+				<!-- <section>
 					<h1>Painting order</h1>
 					<ul>
 						<li>Negative stack level, typically elements with z-index: -1</li>
@@ -1119,20 +1114,20 @@ a {
 					<aside class="notes">
 						children of a stacking context are painted from bottom to top in following order
 					</aside>
-				</section>
+				</section> -->
 
 				<section>
-					<h1>New Stacking Contexts</h1>
+					<h1>Surprise</h1>
 					<ul>
 						<li>Some additional properties can create new stacking contexts (this is where things get complicated)!</li>
-						<li>Only works on positioned elements (if you try to set a z-index on an element with no position specified, it won't do anything)</li>
+						<!-- <li>Only works on positioned elements (if you try to set a z-index on an element with no position specified, it won't do anything)</li> -->
 					</ul>
 					<aside class="notes">
-						At first it’s natural to assume elements with higher z-index values are in front of elements with lower values
+						<!-- At first it’s natural to assume elements with higher z-index values are in front of elements with lower values
 						<br>
 						& any element with z-index is in front of any element without a z-index
 						<br>
-						but it’s not that simple
+						but it’s not that simple -->
 					</aside>
 				</section>
 
@@ -1143,9 +1138,9 @@ a {
 						<li>Transform property also triggers a stacking context when its value isn't none. Examples: scale(1), translate3d(0,0,0)</li>
 					</ul>
 					<aside class="notes">
-						blend mode determines how the pixels on that layer interact with the visible pixels on the layers below it
+						blend mode: how px on that layer interact with px in layer below
 						<br>
-						scale: size, translate3d: GPU into action for CSS transitions, making them smoother
+						scale: size, translate3d: GPU transitions smoother
 					</aside>
 				</section>
 
@@ -1156,7 +1151,6 @@ a {
 						<li>Look up the ancestor tree and see if any parents form stacking contexts</li>
 					</ul>
 					<aside class="notes">
-						if setting z-index of billion on element & not moving forward in stacking order...
 					</aside>
 				</section>
 
@@ -1193,6 +1187,12 @@ a {
 				</section>
 
 				<section>
+					<blockquote>Computers are good at following instructions, but not at reading your mind. - Donald Knuth</blockquote>
+					<aside class="notes">
+					</aside>
+				</section>				
+
+				<section>
 					<img src="img/angry.gif" >
 					<aside class="notes">
 					</aside>
@@ -1202,13 +1202,7 @@ a {
 					<img src="img/happy.gif" >
 					<aside class="notes">
 					</aside>
-				</section>
-
-				<section>
-					<blockquote>Computers are good at following instructions, but not at reading your mind. - Donald Knuth</blockquote>
-					<aside class="notes">
-					</aside>
-				</section>				
+				</section>		
 
 				<section style="text-align: left;">
 					<h1>Thank you!</h1>
