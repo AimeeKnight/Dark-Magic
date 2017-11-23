@@ -102,7 +102,9 @@
 						<li>Invent or polyfill new features</li>
 					</ul>
 					<aside class="notes">
-						don’t actually normalize cross-browser bugs — they just avoid them
+						APIs to extend CSS/hook into rendering engine
+						<br>								
+						bootstrap: don’t normalize cross-browser bugs — just avoid
 						<br>
 						jQuery for CSS						
 					</aside>
@@ -195,15 +197,15 @@
 				</section>
 
 				<section>
-					<img src="img/browser_components.jpg" style="width: 800px;">
+					<img src="img/custom_layers.jpg">
 					<aside class="notes">
 						UI: includes address bar, back/fwd btn, bookmarking menu, etc. Every part of browser display except window see requested page.
 						BROWSER ENGINE: coordinates actions between UI - rendering engine.
 						RENDERING ENGINE: displaying requested content. Parse HTML/CSS, displays parsed content on the screen.
 						NETWORKING: HTTP requests.
-						UI BACKEND: used for drawing basic boxes & windows. Underneath uses operating system.
+						UI BACKEND: drawing = OS.
 						JS INTERPRETER. Parse & execute JS code.
-						DATA STORAGE. Persistence layer. Saves data locally, such as cookies, localStorage.
+						DATA STORAGE: cookies, localStorage.
 					</aside>
 				</section>	
 				
