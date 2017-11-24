@@ -263,7 +263,7 @@
 				<section>
 					<img src="img/characters.jpg">
 					<aside class="notes">
-						translates tokens to individual chars based on file encoding							
+						translates bytes to individual chars based on file encoding							
 					</aside>
 				</section>				
 
@@ -333,9 +333,9 @@
 						<li>Compiler parses source code into a tree structure</li>						
 					</ul>
 					<aside class="notes">
-						interprets tokens via grammar => tree (AST JS)
+						<!-- interprets tokens via grammar => tree (AST JS)
 						<br>
-						cares abt. sequence & combo of tokens detected fits expected grammar
+						cares abt. sequence & combo of tokens detected fits expected grammar -->
 						<!-- <br>
 						AKA: context in which token appears						 -->
 						<!-- <br>
@@ -504,7 +504,7 @@ a {
 					<ul>
 						<li>Visual representation of the document</li>
 						<li>Enable painting the contents in their correct order</li>
-						<li>CSSOM Can have drastic effects on the render tree but none on the DOM tree</li>
+						<li>CSSOM can have drastic effects on the render tree but none on the DOM tree</li>
 					</ul>
 					<aside class="notes">
 						since CSSOM can reorder nodes
@@ -515,7 +515,7 @@ a {
 					<h1>Purpose</h1>
 					<ul>
 						<!-- <li>Stores RenderObjects or "renderers" (AKA frames in Firefox)</li> -->
-						<li>Knows how to lay out and paint itself and its children</li>
+						<li>Knows how to layout and paint itself and its children</li>
 						<li>Includes geometric information like width, height and position</li>
 						<li>Each node in the DOM tree that produces visual output has a corresponding render object in the tree</li>
 					</ul>
@@ -526,7 +526,7 @@ a {
 				<section>
 					<h1>Construction</h1>
 					<ul>
-						<li>Starting at the root of the DOM tree, traverse each visible node</li>
+						<li>Starting at the root of the DOM tree, traverse each node</li>
 						<li>Omit non visible nodes</li>
 						<li>For each visible node find the matching CSSOM rules and apply it</li>
 						<li>Emit visible nodes with content and computed styles</li>
@@ -570,13 +570,7 @@ a {
 					<img src="img/dev_tools_layout.png" style="width: 80%">
 					<aside class="notes">
 					</aside>
-				</section>
-
-				<section>
-					<img src="img/dev_tools_paint.png" style="width: 80%">
-					<aside class="notes">
-					</aside>
-				</section>				
+				</section>	
 
 				<!-- <section>
 					<img src="img/flow.png" style="width: 1500px;">
@@ -619,6 +613,12 @@ a {
 					<aside class="notes">
 					</aside>
 				</section>
+
+				<section>
+					<img src="img/dev_tools_paint.png" style="width: 80%">
+					<aside class="notes">
+					</aside>
+				</section>				
 
 				<section>
 					<h1>Paint</h1>
@@ -679,7 +679,7 @@ a {
 						<li>Can be global or incremental</li>
 					</ul>
 					<aside class="notes">
-						Incremental: when styles change the renderer will become invalid causing OS to see it as a 'dirty region' & generates a 'paint' event
+						Incremental: when styles change render obj becomes invalid = dirty region = generate paint
 					</aside>
 				</section>
 	
@@ -716,7 +716,7 @@ a {
 						<li>Changes to an element's color will only repaint that element</li>
 					</ul>
 					<aside class="notes">
-						layout, will always trigger paint, since changing geometry of element means its pixels need to be fixed
+						layout, always triggers paint = changing geometry of element means px need to be fixed
 					</aside>
 				</section>
 
@@ -736,8 +736,8 @@ a {
 				<section>
 					<h1>Specificity</h1>
 					<ul>
+						<li>Many ways to target a specific tag using CSS selectors</li>							
 						<li>Applying rules in correct cascade order</li>
-						<li>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will win</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -746,7 +746,7 @@ a {
 				<section>
 					<h1>Specificity</h1>
 					<ul>
-						<li>Many ways to target a specific tag using CSS selectors</li>
+						<li>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will win</li>
 						<li>Browser needs a way to negotiate which style it should give to a specific tag</li>
 					</ul>
 					<aside class="notes">
@@ -838,7 +838,18 @@ a {
 				<section>
 					<img src="img/sponge_bob.gif">
 					<h1 class="fragment fade-in">Answer: <span style="color:#FF69B4;">Pink!</span></h1>
-				</section>	
+				</section>
+
+				<section>
+					<h1>Specificity</h1>
+					<ul>
+						<li>You can read values as if they were a number. 0,1,2,2 = 122.</li>
+						<li>Commas are there to remind us that it's not a base 10 system.</li>
+						<li>Can have a specificity value of 0,1,13,4 and 13 won't spill over like a base 10 system.</li>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>				
 
 				<section>
 					<table style="font-size: 70%">
@@ -903,21 +914,10 @@ a {
 				</section>
 
 				<section>
-					<h1>Specificity</h1>
-					<ul>
-						<li>You can read values as if they were a number. 0,1,2,2 = 122.</li>
-						<li>Commas are there to remind us that it's not a base 10 system.</li>
-						<li>Can have a specificity value of 0,1,13,4 and 13 won't spill over like a base 10 system.</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
 					<h1>Positioning</h1>
 					<img src="img/css_is_awesome.jpg">
 					<aside class="notes">
-							process of determining the position and size of all boxes = going back to layout							
+						process of determining the position and size of all boxes = going back to layout							
 					</aside>
 				</section>
 
@@ -971,15 +971,13 @@ a {
 					<h1>Positioning Phases</h1>
 					<ul>
 						<li>Layout is a recursive process</li>
-						<li>Width: Computed by the current renderer</li>
-						<li>Height: For each child, the current renderer determines the position of the child, asks the child to compute its dimensions, then the current renderer can compute its height</li>
+						<li>Width: Computed by the current render object</li>
+						<li>Height: For each child, the current render object determines the position of the child, asks the child to compute its dimensions, then the current render object can compute its height</li>
 					</ul>
-					<aside class="notes">
+					<aside class="notes">					
 						parent tells child to fit into it’s width
 						<br>
-						happens whenever position changes
-						<br>
-						repaint and then composite back together still needs to happen
+						<!-- repaint and then composite back together still needs to happen -->
 					</aside>
 				</section>
 
@@ -993,7 +991,7 @@ a {
 				<section>
 					<h1>Global Layout</h1>
 					<ul>
-						<li>Layout can be triggered on the entire render tree as a result of a global style change that affects all renderers</li>
+						<li>Layout can be triggered on the entire render tree as a result of a global style change that affects all render objects</li>
 						<li>Triggered synchronously</li>
 						<li>Example: font size change, screen being resized</li>
 					</ul>
@@ -1009,15 +1007,13 @@ a {
 						<li>Example: new render objects are appended to the render tree after extra content came from the network and was added to the DOM tree</li>
 					</ul>
 					<aside class="notes">
-						remember render objects knows how to layout & paint themselves + children
+						<!-- remember render objects knows how to layout & paint themselves + children -->
 					</aside>
 				</section>
 
 				<section>
 					<h1>Z -Index</h1>
-					<ul>
-						<li>Every element in an HTML document can be either in front of or behind every other element in the document</li>
-					</ul>
+					<p>Every element in an HTML document can be either in front of or behind every other element in the document</p>
 					<aside class="notes">
 						elements with higher z-index are stacked in front of elements with lower z-index
 					</aside>
@@ -1087,7 +1083,7 @@ a {
 						<li>Check order of appearance in the HTML</li>
 					</ul>
 					<aside class="notes">
-						here are basic rules to determine stacking order w/in simple single stacking context (from back to front)
+						<!-- here are basic rules to determine stacking order w/in simple single stacking context (from back to front) -->
 					</aside>
 				</section>
 
@@ -1095,7 +1091,8 @@ a {
 					<h1>Stacking Context Rules</h1>
 					<h4>Positioned elements (and their children)</h4>
 					<ul>
-						<li>Negative z-index values: higher values are stacked in front of lower values and elements with the same value are stacked according to appearance in the HTML</li>
+						<li>Negative z-index values: higher values are stacked in front of lower values</li>
+						<li>Elements with the same value are stacked according to appearance in the HTML</li>						
 						<li>Negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li>
 					</ul>
 					<aside class="notes">
@@ -1110,7 +1107,8 @@ a {
 					<h4>Positioned elements (and their children)</h4>
 					<ul>
 						<li>Auto z-index values: ordered by appearance in the HTML</li>
-						<li>Positive z-index values: higher values are stacked in front of lower values and elements with the same value are stacked according to appearance in the HTML</li>
+						<li>Positive z-index values: higher values are stacked in front of lower values</li>
+						<li>Elements with the same value are stacked according to appearance in the HTML</li>	
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -1132,7 +1130,6 @@ a {
 
 				<section>
 					<h1>Surprise</h1>
-					<p>Some additional properties can create new stacking contexts!</p>
 					<ul>
 						<!-- <li>Only works on positioned elements (if you try to set a z-index on an element with no position specified, it won't do anything)</li> -->
 					</ul>
@@ -1146,6 +1143,12 @@ a {
 						but it’s not that simple -->
 					</aside>
 				</section>
+
+				<section>
+					<h3>z-index isn't the only way to create a stacking context!</h3>
+					<aside class="notes">
+					</aside>
+				</section>				
 
 				<section>
 					<h1>New Stacking Contexts</h1>
@@ -1190,10 +1193,10 @@ a {
 						<li>Construct the DOM by parsing the HTML</li>
 						<li>May be incremental and a response may not arrive all at once, so may not finish construction all at once</li>
 						<li>Request CSS and JavaScript resources</li>
-						<li>If scripts are synchronous it will not be executed until the CSS is received since CSS is render-blocking</li>
+						<li>If scripts are synchronous they won't be executed until the CSS is received since CSS is render-blocking</li>
 					</ul>
 					<aside class="notes">
-						here are steps the browser goes through when loading page
+						<!-- here are steps the browser goes through when loading page -->
 					</aside>
 				</section>
 
