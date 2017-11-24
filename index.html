@@ -221,7 +221,7 @@
 					</aside>
 				</section>
 
-				<section>
+				<!-- <section>
 						<pre><code><div class="container">
  <div id="main">
   <p>
@@ -231,7 +231,7 @@
 </div></code></pre>
 					<aside class="notes">
 					</aside>
-				</section>
+				</section> -->
 
 				<section>
 					<img src="img/html_parser.jpg">
@@ -419,7 +419,7 @@
 					</aside>
 				</section>				
 				
-				<section>
+				<!-- <section>
 						<pre><code>#main a {
   color: green;
 }
@@ -437,7 +437,7 @@ a {
 }</code></pre>
 					<aside class="notes">
 					</aside>
-				</section>	
+				</section>	 -->
 				
 				<section>
 					<h1>CSSOM</h1>
@@ -565,6 +565,18 @@ a {
 							Chrome DevTools perf tab capture							
 					</aside>
 				</section>
+
+				<section>
+					<img src="img/dev_tools_layout.png" style="width: 80%">
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/dev_tools_paint.png" style="width: 80%">
+					<aside class="notes">
+					</aside>
+				</section>				
 
 				<!-- <section>
 					<img src="img/flow.png" style="width: 1500px;">
@@ -1120,11 +1132,13 @@ a {
 
 				<section>
 					<h1>Surprise</h1>
+					<p>Some additional properties can create new stacking contexts!</p>
 					<ul>
-						<li>Some additional properties can create new stacking contexts (this is where things get complicated)!</li>
 						<!-- <li>Only works on positioned elements (if you try to set a z-index on an element with no position specified, it won't do anything)</li> -->
 					</ul>
+					<img src="img/shock.gif" >
 					<aside class="notes">
+						where things get complicated
 						<!-- At first it’s natural to assume elements with higher z-index values are in front of elements with lower values
 						<br>
 						& any element with z-index is in front of any element without a z-index
@@ -1136,13 +1150,17 @@ a {
 				<section>
 					<h1>New Stacking Contexts</h1>
 					<ul>
-						<li>Opacity less than 1, filter when its value is something other than none, and mix-blend-mode when its value is something other than normal</li>
-						<li>Transform property also triggers a stacking context when its value isn't none. Examples: scale(1), translate3d(0,0,0)</li>
+						<li>opacity: less than 1</li>
+						<li>filter: values besides none</li>
+						<li>mix-blend-mode: values besides normal</li>						
+						<li>transform values besides none. Examples: scale(1), translate3d(0,0,0)</li>
 					</ul>
 					<aside class="notes">
-						blend mode: how px on that layer interact with px in layer below
+						BLEND MODE: how px interact px layer below
 						<br>
-						scale: size, translate3d: GPU transitions smoother
+						SCALE: size
+						<br>
+						translate3D: GPU transitions smoother
 					</aside>
 				</section>
 
@@ -1151,9 +1169,12 @@ a {
 					<ul>
 						<li>Be able to spot when new stacking contexts are formed</li>
 						<li>Look up the ancestor tree and see if any parents form stacking contexts</li>
+						<li>2,147,483,647</li>
 					</ul>
 					<aside class="notes">
-					</aside>
+						2 billion, 1 hundred and 47 million, 4 hundred and 83 thousand, 6 hundred and 47
+						<br>
+						max signed value of 32 bit int. limitation from browser prog lang</aside>
 				</section>
 
 				<section>
