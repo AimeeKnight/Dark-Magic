@@ -104,7 +104,7 @@
 					<aside class="notes">
 						APIs to extend CSS/hook into rendering engine
 						<br>								
-						bootstrap: don’t normalize cross-browser bugs — just avoid
+						bootstrap: just avoids
 						<br>
 						jQuery for CSS						
 					</aside>
@@ -328,7 +328,7 @@
 					<ul>
 						<!-- <li>Reads the stream of tokens from the lexer.</li> -->
 						<li>Reads the stream of tokens.</li>						
-						<li>Analyzes the document structure according to the language grammar (vocabulary + syntax rules.</li>
+						<li>Analyzes the document structure according to the language grammar (vocabulary + syntax rules).</li>
 						<!-- <li>Compiler parses source code into a tree structure, and then translates that into machine code.</li> -->
 						<li>Compiler parses source code into a tree structure</li>						
 					</ul>
@@ -401,21 +401,24 @@
 					<img src="img/cssom_flow.jpg">
 					<aside class="notes">
 					</aside>
-				</section>
-
-				<section>
-					<img src="img/cssom.jpg">
-					<aside class="notes">
-							AST/tree structure							
-					</aside>
-				</section>				
+				</section>			
 
 				<section>
 					<img src="img/confused.gif" >
 					<aside class="notes">
 						DOM and CSSOM are independent data structures
 						<br>
-						As with HTML, need to convert received CSS rules into something browser can understand & work with. Hence, repeat HTML process, but for CSS instead
+					</aside>
+				</section>
+				
+				<section>
+					<img src="img/cssom.jpg">
+					<aside class="notes">
+						AST/tree structure
+						<br>
+						Like HTML, need to convert CSS rules into something browser can understand & work with.
+						<br>
+						Repeat HTML process for CSS						
 					</aside>
 				</section>				
 				
@@ -479,17 +482,31 @@ a {
 						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the rendered output</li>
 					</ul>
 					<aside class="notes">
-						DOM tree captures properties & relations of document markup, but doesn't tell how element will look when rendered. That’s responsibility of CSSOM
+						DOM tree captures properties + relationship to doc markup
 						<br>
-						'hidden' visibility WILL appear
+						Doesn't tell how element look rendered. That’s responsibility of CSSOM
+						<br>
+						hidden visibility WILL appear
 					</aside>
-				</section>			
+				</section>
 
 				<section>
 					<img src="img/render_tree.jpg">
 					<aside class="notes">
 					</aside>
 				</section>
+<!-- 
+			<section>
+					<img src="img/render_tree_construction_dom.jpg">
+					<aside class="notes">
+					</aside>
+				</section>				
+
+				<section>
+					<img src="img/render_tree_construction_cssom.jpg" style="width: 90%">
+					<aside class="notes">
+					</aside>
+				</section> -->
 
 				<section>
 					<img src="img/render_tree_construction.jpg">
@@ -532,18 +549,6 @@ a {
 						<li>Emit visible nodes with content and computed styles</li>
 						<li>Output a render tree that contains both the content and style information of all visible content on the screen</li>
 					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<img src="img/render_tree_construction_dom.jpg">
-					<aside class="notes">
-					</aside>
-				</section>				
-
-				<section>
-					<img src="img/render_tree_construction_cssom.jpg" style="width: 90%">
 					<aside class="notes">
 					</aside>
 				</section>
@@ -982,8 +987,6 @@ a {
 						<li>Height: For each child, the current render object determines the position of the child, asks the child to compute its dimensions, then the current render object can compute its height</li>
 					</ul>
 					<aside class="notes">					
-						parent tells child to fit into it’s width
-						<br>
 						<!-- repaint and then composite back together still needs to happen -->
 					</aside>
 				</section>
@@ -991,6 +994,8 @@ a {
 				<section>
 					<img src="img/layout.jpg" style="width: 80%">
 					<aside class="notes">
+						parent tells child to fit into it’s width
+						<br>						
 						1. Width, 2. Height
 					</aside>
 				</section>
@@ -1064,7 +1069,7 @@ a {
 						<li>Root Stacking Context: created by an html element</li>
 						<li>Local Stacking Context: created by specific properties and values</li>
 						<li>Within a local stacking context, the z-index values of children are relative to the root element rather than to the document root</li>
-						<li>Layers outside of a context (sibling elements of a local stacking context) can't sit between layers within that context</li>
+						<li>Layers outside of a context (sibling elements of a local stacking context) can't sit between layers within another context</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -1103,8 +1108,8 @@ a {
 						<li>Negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li>
 					</ul>
 					<aside class="notes">
-						-1 higher than -5
-						<br>
+						<!-- -1 higher than -5
+						<br> -->
 						(2)...because of this, possible for an element to appear behind own parent
 					</aside>
 				</section>
