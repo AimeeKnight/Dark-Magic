@@ -56,15 +56,18 @@
 				</section>
 
 				<section>
-					<img src="img/blinds.gif" >
+					<blockquote>A language that doesn't affect the way you think about programming is not worth knowing. - Alan J. Perlis</blockquote>
 					<aside class="notes">
-						Trying to fix someone else's CSS
+						dismiss as markup lang
+						<br>
+						does affect our thinking
 					</aside>
 				</section>
 
 				<section>
-					<blockquote>A language that doesn't affect the way you think about programming is not worth knowing. - Alan J. Perlis</blockquote>
+					<img src="img/blinds.gif" >
 					<aside class="notes">
+						Trying to fix someone else's CSS
 					</aside>
 				</section>
 
@@ -330,11 +333,12 @@
 					<ul>
 						<!-- <li>Reads the stream of tokens from the lexer.</li> -->
 						<li>Reads the stream of tokens.</li>						
-						<li>Analyzes the document structure according to the language grammar (vocabulary + syntax rules).</li>
+						<li>Analyzes the document structure according to the language grammar.</li>
 						<!-- <li>Compiler parses source code into a tree structure, and then translates that into machine code.</li> -->
-						<li>Compiler parses source code into a tree structure</li>						
+						<!-- <li>Compiler parses source code into a tree structure</li>						 -->
 					</ul>
 					<aside class="notes">
+						grammer = vocabulary + syntax rules
 						<!-- interprets tokens via grammar => tree (AST JS)
 						<br>
 						cares abt. sequence & combo of tokens detected fits expected grammar -->
@@ -348,6 +352,7 @@
 				<section>
 					<img src="img/dom.jpg">
 					<aside class="notes">
+						Compiler parses source code into a tree structure
 					</aside>
 				</section>
 
@@ -393,7 +398,7 @@
 						<li>Browser turns tokens into nodes</li>
 						<li>Browser turns nodes into the DOM tree</li>
 						<li>DOM tree construction finished</li>
-						<li>Awaits CSSOM tree construction</li>
+						<li>Pause for CSSOM tree construction</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -419,7 +424,7 @@
 					<aside class="notes">
 						AST/tree structure
 						<br>
-						Like HTML, need to convert CSS rules into something browser can understand & work with.
+						Like HTML, need to convert CSS rules into something browser can understand.
 						<br>
 						Repeat HTML process for CSS						
 					</aside>
@@ -539,7 +544,7 @@ a {
 						<!-- <li>Stores RenderObjects or "renderers" (AKA frames in Firefox)</li> -->
 						<li>Knows how to layout and paint itself and its children</li>
 						<li>Includes geometric information like width, height and position</li>
-						<li>Each node in the DOM tree that produces visual output has a corresponding render object in the tree</li>
+						<li>Each node in the DOM tree that produces visual output has a corresponding render object in the render tree</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -678,6 +683,8 @@ a {
 							<br>
 							flexbox is great from a usability standpoint
 							<br>
+							experiment
+							<br>
 							keep up with css skills
 						</aside>
 					</section>				
@@ -804,7 +811,7 @@ a {
 						<td>Attribute selectors</td>
 						<td>
 							<ul>
-								<li>[type="text"]</li>
+								<li>[target="blank"]</li>
 								<li>[rel="nofollow"]</li>
 							</ul>
 						</td>
@@ -869,7 +876,7 @@ a {
 				<section>
 					<h1>Specificity</h1>
 					<ul>
-						<li>You can read values as if they were a number. 0,1,2,2 = 122.</li>
+						<li>You can read values as if they were a number. 0,1,1,1 = 111.</li>
 						<li>Commas are there to remind us that it's not a base 10 system.</li>
 						<li>Can have a specificity value of 0,1,13,4 and 13 won't spill over like a base 10 system.</li>
 					</ul>
@@ -1124,7 +1131,7 @@ a {
 					<aside class="notes">
 						<!-- -1 higher than -5
 						<br> -->
-						(2)...because of this, possible for an element to appear behind own parent
+						(2)...because of this, possible for child element to appear behind parent
 					</aside>
 				</section>
 
@@ -1241,6 +1248,7 @@ a {
 				<section>
 					<blockquote>Computers are good at following instructions, but not at reading your mind. - Donald Knuth</blockquote>
 					<aside class="notes">
+						debug systematic like JS
 					</aside>
 				</section>				
 
