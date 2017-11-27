@@ -653,6 +653,7 @@ a {
 					<ul>
 						<li>Multiple rounds of painting can be caused by JS being loaded that changes the DOM</li>
 						<li>Includes: text, colors, shadows, background images, etc.</li>
+						<li>Changing any property besides transform or opacity will always trigger paint</li>						
 						<!-- <li>
 							<a href="https://www.youtube.com/watch?v=ZTnIxIA5KGw" target="_blank">Gecko Reflow Visualization</a>
 						</li> -->
@@ -667,9 +668,10 @@ a {
 						<li>Time varies based on render tree construction</li>
 						<li>The bigger the width and height of the element, the longer the painting time</li>
 						<li>Adding different effects also increases painting time</li>
+						<li>Paint is usually the most expensive component of the render pipeline</li>
 					</ul>
 					<aside class="notes">
-						first thing to look for is the area of the element
+						(2) first thing to look for is the area of the element
 					</aside>
 				</section>
 
@@ -707,6 +709,12 @@ a {
 					<img src="img/composite_diagram.jpg">
 					<aside class="notes">
 					</aside>
+				</section>
+
+				<section>
+					<img src="img/composite_dev_tools.png">
+					<aside class="notes">
+					</aside>
 				</section>				
 	
 				<section>
@@ -733,18 +741,27 @@ a {
 				</section>				 -->
 
 				<section>
-					<h1>Summary</h1>
+					<h3>Rendering performance</h3>
 					<ul>
-						<li>Browsers try to do the minimal possible actions in response to a change</li>
 						<li>Changes to the element's position will cause relayout and repaint of that element, its children and possibly siblings</li>						
 						<li>Adding a DOM node will cause relayout and repaint of the parent node</li>						
 						<li>Major changes, like increasing font size of the html element will cause relayout and repaint of the entire tree</li>
 						<li>Changes to an element's color will only repaint that element</li>
+						<li>Transforms and opacity are currently the only properties which only trigger composite</li>						
 					</ul>
 					<aside class="notes">
-						layout, always triggers paint = changing geometry of element means px need to be fixed
 					</aside>
 				</section>
+
+				<section>
+					<h1>Summary</h1>
+					<ul>
+						<li>Browsers try to do the minimal possible actions in response to a change</li>
+						<li>Layout always triggers paint since changing the geometry of element means the pixels need to be fixed</li>						
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>				
 
 				<section>
 					<img src="img/delete.gif" >
