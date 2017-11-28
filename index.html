@@ -226,18 +226,6 @@
 					</aside>
 				</section>
 
-				<!-- <section>
-						<pre><code><div class="container">
- <div id="main">
-  <p>
-   <a href="#">Link</a>
-  </p>
- </div>
-</div></code></pre>
-					<aside class="notes">
-					</aside>
-				</section> -->
-
 				<section>
 					<img src="img/html_parser.jpg">
 					<aside class="notes">
@@ -310,17 +298,6 @@
 					</aside>
 				</section>
 
-				<!-- <section>
-					<h1>Lexer</h1>
-					<ul>
-						<li>Like the tokenizer, but it also identifies the type of each token (this token is a number, that token is a string literal, this other token is an equality operator).</li>
-						<li>Feeds token stream to the parser.</li>
-					</ul>
-					<aside class="notes">
-						AKA does same as token plus attachs extra info to each token. If tokenize into words, lexer would attach tags like number, word, punctuation etc.
-					</aside>
-				</section> -->
-
 				<section>
 					<img src="img/syntax_analysis.jpg">
 					<aside class="notes">
@@ -331,21 +308,11 @@
 				<section>
 					<h1>Parser</h1>
 					<ul>
-						<!-- <li>Reads the stream of tokens from the lexer.</li> -->
 						<li>Reads the stream of tokens.</li>						
 						<li>Analyzes the document structure according to the language grammar.</li>
-						<!-- <li>Compiler parses source code into a tree structure, and then translates that into machine code.</li> -->
-						<!-- <li>Compiler parses source code into a tree structure</li>						 -->
 					</ul>
 					<aside class="notes">
 						grammer = vocabulary + syntax rules
-						<!-- interprets tokens via grammar => tree (AST JS)
-						<br>
-						cares abt. sequence & combo of tokens detected fits expected grammar -->
-						<!-- <br>
-						AKA: context in which token appears						 -->
-						<!-- <br>
-						alpha order: lex then parse -->
 					</aside>
 				</section>			
 	
@@ -365,10 +332,6 @@
 					<aside class="notes">
 						when parsing, have to take into account surrounding chars, what came before or after
 						<br>
-						<!-- not defined - fudge factor
-						<br>
-						missing info, need more than the spec
-						<br> -->
 						edge cases
 					</aside>
 				</section>
@@ -428,27 +391,7 @@
 						<br>
 						Repeat HTML process for CSS						
 					</aside>
-				</section>				
-				
-				<!-- <section>
-						<pre><code>#main a {
-  color: green;
-}
-p a {
-  color: yellow;
-}
-.container #main a {
-  color: pink;
-}
-div #main p a {
-  color: orange;
-}
-a {
-  color: red;
-}</code></pre>
-					<aside class="notes">
-					</aside>
-				</section>	 -->
+				</section>
 				
 				<section>
 					<h1>CSSOM</h1>
@@ -505,19 +448,6 @@ a {
 					</aside>
 				</section>
 
-<!-- 
-			<section>
-					<img src="img/render_tree_construction_dom.jpg">
-					<aside class="notes">
-					</aside>
-				</section>				
-
-				<section>
-					<img src="img/render_tree_construction_cssom.jpg" style="width: 90%">
-					<aside class="notes">
-					</aside>
-				</section> -->
-
 				<section>
 					<img src="img/render_tree_construction.jpg">
 					<aside class="notes">
@@ -541,7 +471,6 @@ a {
 				<section>
 					<h1>Purpose</h1>
 					<ul>
-						<!-- <li>Stores RenderObjects or "renderers" (AKA frames in Firefox)</li> -->
 						<li>Knows how to layout and paint itself and its children</li>
 						<li>Includes geometric information like width, height and position</li>
 						<li>Each node in the DOM tree that produces visual output has a corresponding render object in the render tree</li>
@@ -586,41 +515,16 @@ a {
 					<img src="img/dev_tools_layout.png" style="width: 80%">
 					<aside class="notes">
 					</aside>
-				</section>	
-
-				<!-- <section>
-					<img src="img/flow.png" style="width: 1500px;">
-					<aside class="notes">
-					</aside>
-				</section> -->
-
-				<!-- <section>
-					<ul>
-						<li>Source code &darr;</li>
-						<li>Parsing &darr;</li>
-						<li>Parse tree (think AST) &darr;</li>
-						<li>Translation (compilation) &darr;</li>
-						<li>Machine code</li>
-					</ul>
-					<aside class="notes">
-						created objs are linked in tree structure that captures parent-child relation from orig markup: HTML obj is parent of body obj, body parent of p obj, so on
-						<br>
-						translation: turns AST into machine code
-					</aside>
-				</section> -->
+				</section>
 
 				<section>
 					<h1>Layout</h1>
 					<h4>(AKA Reflow)</h4>
 					<ul>
 						<li>Calculating the position and size of the tree's render objects</li>
-						<!-- <li>Calculating these values is called layout or reflow</li> -->
 						<li>The output of the layout process is a box model that contains the position and size of every element within the viewport</li>
 					</ul>
 					<aside class="notes">
-						<!-- up to this we’ve calculated which nodes should be visible and their computed styles
-						<br>
-						but haven't calculated their exact position & size within the viewport of the device -->
 					</aside>
 				</section>
 
@@ -644,7 +548,6 @@ a {
 						<li>Converts each node in the render tree to actual pixels on the screen</li>
 					</ul>
 					<aside class="notes">
-						<!-- once you have visible nodes (DOM), computed styles (CSSOM) and geometry (Layout), the information is passed to the second stage and can draw the render tree -->
 					</aside>
 				</section>
 
@@ -653,10 +556,7 @@ a {
 					<ul>
 						<li>Multiple rounds of painting can be caused by JS being loaded that changes the DOM</li>
 						<li>Includes: text, colors, shadows, background images, etc.</li>
-						<li>Changing any property besides transform or opacity will always trigger paint</li>						
-						<!-- <li>
-							<a href="https://www.youtube.com/watch?v=ZTnIxIA5KGw" target="_blank">Gecko Reflow Visualization</a>
-						</li> -->
+						<li>Changing any property besides transform or opacity will always trigger paint</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -696,7 +596,6 @@ a {
 					<ul>
 						<li>Follows order that elements are stacked in their stacking contexts</li>
 						<li>Painted from back to front</li>
-						<!-- <li>Example: background color &rarr; background image &rarr; border &rarr; children</li> -->
 						<li>Can be global or incremental</li>
 					</ul>
 					<aside class="notes">
@@ -739,12 +638,6 @@ a {
 						painted parts put together
 					</aside>
 				</section>
-
-				<!-- <section>
-					<img src="img/reflow_repaint.jpg" style="width: 80%">
-					<aside class="notes">
-					</aside>
-				</section>				 -->
 
 				<section>
 					<h3>Rendering performance</h3>
@@ -977,18 +870,6 @@ a {
 					</aside>
 				</section>
 
-				<!-- <section>
-					<h1>Positioning</h1>
-					<ul>
-						<li>Before starting layout (positioning), a tree of render objects is always required</li>
-						<li>When renderers are first created and added to the render tree, they have no position or size yet</li>
-						<li>All renderers have own layout method</li>
-					</ul>
-					<aside class="notes">
-						process of determining the position and size of all boxes = going back to layout
-					</aside>
-				</section> -->
-
 				<section>
 					<h1>Positioning</h1>
 					<h4>Normal & Relative</h4>
@@ -997,9 +878,6 @@ a {
 						<li>Relative: Positioned like usual and then moved by the required delta</li>
 					</ul>
 					<aside class="notes">
-						<!-- block: has own rectangle on the browser window
-						<br>
-						inline: does not have its own block, is inside containing block -->
 					</aside>
 				</section>
 
@@ -1031,7 +909,6 @@ a {
 						<li>Height: For each child, the current render object determines the position of the child, asks the child to compute its dimensions, then the current render object can compute its height</li>
 					</ul>
 					<aside class="notes">					
-						<!-- repaint and then composite back together still needs to happen -->
 					</aside>
 				</section>
 
@@ -1063,7 +940,6 @@ a {
 						<li>Example: new render objects are appended to the render tree after extra content came from the network and was added to the DOM tree</li>
 					</ul>
 					<aside class="notes">
-						<!-- remember render objects knows how to layout & paint themselves + children -->
 					</aside>
 				</section>
 
@@ -1101,8 +977,6 @@ a {
 						<li>When z-index and position properties aren’t involved, the rules are simple: the stacking order is the same as the order of appearance in the HTML</li>
 					</ul>
 					<aside class="notes">
-						<!-- when you introduce position property, positioned elements (& children) can be displayed in front of non-positioned elements -->
-						<br>
 						POSITIONED: relative, absolute, etc. (value other than static)
 					</aside>
 				</section>
@@ -1139,7 +1013,6 @@ a {
 						<li>Check order of appearance in the HTML</li>
 					</ul>
 					<aside class="notes">
-						<!-- here are basic rules to determine stacking order w/in simple single stacking context (from back to front) -->
 					</aside>
 				</section>
 
@@ -1152,8 +1025,6 @@ a {
 						<li>Negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li>
 					</ul>
 					<aside class="notes">
-						<!-- -1 higher than -5
-						<br> -->
 						(2)...because of this, possible for child element to appear behind parent
 					</aside>
 				</section>
@@ -1168,35 +1039,13 @@ a {
 					</ul>
 					<aside class="notes">
 					</aside>
-				</section>				
-
-				<!-- <section>
-					<h1>Painting order</h1>
-					<ul>
-						<li>Negative stack level, typically elements with z-index: -1</li>
-						<li>Position value of static</li>
-						<li>Stack level 0, typically positioned elements with a z-index value of auto</li>
-						<li>Positive stack levels, e.g. a positioned element with a z-index value of 1 or higher</li>
-						<li>Elements with the same stack level are layered based on their source order (successive elements stack on top of their predecessors)</li>
-					</ul>
-					<aside class="notes">
-						children of a stacking context are painted from bottom to top in following order
-					</aside>
-				</section> -->
+				</section>
 
 				<section>
 					<h1>Surprise</h1>
-					<ul>
-						<!-- <li>Only works on positioned elements (if you try to set a z-index on an element with no position specified, it won't do anything)</li> -->
-					</ul>
 					<img src="img/shock.gif" >
 					<aside class="notes">
 						where things get complicated
-						<!-- At first it’s natural to assume elements with higher z-index values are in front of elements with lower values
-						<br>
-						& any element with z-index is in front of any element without a z-index
-						<br>
-						but it’s not that simple -->
 					</aside>
 				</section>
 
@@ -1252,7 +1101,6 @@ a {
 						<li>If scripts are synchronous they won't be executed until the CSS is received since CSS is render-blocking</li>
 					</ul>
 					<aside class="notes">
-						<!-- here are steps the browser goes through when loading page -->
 					</aside>
 				</section>
 
