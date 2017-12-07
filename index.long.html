@@ -145,7 +145,7 @@
 					</aside>
 				</section>				
 
-				<!-- <section>
+				<section>
 					<h3>Vocabulary</h3>
 					<table style="font-size: 80%">
 					<tr>
@@ -191,7 +191,7 @@
 						<br>
 						each tab = own rendering engine
 					</aside>
-				</section>			 -->
+				</section>			
 
 				<section>
 					<h1>So, how do browsers actually work? 🤔</h1>
@@ -232,11 +232,11 @@
 					</aside>
 				</section>
 
-				<!-- <section>
+				<section>
 					<img src="img/how_browsers_work_breakdown.jpg">
 					<aside class="notes">
 					</aside>
-				</section> -->
+				</section>
 
 				<section>
 					<img src="img/bytes.jpg">
@@ -565,7 +565,7 @@
 				<section>
 					<h1>Painting Time</h1>
 					<ul>
-						<!-- <li>Time varies based on render tree construction</li> -->
+						<li>Time varies based on render tree construction</li>
 						<li>The bigger the width and height of the element, the longer the painting time</li>
 						<li>Adding different effects also increases painting time</li>
 						<li>Paint is usually the most expensive component of the render pipeline</li>
@@ -594,8 +594,8 @@
 				<section>
 					<h1>Painting Order</h1>
 					<ul>
-						<li>Follows order that elements are stacked in their stacking contexts (back to front)</li>
-						<!-- <li>Painted from back to front</li> -->
+						<li>Follows order that elements are stacked in their stacking contexts</li>
+						<li>Painted from back to front</li>
 						<li>Can be global or incremental</li>
 					</ul>
 					<aside class="notes">
@@ -625,7 +625,7 @@
 				<section>
 					<h1>Composite</h1>
 					<ul>
-						<li>Render different elements of a web page in different layers</li>
+						<li>Render different elements of a web page in different layers (think photoshop layers)</li>
 						<li>Action of flattening all layers into the final image that is visible on the screen</li>
 					</ul>
 					<aside class="notes">
@@ -642,7 +642,7 @@
 				<section>
 					<h3>Rendering performance</h3>
 					<ul>
-						<!-- <li>Changes to the element's position will cause relayout and repaint of that element, its children and possibly siblings</li>						 -->
+						<li>Changes to the element's position will cause relayout and repaint of that element, its children and possibly siblings</li>						
 						<li>Adding a DOM node will cause relayout and repaint of the parent node</li>						
 						<li>Major changes, like increasing font size of the html element will cause relayout and repaint of the entire tree</li>
 						<li>Changes to an element's color will only repaint that element</li>
@@ -682,7 +682,7 @@
 					</aside>
 				</section>				
 
-				<!-- <section>
+				<section>
 					<h1>Specificity</h1>
 					<ul>
 						<li>Many ways to target a specific tag using CSS selectors</li>							
@@ -690,7 +690,7 @@
 					</ul>
 					<aside class="notes">
 					</aside>
-				</section> -->
+				</section>
 
 				<section>
 					<h1>Specificity</h1>
@@ -702,7 +702,7 @@
 					</aside>
 				</section>
 
-				<!-- <section>
+				<section>
 					<h1>Specificity</h1>
 					<ul>
 						<li>Browser makes a decision by first calculating each selectors' specificity value</li>
@@ -710,9 +710,9 @@
 					</ul>
 					<aside class="notes">
 					</aside>
-				</section> -->
+				</section>
 
-				<!-- <section>
+				<section>
 					<h3>Selector Prerequisite Refresher</h3>						
 					<table>
 					<tr>
@@ -754,7 +754,7 @@
 					<aside class="notes">
 						all know type (div)
 					</aside>
-				</section> -->
+				</section>
 
 				<section>
 						<pre><code><div class="container">
@@ -840,7 +840,7 @@ a {
 					</aside>
 				</section>
 
-				<!-- <section>
+				<section>
 					<h4>Specificity value: 0,1,2,2</h4>		
 					<pre><code>#header .navbar li a:visited</code></pre>
 					<table>
@@ -860,7 +860,7 @@ a {
 					<aside class="notes">
 						0 style attrs, 1 id, 1 class + 1 pseudo-class, 2 type selectors (li, a)
 					</aside>
-				</section> -->
+				</section>
 
 				<section>
 					<h1>Positioning</h1>
@@ -912,16 +912,16 @@ a {
 					</aside>
 				</section>
 
-				<!-- <section>
+				<section>
 					<img src="img/layout.jpg" style="width: 80%">
 					<aside class="notes">
 						parent tells child to fit into it’s width
 						<br>						
 						1. Width, 2. Height
 					</aside>
-				</section> -->
+				</section>
 
-				<!-- <section>
+				<section>
 					<h1>Global Layout</h1>
 					<ul>
 						<li>Layout can be triggered on the entire render tree as a result of a global style change that affects all render objects</li>
@@ -941,7 +941,7 @@ a {
 					</ul>
 					<aside class="notes">
 					</aside>
-				</section> -->
+				</section>
 
 				<section>
 					<h1>Z -Index</h1>
@@ -962,7 +962,7 @@ a {
 					<h1>Stacking Context</h1>
 					<ul>
 						<li>A three-dimensional representation of HTML elements along an imaginary z-axis relative to the user facing the viewport</li>
-						<!-- <li>An element that contains a set of layers</li> -->
+						<li>An element that contains a set of layers</li>
 						<li>Groups of elements with a common parent that move forward or backward together</li>
 					</ul>
 					<aside class="notes">
@@ -993,7 +993,7 @@ a {
 					</aside>
 				</section>
 
-				<!-- <section>
+				<section>
 					<h1>Stacking Context</h1>
 					<ul>
 						<li>When a new stacking context is formed on an element, that stacking context confines all of its child elements to a particular place in the stacking order</li>
@@ -1003,9 +1003,9 @@ a {
 						<br>
 						diff contexts ? can't even change even with a z-index of billion!
 					</aside>
-				</section> -->
+				</section>
 
-				<!-- <section>
+				<section>
 					<h1>Stacking Context Rules</h1>
 					<h4>Non-positioned elements</h4>
 					<ul>
@@ -1014,24 +1014,22 @@ a {
 					</ul>
 					<aside class="notes">
 					</aside>
-				</section> -->
+				</section>
 
 				<section>
 					<h1>Stacking Context Rules</h1>
 					<h4>Positioned elements (and their children)</h4>
 					<ul>
-						<!-- <li>Higher values are stacked in front of lower values</li>							 -->
-						<li>Auto z-index values: ordered by appearance in the HTML</li>							
+						<li>Negative z-index values: higher values are stacked in front of lower values</li>
 						<li>Elements with the same value are stacked according to appearance in the HTML</li>						
-						<!-- <li>Negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li> -->
+						<li>Negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li>
 					</ul>
 					<aside class="notes">
-						Higher values are stacked in front of lower values
-						<!-- (2)...because of this, possible for child element to appear behind parent -->
+						(2)...because of this, possible for child element to appear behind parent
 					</aside>
 				</section>
 
-				<!-- <section>
+				<section>
 					<h1>Stacking Context Rules</h1>
 					<h4>Positioned elements (and their children)</h4>
 					<ul>
@@ -1041,7 +1039,7 @@ a {
 					</ul>
 					<aside class="notes">
 					</aside>
-				</section> -->
+				</section>
 
 				<section>
 					<h1>Surprise</h1>
