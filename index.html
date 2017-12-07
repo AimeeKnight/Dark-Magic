@@ -85,7 +85,7 @@
 
 				<section>
 					<ul>
-						<li>Software developers spend more time reading than writing source code</li>
+						<!-- <li>Software developers spend more time reading than writing source code</li> -->
 						<li>Knowledge of internals can be useful for advanced debugging and performance tuning</li>
 						<li>In the future, we'll be able to modify the browsers rendering engine ourselves!</li>
 					</ul>
@@ -212,12 +212,12 @@
 					</aside>
 				</section>	
 				
-				<section>
+				<!-- <section>
 					<h3>Rendering Engine Main Flow</h3>
 					<img src="img/pipeline_diagram.jpg">
 					<aside class="notes">
 					</aside>
-				</section>
+				</section> -->
 
 				<section>
 					<h3>Rendering Engine Main Flow</h3>
@@ -226,11 +226,11 @@
 					</aside>
 				</section>
 
-				<section>
+				<!-- <section>
 					<img src="img/html_parser.jpg">
 					<aside class="notes">
 					</aside>
-				</section>
+				</section> -->
 
 				<!-- <section>
 					<img src="img/how_browsers_work_breakdown.jpg">
@@ -556,7 +556,7 @@
 					<ul>
 						<li>Multiple rounds of painting can be caused by JS being loaded that changes the DOM</li>
 						<li>Includes: text, colors, shadows, background images, etc.</li>
-						<li>Changing any property besides transform or opacity will always trigger paint</li>
+						<!-- <li>Changing any property besides transform or opacity will always trigger paint</li> -->
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -633,8 +633,8 @@
 						<br>
 						GPU = speed up vs old CPU
 						<br>
-						cache & group chunks of render tree
-						<br>
+						<!-- cache & group chunks of render tree
+						<br> -->
 						painted parts put together
 					</aside>
 				</section>
@@ -695,8 +695,8 @@
 				<section>
 					<h1>Specificity</h1>
 					<ul>
-						<li>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will win</li>
-						<li>Browser needs a way to negotiate which style it should give to a specific tag</li>
+						<p>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will win.</p>
+						<!-- <li>Browser needs a way to negotiate which style it should give to a specific tag</li> -->
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -961,7 +961,7 @@ a {
 				<section>
 					<h1>Stacking Context</h1>
 					<ul>
-						<li>A three-dimensional representation of HTML elements along an imaginary z-axis relative to the user facing the viewport</li>
+						<li>A three-dimensional representation of HTML elements along an imaginary z-axis</li>
 						<!-- <li>An element that contains a set of layers</li> -->
 						<li>Groups of elements with a common parent that move forward or backward together</li>
 					</ul>
@@ -1018,15 +1018,14 @@ a {
 
 				<section>
 					<h1>Stacking Context Rules</h1>
-					<h4>Positioned elements (and their children)</h4>
+					<!-- <h4>Positioned elements (and their children)</h4> -->
 					<ul>
-						<!-- <li>Higher values are stacked in front of lower values</li>							 -->
-						<li>Auto z-index values: ordered by appearance in the HTML</li>							
-						<li>Elements with the same value are stacked according to appearance in the HTML</li>						
+						<li>Higher values are stacked in front of lower values</li>							
+						<!-- <li>Auto z-index values: ordered by appearance in the HTML</li>							 -->
+						<li>Auto z-index values and elements with the same value are stacked according to appearance in the HTML</li>						
 						<!-- <li>Negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li> -->
 					</ul>
 					<aside class="notes">
-						Higher values are stacked in front of lower values
 						<!-- (2)...because of this, possible for child element to appear behind parent -->
 					</aside>
 				</section>
@@ -1087,18 +1086,18 @@ a {
 						max signed value of 32 bit int. limitation from browser prog lang</aside>
 				</section>
 
-				<section>
+				<!-- <section>
 					<h1>Debugging z-index</h1>
 					<img src="img/stacking_context.png" >					
 					<aside class="notes">
 					</aside>
-				</section>		
+				</section>		 -->
 
 				<section>
 					<h1>Conclusion</h1>
 					<ul>
 						<li>Construct the DOM by parsing the HTML</li>
-						<li>May be incremental and a response may not arrive all at once, so may not finish construction all at once</li>
+						<!-- <li>May be incremental and a response may not arrive all at once, so may not finish construction all at once</li> -->
 						<li>Request CSS and JavaScript resources</li>
 						<li>If scripts are synchronous they won't be executed until the CSS is received since CSS is render-blocking</li>
 					</ul>
