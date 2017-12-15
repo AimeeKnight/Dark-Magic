@@ -85,7 +85,6 @@
 
 				<section>
 					<ul>
-						<li>Software developers spend more time reading than writing source code</li>
 						<li>Knowledge of internals can be useful for advanced debugging and performance tuning</li>
 						<li>In the future, we'll be able to modify the browsers rendering engine ourselves!</li>
 					</ul>
@@ -143,55 +142,7 @@
 					</ul>
 					<aside class="notes">
 					</aside>
-				</section>				
-
-				<section>
-					<h3>Vocabulary</h3>
-					<table style="font-size: 80%">
-					<tr>
-						<td>Browsers</td>
-						<td>
-							<ul>
-								<li>Chromium</li>
-								<li>Chrome</li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>Rendering Engines</td>
-						<td>
-							<ul>
-								<li>Webkit <i>(Safari)</i></li>
-								<li>Blink <i>(Chrome, Opera)</i></li>
-								<li>Gecko <i>(Firefox)</i></li>
-								<li>Trident <i>(IE)</i></li>
-								<li>EdgeHTML <i>(Edge)</i></li>								
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>JavaScript Engines</td>
-						<td>
-							<ul>
-								<li>Nitro <i>(Safari)</i></li>									
-								<li>V8 <i>(Chrome)</i></li>
-								<li>SpiderMonkey <i>(Firefox)</i></li>		
-								<li>Chakra <i>(IE)</i></li>								
-								<li>Chakra <i>(Edge)</i></li>
-							</ul>
-						</td>
-					</tr>											
-					</table>
-					<aside class="notes">
-						Open source browser vs rendering/layout engine 
-						<br>
-						Webkit (apple) forked into blink, EdgeHTML = fork of trident
-						<br>
-						2m loc
-						<br>
-						each tab = own rendering engine
-					</aside>
-				</section>			
+				</section>
 
 				<section>
 					<h1>So, how do browsers actually work? 🤔</h1>
@@ -211,29 +162,10 @@
 						DATA STORAGE: cookies, localStorage.
 					</aside>
 				</section>	
-				
-				<section>
-					<h3>Rendering Engine Main Flow</h3>
-					<img src="img/pipeline_diagram.jpg">
-					<aside class="notes">
-					</aside>
-				</section>
 
 				<section>
 					<h3>Rendering Engine Main Flow</h3>
 					<img src="img/dom_diagram.jpg">
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<img src="img/html_parser.jpg">
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<img src="img/how_browsers_work_breakdown.jpg">
 					<aside class="notes">
 					</aside>
 				</section>
@@ -556,7 +488,6 @@
 					<ul>
 						<li>Multiple rounds of painting can be caused by JS being loaded that changes the DOM</li>
 						<li>Includes: text, colors, shadows, background images, etc.</li>
-						<li>Changing any property besides transform or opacity will always trigger paint</li>
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -565,7 +496,6 @@
 				<section>
 					<h1>Painting Time</h1>
 					<ul>
-						<li>Time varies based on render tree construction</li>
 						<li>The bigger the width and height of the element, the longer the painting time</li>
 						<li>Adding different effects also increases painting time</li>
 						<li>Paint is usually the most expensive component of the render pipeline</li>
@@ -594,8 +524,7 @@
 				<section>
 					<h1>Painting Order</h1>
 					<ul>
-						<li>Follows order that elements are stacked in their stacking contexts</li>
-						<li>Painted from back to front</li>
+						<li>Follows order that elements are stacked in their stacking contexts (back to front)</li>
 						<li>Can be global or incremental</li>
 					</ul>
 					<aside class="notes">
@@ -625,15 +554,13 @@
 				<section>
 					<h1>Composite</h1>
 					<ul>
-						<li>Render different elements of a web page in different layers (think photoshop layers)</li>
+						<li>Render different elements of a web page in different layers</li>
 						<li>Action of flattening all layers into the final image that is visible on the screen</li>
 					</ul>
 					<aside class="notes">
 						hardware acceleration = compositing
 						<br>
 						GPU = speed up vs old CPU
-						<br>
-						cache & group chunks of render tree
 						<br>
 						painted parts put together
 					</aside>
@@ -642,7 +569,6 @@
 				<section>
 					<h3>Rendering performance</h3>
 					<ul>
-						<li>Changes to the element's position will cause relayout and repaint of that element, its children and possibly siblings</li>						
 						<li>Adding a DOM node will cause relayout and repaint of the parent node</li>						
 						<li>Major changes, like increasing font size of the html element will cause relayout and repaint of the entire tree</li>
 						<li>Changes to an element's color will only repaint that element</li>
@@ -680,79 +606,14 @@
 					<blockquote>The amateur software engineer is always in search of magic. - Grady Booch</blockquote>
 					<aside class="notes">
 					</aside>
-				</section>				
-
-				<section>
-					<h1>Specificity</h1>
-					<ul>
-						<li>Many ways to target a specific tag using CSS selectors</li>							
-						<li>Applying rules in correct cascade order</li>
-					</ul>
-					<aside class="notes">
-					</aside>
 				</section>
 
 				<section>
 					<h1>Specificity</h1>
 					<ul>
-						<li>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will win</li>
-						<li>Browser needs a way to negotiate which style it should give to a specific tag</li>
+						<p>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will win.</p>
 					</ul>
 					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<h1>Specificity</h1>
-					<ul>
-						<li>Browser makes a decision by first calculating each selectors' specificity value</li>
-						<li>Second, it checks which selector has the highest value to determine the winner</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<h3>Selector Prerequisite Refresher</h3>						
-					<table>
-					<tr>
-						<th>
-							<h4>Type</h4>
-						</th>
-						<th>
-							<h4>Examples</h4>								
-						</th>
-					</tr>
-					<tr>
-						<td>Attribute selectors</td>
-						<td>
-							<ul>
-								<li>[target="blank"]</li>
-								<li>[type="text"]</li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>Pseudo-classes</td>
-						<td>
-							<ul>
-								<li>:hover</li>
-								<li>:visited</li>
-							</ul>
-						</td>
-					</tr>	
-					<tr>
-						<td>Pseudo-elements</td>
-						<td>
-							<ul>
-								<li>::before</li>
-								<li>::after</li>
-							</ul>
-						</td>
-					</tr>								
-					</table>
-					<aside class="notes">
-						all know type (div)
 					</aside>
 				</section>
 
@@ -841,28 +702,6 @@ a {
 				</section>
 
 				<section>
-					<h4>Specificity value: 0,1,2,2</h4>		
-					<pre><code>#header .navbar li a:visited</code></pre>
-					<table>
-						<tr>
-							<th>A</th>								
-							<th>B</th>
-							<th>C</th>
-							<th>D</th>							
-						</tr>
-						<tr>
-							<td>0</td>								
-							<td>1</td>
-							<td>2</td>
-							<td>2</td>
-						</tr>
-					</table>
-					<aside class="notes">
-						0 style attrs, 1 id, 1 class + 1 pseudo-class, 2 type selectors (li, a)
-					</aside>
-				</section>
-
-				<section>
 					<h1>Positioning</h1>
 					<img src="img/css_is_awesome.jpg">
 					<aside class="notes">
@@ -913,37 +752,6 @@ a {
 				</section>
 
 				<section>
-					<img src="img/layout.jpg" style="width: 80%">
-					<aside class="notes">
-						parent tells child to fit into it’s width
-						<br>						
-						1. Width, 2. Height
-					</aside>
-				</section>
-
-				<section>
-					<h1>Global Layout</h1>
-					<ul>
-						<li>Layout can be triggered on the entire render tree as a result of a global style change that affects all render objects</li>
-						<li>Triggered synchronously</li>
-						<li>Example: font size change, screen being resized</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<h1>Incremental layout</h1>
-					<ul>
-						<li>Only dirty render objects will be laid out</li>
-						<li>Triggered asynchronously</li>
-						<li>Example: new render objects are appended to the render tree after extra content came from the network and was added to the DOM tree</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
 					<h1>Z -Index</h1>
 					<p>Every element in an HTML document can be either in front of or behind every other element in the document</p>
 					<aside class="notes">
@@ -961,8 +769,7 @@ a {
 				<section>
 					<h1>Stacking Context</h1>
 					<ul>
-						<li>A three-dimensional representation of HTML elements along an imaginary z-axis relative to the user facing the viewport</li>
-						<li>An element that contains a set of layers</li>
+						<li>A three-dimensional representation of HTML elements along an imaginary z-axis</li>
 						<li>Groups of elements with a common parent that move forward or backward together</li>
 					</ul>
 					<aside class="notes">
@@ -994,48 +801,10 @@ a {
 				</section>
 
 				<section>
-					<h1>Stacking Context</h1>
-					<ul>
-						<li>When a new stacking context is formed on an element, that stacking context confines all of its child elements to a particular place in the stacking order</li>
-						<li>If an element is contained in a stacking context at the bottom of the stacking order, there is no way to get it to appear in front of another element in a different stacking context</li>
-					</ul>
-					<aside class="notes">
-						<br>
-						diff contexts ? can't even change even with a z-index of billion!
-					</aside>
-				</section>
-
-				<section>
 					<h1>Stacking Context Rules</h1>
-					<h4>Non-positioned elements</h4>
 					<ul>
-						<li>Check the stacking context’s root element</li>
-						<li>Check order of appearance in the HTML</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<h1>Stacking Context Rules</h1>
-					<h4>Positioned elements (and their children)</h4>
-					<ul>
-						<li>Negative z-index values: higher values are stacked in front of lower values</li>
-						<li>Elements with the same value are stacked according to appearance in the HTML</li>						
-						<li>Negative z-indexes are ordered first within a stacking context, which means they appear behind all other elements</li>
-					</ul>
-					<aside class="notes">
-						(2)...because of this, possible for child element to appear behind parent
-					</aside>
-				</section>
-
-				<section>
-					<h1>Stacking Context Rules</h1>
-					<h4>Positioned elements (and their children)</h4>
-					<ul>
-						<li>Auto z-index values: ordered by appearance in the HTML</li>
-						<li>Positive z-index values: higher values are stacked in front of lower values</li>
-						<li>Elements with the same value are stacked according to appearance in the HTML</li>	
+						<li>Higher values are stacked in front of lower values</li>							
+						<li>Auto z-index values and elements with the same value are stacked according to appearance in the HTML</li>						
 					</ul>
 					<aside class="notes">
 					</aside>
@@ -1086,17 +855,9 @@ a {
 				</section>
 
 				<section>
-					<h1>Debugging z-index</h1>
-					<img src="img/stacking_context.png" >					
-					<aside class="notes">
-					</aside>
-				</section>		
-
-				<section>
 					<h1>Conclusion</h1>
 					<ul>
 						<li>Construct the DOM by parsing the HTML</li>
-						<li>May be incremental and a response may not arrive all at once, so may not finish construction all at once</li>
 						<li>Request CSS and JavaScript resources</li>
 						<li>If scripts are synchronous they won't be executed until the CSS is received since CSS is render-blocking</li>
 					</ul>
