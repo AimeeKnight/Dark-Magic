@@ -65,21 +65,12 @@
 				</section>
 
 				<section>
-					<img src="img/blinds.gif" >
-					<aside class="notes">
-						Trying to fix someone else's CSS
-					</aside>
-				</section>
-
-				<section>
 					<img src="img/amk_skate.gif" style="width: 370px;">
 					<ul>
 						<li>Work For: Built Technologies</li>
 						<li>Hobbies: JavaScript Jabber, ⛸, 🏋, running</li>
-						<li>Likes: 😻😻, 🍵, kombucha</li>
 					</ul>
 					<aside class="notes">
-						NSS
 					</aside>
 				</section>
 
@@ -89,50 +80,20 @@
 						<li>In the future, we'll be able to modify the browsers rendering engine ourselves!</li>
 					</ul>
 					<aside class="notes">
-						why it’s important
-						<br>
 						my story - front end
 						<br>
 						guessing vs systematic
-					</aside>
-				</section>
-
-				<section>
-					<h3>Houdini</h3>
-					<ul>
-						<li>Normalize cross-browser differences</li>
-						<li>Invent or polyfill new features</li>
-					</ul>
-					<aside class="notes">
-						APIs to extend CSS/hook into rendering engine
-						<br>								
-						bootstrap: just avoids
 						<br>
-						jQuery for CSS						
-					</aside>
-				</section>				
-				
-				<section>
-					<blockquote>Low-level programming is good for the programmer’s soul. – John Carmack</blockquote>
-					<aside class="notes">
+						Houdini
 					</aside>
 				</section>
 
 				<section>
 					<h3>Can't I just use component based styling?<h3>
 					<aside class="notes">
+							gain specificty, lose the cascade
 					</aside>
-				</section>
-
-				<section>
-					<ul>
-						<li>No longer able to change one variable to update all colors</li>
-						<li>Unable to affect children by parent classes</li>
-					</ul>
-					<aside class="notes">
-						gain specificty, lose the cascade
-					</aside>
-				</section>				
+				</section>			
 
 				<section>
 					<ul>
@@ -143,25 +104,6 @@
 					<aside class="notes">
 					</aside>
 				</section>
-
-				<section>
-					<h1>So, how do browsers actually work? 🤔</h1>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<img src="img/custom_layers.jpg">
-					<aside class="notes">
-						UI: address bar, back/fwd btn, bookmarking menu, All seen minus window.
-						BROWSER ENGINE: mediator.
-						RENDERING ENGINE: parse & display HTML CSS.
-						NETWORKING: HTTP requests.
-						UI BACKEND: drawing = OS.
-						JS INTERPRETER. Parse & execute JS.
-						DATA STORAGE: cookies, localStorage.
-					</aside>
-				</section>	
 
 				<section>
 					<h3>Rendering Engine Main Flow</h3>
@@ -344,19 +286,7 @@
 					<img src="img/css_parser.jpg">
 					<aside class="notes">
 					</aside>
-				</section>
-
-				<section>
-					<h1>CSSOM</h1>
-					<ul>
-						<li>CSS files are parsed into <strong style="color: #42affa">stylesheet objects</strong></li>
-						<li>Each stylesheet object contains a CSS <strong style="color: #42affa">rules object</strong></li>
-						<li>Each rules object contains <strong style="color: #42affa">selector and declaration objects</strong> and <strong style="color: #42affa">other objects corresponding to CSS grammar</strong></li>
-					</ul>
-					<aside class="notes">
-						to compute final styles for obj on pg, browser starts with most general rule for a node (body element) then recursively computed styles by applying more specific rules (cascade)
-					</aside>
-				</section>				
+				</section>			
 
 				<section>
 					<h1>CSSOM</h1>
@@ -421,6 +351,7 @@
 						<li>Output a render tree that contains both the content and style information of all visible content on the screen</li>
 					</ul>
 					<aside class="notes">
+						Remove?
 					</aside>
 				</section>
 
@@ -600,12 +531,6 @@
 					<aside class="notes">
 						me!
 					</aside>
-				</section>				
-
-				<section>
-					<blockquote>The amateur software engineer is always in search of magic. - Grady Booch</blockquote>
-					<aside class="notes">
-					</aside>
 				</section>
 
 				<section>
@@ -702,48 +627,16 @@ a {
 				</section>
 
 				<section>
-					<h1>Positioning</h1>
+					<h1>Positioning and Layout</h1>
 					<img src="img/css_is_awesome.jpg">
 					<aside class="notes">
-						process of determining the position and size of all boxes = going back to layout							
 					</aside>
+					Layout is a recursive process
 				</section>
 
 				<section>
-					<h1>Positioning</h1>
-					<h4>Normal & Relative</h4>
+					<h1>Positioning and Layout</h1>
 					<ul>
-						<li>Normal: The object is positioned according to its place in the document, box type, and dimensions</li>
-						<li>Relative: Positioned like usual and then moved by the required delta</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<h1>Positioning</h1>
-					<h4>Float</h4>
-					<ul>
-						<li>The object is first laid out in normal flow, then moved as far left or right as possible</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>				
-
-				<section>
-					<h1>Positioning</h1>
-					<h4>Absolute</h4>
-					<ul>
-						<li>The object is put in the render tree in a different place than in the DOM tree</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>		
-
-				<section>
-					<h1>Positioning Phases</h1>
-					<ul>
-						<li>Layout is a recursive process</li>
 						<li>Width: Computed by the current render object</li>
 						<li>Height: For each child, the current render object determines the position of the child, asks the child to compute its dimensions, then the current render object can compute its height</li>
 					</ul>
@@ -774,17 +667,6 @@ a {
 					</ul>
 					<aside class="notes">
 						understanding of stacking contexts is key
-					</aside>
-				</section>
-
-				<section>
-					<h1>Stacking Order</h1>
-					<ul>
-						<li>Every stacking context has a single HTML element as its root element</li>
-						<li>When z-index and position properties aren’t involved, the rules are simple: the stacking order is the same as the order of appearance in the HTML</li>
-					</ul>
-					<aside class="notes">
-						POSITIONED: relative, absolute, etc. (value other than static)
 					</aside>
 				</section>
 
@@ -882,19 +764,7 @@ a {
 					<aside class="notes">
 						debug systematic like JS
 					</aside>
-				</section>				
-
-				<section>
-					<img src="img/angry.gif" >
-					<aside class="notes">
-					</aside>
 				</section>
-
-				<section>
-					<img src="img/happy.gif" >
-					<aside class="notes">
-					</aside>
-				</section>		
 
 				<section style="text-align: left;">
 					<h1>Thank you!</h1>
