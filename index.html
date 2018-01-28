@@ -224,22 +224,7 @@
 						<br>
 						give it same input, always get same output				
 					</aside>
-				</section>
-
-				<section>
-					<h1>Recap</h1>
-					<ul>
-						<li>Browser sends HTTP request for page</li>
-						<li>Web server sends response</li>
-						<li>Browser converts response data (bytes) into tokens, via tokenization</li>
-						<li>Browser turns tokens into nodes</li>
-						<li>Browser turns nodes into the DOM tree</li>
-						<li>DOM tree construction finished</li>
-						<li>Pause for CSSOM tree construction</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>				
+				</section>		
 				
 				<section>
 					<h3>Rendering Engine Main Flow</h3>
@@ -265,32 +250,12 @@
 						<br>
 						Repeat HTML process for CSS						
 					</aside>
-				</section>
-				
+				</section>		
+
 				<section>
 					<h1>CSSOM</h1>
 					<ul>
 						<li>By default CSS is treated as a render blocking resource</li>
-						<li>Browser will hold rendering of any process until the CSSOM is constructed</li>
-					</ul>
-					<aside class="notes">
-						encounter link tag in head for sheet. dispatches req
-						<br>
-						STOP? scripts asking for style information during doc parsing. If style not loaded & parsed, script = wrong answers
-						<br>
-						incremental = because of cascade. RED => BLUE: jarring
-					</aside>
-				</section>			
-
-				<section>
-					<img src="img/css_parser.jpg">
-					<aside class="notes">
-					</aside>
-				</section>			
-
-				<section>
-					<h1>CSSOM</h1>
-					<ul>
 						<li>Not 1 to 1 with the DOM</li>
 						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the rendered output</li>
 					</ul>
@@ -298,8 +263,6 @@
 						DOM tree captures properties + relationship to doc markup
 						<br>
 						Doesn't tell how element look rendered. That’s responsibility of CSSOM
-						<br>
-						hidden visibility WILL appear
 					</aside>
 				</section>
 
@@ -341,7 +304,7 @@
 					</aside>
 				</section>
 
-				<section>
+				<!-- <section>
 					<h1>Construction</h1>
 					<ul>
 						<li>Starting at the root of the DOM tree, traverse each node</li>
@@ -351,9 +314,8 @@
 						<li>Output a render tree that contains both the content and style information of all visible content on the screen</li>
 					</ul>
 					<aside class="notes">
-						Remove?
 					</aside>
-				</section>
+				</section> -->
 
 				<section>
 					<h1>Rendering Phases</h1>
@@ -415,16 +377,6 @@
 				</section>
 
 				<section>
-					<h1>Painting</h1>
-					<ul>
-						<li>Multiple rounds of painting can be caused by JS being loaded that changes the DOM</li>
-						<li>Includes: text, colors, shadows, background images, etc.</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
 					<h1>Painting Time</h1>
 					<ul>
 						<li>The bigger the width and height of the element, the longer the painting time</li>
@@ -432,7 +384,6 @@
 						<li>Paint is usually the most expensive component of the render pipeline</li>
 					</ul>
 					<aside class="notes">
-						(2) first thing to look for is the area of the element
 					</aside>
 				</section>
 
@@ -443,11 +394,6 @@
 							<li>Flexbox: 3.5ms</li>							
 						</ul>
 						<aside class="notes">
-							<br>
-							flexbox is great from a usability standpoint
-							<br>
-							experiment
-							<br>
 							keep up with css skills
 						</aside>
 					</section>				
@@ -491,9 +437,7 @@
 					<aside class="notes">
 						hardware acceleration = compositing
 						<br>
-						GPU = speed up vs old CPU
-						<br>
-						painted parts put together
+						GPU
 					</aside>
 				</section>
 
@@ -501,48 +445,17 @@
 					<h3>Rendering performance</h3>
 					<ul>
 						<li>Adding a DOM node will cause relayout and repaint of the parent node</li>						
-						<li>Major changes, like increasing font size of the html element will cause relayout and repaint of the entire tree</li>
+						<li>Increasing font size of the html element will cause relayout and repaint of the entire tree</li>
 						<li>Changes to an element's color will only repaint that element</li>
-						<li>Transforms and opacity are currently the only properties which only trigger composite</li>						
+						<li>Transforms and opacity are the only properties which trigger composite</li>
+						<li>Layout always triggers paint since changing the geometry of element means the pixels need to be fixed</li>								
 					</ul>
 					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<h1>Summary</h1>
-					<ul>
-						<li>Browsers try to do the minimal possible actions in response to a change</li>
-						<li>Layout always triggers paint since changing the geometry of element means the pixels need to be fixed</li>						
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>				
-
-				<section>
-					<img src="img/delete.gif" >
-					<aside class="notes">
-						ever moved something around only to see another part of page break?
-					</aside>
-				</section>
-
-				<section>
-					<img src="img/tweet.png" >
-					<aside class="notes">
-						me!
 					</aside>
 				</section>
 
 				<section>
 					<h1>Specificity</h1>
-					<ul>
-						<p>If multiple CSS selectors are targeting the same set of HTML elements, and if the CSS selectors are trying to assign the same property/properties to the HTML elements, the selector with the highest specificity value will win.</p>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
 						<pre><code><div class="container">
  <div id="main">
   <p>
@@ -622,16 +535,15 @@ a {
 					<p class="fragment fade-in" style="color: #00BFFF; font-size: 40px !important">C: Number of class selectors, attribute selectors, pseudo-classes (0,0,1,0 points)</p>					
 					<p class="fragment fade-in" style="color: #7CFC00; font-size: 40px !important">D: Number of type selectors, pseudo-elements (0,0,0,1 points)</p>					
 					<aside class="notes">
-						had to write down my calculations on a piece of paper
 					</aside>
 				</section>
 
 				<section>
-					<h1>Positioning and Layout</h1>
+					<h3>Positioning and Layout</h3>
 					<img src="img/css_is_awesome.jpg">
 					<aside class="notes">
+							Layout is a recursive process
 					</aside>
-					Layout is a recursive process
 				</section>
 
 				<section>
@@ -646,13 +558,6 @@ a {
 
 				<section>
 					<h1>Z -Index</h1>
-					<p>Every element in an HTML document can be either in front of or behind every other element in the document</p>
-					<aside class="notes">
-						elements with higher z-index are stacked in front of elements with lower z-index
-					</aside>
-				</section>
-
-				<section>
 					<img src="img/so_hard.gif" >
 					<aside class="notes">
 						appears so simple, so most devs don’t dig deeper
@@ -666,7 +571,7 @@ a {
 						<li>Groups of elements with a common parent that move forward or backward together</li>
 					</ul>
 					<aside class="notes">
-						understanding of stacking contexts is key
+						stacking contexts is key
 					</aside>
 				</section>
 
@@ -686,9 +591,13 @@ a {
 					<h1>Stacking Context Rules</h1>
 					<ul>
 						<li>Higher values are stacked in front of lower values</li>							
-						<li>Auto z-index values and elements with the same value are stacked according to appearance in the HTML</li>						
+						<li>Auto z-index values and elements with the same value are stacked according to appearance in the HTML</li>
+						<li>Max value: 2,147,483,647</li>			
 					</ul>
 					<aside class="notes">
+							billion, million, thousand, hundred
+							<br>
+							max signed value of 32 bit int. limitation from browser prog lang
 					</aside>
 				</section>
 
@@ -720,42 +629,6 @@ a {
 						SCALE: size
 						<br>
 						translate3D: GPU transitions smoother
-					</aside>
-				</section>
-
-				<section>
-					<h1>Debugging z-index</h1>
-					<ul>
-						<li>Be able to spot when new stacking contexts are formed</li>
-						<li>Look up the ancestor tree and see if any parents form stacking contexts</li>
-						<li>2,147,483,647</li>
-					</ul>
-					<aside class="notes">
-						billion, million, thousand, hundred
-						<br>
-						max signed value of 32 bit int. limitation from browser prog lang</aside>
-				</section>
-
-				<section>
-					<h1>Conclusion</h1>
-					<ul>
-						<li>Construct the DOM by parsing the HTML</li>
-						<li>Request CSS and JavaScript resources</li>
-						<li>If scripts are synchronous they won't be executed until the CSS is received since CSS is render-blocking</li>
-					</ul>
-					<aside class="notes">
-					</aside>
-				</section>
-
-				<section>
-					<h1>Conclusion</h1>
-					<ul>
-						<li>Complete CSSOM construction to un-block the JavaScript engine</li>
-						<li>Execute JavaScript</li>
-						<li>Merge the DOM and CSSOM into the Render Tree</li>
-						<li>Run layout, paint, and composite</li>
-					</ul>
-					<aside class="notes">
 					</aside>
 				</section>
 
