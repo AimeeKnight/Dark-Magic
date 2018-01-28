@@ -143,7 +143,7 @@
 				<section>
 					<h1>Tokenizer</h1>
 					<ul>
-						<li>Breaks input valid tokens.</li>
+						<li>Breaks input into valid tokens.</li>
 						<li>HTML tokens: start tags, end tags, attribute names, attribute values</li>
 						<li>Strips irrelevant characters: white space, line breaks.</li>
 					</ul>
@@ -220,9 +220,7 @@
 				<section>
 					<img src="img/jump.gif">
 					<aside class="notes">
-						CSS = conventional parser		
-						<br>
-						give it same input, always get same output				
+						CSS = conventional parser	
 					</aside>
 				</section>		
 				
@@ -255,8 +253,8 @@
 				<section>
 					<h1>CSSOM</h1>
 					<ul>
-						<li>By default CSS is treated as a render blocking resource</li>
 						<li>Not 1 to 1 with the DOM</li>
+						<li>By default CSS is treated as a render blocking resource</li>
 						<li>Display none, script tags, meta tags, head element, etc. are omitted since they're not reflected in the rendered output</li>
 					</ul>
 					<aside class="notes">
@@ -294,17 +292,17 @@
 				</section>
 
 				<section>
-					<h1>Purpose</h1>
-					<ul>
-						<li>Knows how to layout and paint itself and its children</li>
-						<li>Includes geometric information like width, height and position</li>
+						<h1>Render Tree</h1>
+						<ul>
 						<li>Each node in the DOM tree that produces visual output has a corresponding render object in the render tree</li>
+						<li>Each render object knows how to layout and paint itself and its children</li>
+						<li>Includes geometric information like width, height and position</li>
 					</ul>
 					<aside class="notes">
 					</aside>
 				</section>
 
-				<!-- <section>
+				<section>
 					<h1>Construction</h1>
 					<ul>
 						<li>Starting at the root of the DOM tree, traverse each node</li>
@@ -315,7 +313,7 @@
 					</ul>
 					<aside class="notes">
 					</aside>
-				</section> -->
+				</section>
 
 				<section>
 					<h1>Rendering Phases</h1>
@@ -332,7 +330,7 @@
 					<h3>Rendering Engine Main Flow</h3>
 					<img src="img/layout_diagram.jpg">
 					<aside class="notes">
-						Chrome DevTools perf tab capture							
+						perf tab							
 					</aside>
 				</section>
 
@@ -425,6 +423,7 @@
 				<section>
 					<img src="img/composite_dev_tools.png">
 					<aside class="notes">
+						layers tab
 					</aside>
 				</section>				
 	
